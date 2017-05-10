@@ -8,13 +8,64 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
+	<link rel="stylesheet" href="css/editor2.css">
+	<link rel="stylesheet" href="css/custom.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/editor.css"> 
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/main.css">
+
+	<!--[if lte IE 9]>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+		<![endif]-->
+
+	<script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
+
 </head>
 
 <body class="body">
+	<!--<header class="hero-image" role="banner" style="background-image: url(img/waterfall.jpg);">-->
+	<!-- <header class="hero-image-about"> -->
+	<header>
+		<span class="menu-trigger animated fadeInDown">
+					<span class="bar"></span>
+		<span class="bar"></span>
+		<span class="bar"></span>
+		</span>
+
+		<!-- if the user has javascript disabled they can still use the menu -->
+		<noscript>
+					<div class="no-js-menu">
+						<ul>
+							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+							<li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
+							<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
+							<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li>
+							<li><i class="fa fa-users"></i><a href="guest_authors.html">Guest Authors</a></li>
+							<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
+							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
+						</ul>
+					</div>
+				</noscript>
+		<!-- end no script -->
+
+		<div id="menu-target">
+			<ul>
+				<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+				<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
+						<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
+						<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li>
+						<li><i class="fa fa-users"></i><a href="guest_authors.html">Guest Authors</a></li> -->
+				<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
+				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
+			</ul>
+			<hr>
+		</div>
+	</header>
+
+
 	<div class="title">
-		<h1>Image Editor</h1>
+		<h1>DEV - Image Editor</h1>
 		<p>Load And Edit Your Image To Fit Inside The Selected State</p>
 	</div>
 
@@ -23,12 +74,12 @@
 		<input type="file" id="UploadImage" href="#" title="Upload Your Image"></input>
 
 		<!-- <div class="border-color">
-			<h5><strong>Change State Border Color</strong></h5>
-			<form>
-				<input id="borderColor" type="radio" onclick="changeBorderBlack()" name="borderColor" value="black" checked> Black<br>
-				<input id="borderColor" type="radio" onclick="changeBorderWhite()" name="borderColor" value="white"> White<br>
-			</form>
-		</div> -->
+						<h5><strong>Change State Border Color</strong></h5>
+						<form>
+							<input id="borderColor" type="radio" onclick="changeBorderBlack()" name="borderColor" value="black" checked> Black<br>
+							<input id="borderColor" type="radio" onclick="changeBorderWhite()" name="borderColor" value="white"> White<br>
+						</form>
+					</div> -->
 
 
 
@@ -56,11 +107,11 @@
 		<section id="toolbar">
 			<a id="save" href="#" title="Save">Save</a>
 			<!-- <a id="greyscale" href="#" title="Convert to grayscale">B&W</a>
-					<a id="sepia" href="#" title="Convert to sepia tone">Sepia</a> -->
-			|<a id="ReCenter" href="#" title="Re-Center Your Image">Re-Center</a>
-			|<a id="showImage" href="#" title="Show Entire Image">Show Entire Image</a>
-			|<a id="trim" href="#" title="Trim Image">Trim State</a>
-			|<a id="reset" href="#" title="Reset">Reset</a>
+								<a id="sepia" href="#" title="Convert to sepia tone">Sepia</a> -->
+			|<a id="ReCenter" href="#" title="Re-Center Your Image">Re-Center</a> |
+			<a id="showImage" href="#" title="Show Entire Image">Show Entire Image</a> |
+			<a id="trim" href="#" title="Trim Image">Trim State</a> |
+			<a id="reset" href="#" title="Reset">Reset</a>
 		</section>
 
 		<section id="editorContainer">
@@ -68,8 +119,36 @@
 		</section>
 	</div>
 
-	<script src="jquery/jquery-1.12.4.min.js"></script>
-	<script src="jquery/jquery-ui-1.10.3.js"></script>
+
+
+
+	<!-- <footer class="single single-page without-readmore">
+					<div class="container">
+						<div class="col-sm-12">
+							<p>
+								<a href="about.html">About</a>
+								<i class="link-spacer"></i>
+								<a href="author_evan.html">Neises</a>
+								<i class="link-spacer"></i>
+								<a href="author_jake.html">Ellis</a>
+							</p>
+						</div>
+					</div>
+				</footer> -->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+		window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+	</script>
+
+	<script src="js/vendor/jquery.jpanelmenu.min.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/vendor/fastclick.min.js"></script>
+
+
+	<script src="js/main.js"></script>
+	<!-- <script src="jquery/jquery-1.12.4.min.js"></script>
+				<script src="jquery/jquery-ui-1.10.3.js"></script> -->
 	<script src="js/Fabric_JS/fabric.min.js"></script>
 	<!-- <script src="js/raphael.js"></script> -->
 	<script src="js/usa_map.js"></script>
