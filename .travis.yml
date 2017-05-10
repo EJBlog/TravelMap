@@ -3,5 +3,5 @@ node_js:
   - "4.0"
 script:
   - echo "Deploying!"
-after-success:
+after_success:
   - firebase deploy --token $FIREBASE_TOKEN
