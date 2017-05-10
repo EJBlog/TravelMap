@@ -81,6 +81,9 @@
   	font-family: sans-serif;
   	font-size: 10px;
   }
+  ol,ul,li{
+    font-size: 10px;
+  }
 }
 
 .feedback{
