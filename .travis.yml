@@ -1,5 +1,3 @@
-# Following tutorial but can change these
-
 language: node_js
 node_js:
   - "4.0"
@@ -8,4 +6,4 @@ script:
 install:
   - npm install -g firebase-tools
 after-success:
-  - firebase deploy --token $FIREBASE-TOKEN
+  - firebase deploy --token $FIREBASE_TOKEN
