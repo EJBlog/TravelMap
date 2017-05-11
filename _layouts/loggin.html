@@ -30,6 +30,30 @@
     <button type="submit">Submit</button>
   </form>
 
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    // TODO: Replace with your project's customized code snippet
+    var config = {
+      apiKey: "AIzaSyDe8J79UZpqZShe7JG6YrnmocRYeIT58QE",
+      authDomain: "travel-map-dev.firebaseapp.com",
+      databaseURL: "https:travel-map-dev.firebaseio.com",
+      // storageBucket: "<BUCKET>.appspot.com",
+      // messagingSenderId: "<SENDER_ID>",
+    };
+    firebase.initializeApp(config);
+  </script>
+
+<!-- Leave out Storage -->
+<!-- <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-storage.js"></script> -->
+
+<script>
+  var config = {
+    // ...
+  };
+  firebase.initializeApp(config);
+</script>
+
   <!-- <span><%= userInfo[i].user_id</span>
   <span>userInfo[i].password</span> -->
 
@@ -68,8 +92,11 @@
 
     };
   </script> -->
-  
-<script src="js/server.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js"></script>
 
 </body>
 
