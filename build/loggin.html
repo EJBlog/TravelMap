@@ -17,18 +17,11 @@
 		<![endif]-->
 
   <script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
-  {% include google_analytics.html %}
 
 
 </head>
 
 <body>
-
-  <form action="/userInfo" method="POST">
-    <input type="text" placeholder="user name" name="user_id">
-    <input type="text" placeholder="password" name="password">
-    <button type="submit">Submit</button>
-  </form>
 
   <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
   <script>
@@ -36,7 +29,8 @@
     // TODO: Replace with your project's customized code snippet
     var config = {
       apiKey: "AIzaSyAMN2ml4dlYJqpzlWLmCLl_-5s0U2TrsnU",
-      authDomain: "travel-map-9e0cf.firebaseapp.com",
+      authDomain: "www.officetoadventure.com", // Use this for production
+      // authDomain: "travel-map-dev.firebaseapp.com", // Use this for DEV
       databaseURL:"https://travel-map-9e0cf.firebaseio.com/"
       // storageBucket: "<BUCKET>.appspot.com",
       // messagingSenderId: "<SENDER_ID>",
