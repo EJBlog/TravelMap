@@ -17,9 +17,6 @@
 		<![endif]-->
 
   <input type="button" onclick="fbloggin()" name="loggin" value="Facebook Log In"><br>
-  <input type="button" onclick="createUser()" name="newUser" value="Create a new account">
-    <input type="button" onclick="signInUser()" name="signIn" value="Log in">
-      <input type="button" onclick="signOutUser()" name="signOut" value="Log Out">
 
   <script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
 
@@ -69,47 +66,6 @@
       });
     }
 
-    //username and password create account
-    var createUser = function() {
-      var config = {
-        apiKey: "AIzaSyAMN2ml4dlYJqpzlWLmCLl_-5s0U2TrsnU",
-        // authDomain: "travel-map-9e0cf.firebaseapp.com",
-        authDomain: "www.officetoadventure.com",
-        // authDomain: "travel-map-dev.firebaseapp.com", // Use this for DEV
-        databaseURL: "https://travel-map-9e0cf.firebaseio.com/"
-        // storageBucket: "<BUCKET>.appspot.com",
-        // messagingSenderId: "<SENDER_ID>",
-      };
-      firebase.initializeApp(config);
-
-      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
-    }
-
-    // Username and password sign in
-    var signInUser = function() {
-      // Sign in a user using email and password
-      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
-    }
-
-    //Username and password signout
-    var signOutUser = function() {
-      //sign someone who was signed in using username and password
-      firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-      }).catch(function(error) {
-        // An error happened.
-      });
-    }
 
   </script>
 

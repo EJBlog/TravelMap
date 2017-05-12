@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Map</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/map.css">
+
+  <form>
+    <input type="text" placeholder="Email" id="email" name="email">
+    <input type="text" placeholder="Password" id="password" name="password">
+  </form>
+
+  <input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
+  <input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
+  <input type="button" onclick="signOutUser()" id="signOut" name="signOut" value="Log Out">
+
+  <script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
+
+
+</head>
+
+<body>
+
+
+      
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAMN2ml4dlYJqpzlWLmCLl_-5s0U2TrsnU",
+      // authDomain: "travel-map-9e0cf.firebaseapp.com",
+      authDomain: "www.officetoadventure.com",
+      // authDomain: "travel-map-dev.firebaseapp.com", // Use this for DEV
+      databaseURL: "https://travel-map-9e0cf.firebaseio.com/"
+      // storageBucket: "<BUCKET>.appspot.com",
+      // messagingSenderId: "<SENDER_ID>",
+    };
+    firebase.initializeApp(config);
+
+    //username and password create account
+    var createUser = function() {
+
+        var emailText = document.getElementById('email').value;
+        var passwordText = document.getElementById('password').value;
+
+        var email = emailText.toString();
+        var password = passwordText.toString();
+
+
+      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          var uid = user.uid;
+          var providerData = user.providerData;
+          // ...
+        } else {
+          // User is signed out.
+          // ...
+        }
+      });
+    }
+
+    // Username and password sign in
+    function signInUser() {
+      var email;
+      var password;
+
+      document.getElementById('signIn').onclick = function() {
+        var emailText = document.getElementById('email').value;
+        var passwordText = document.getElementById('password').value;
+
+        email = emailText.toString();
+        password = passwordText.toString();
+      }
+
+
+      // Sign in a user using email and password
+      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          var uid = user.uid;
+          var providerData = user.providerData;
+          // ...
+        } else {
+          // User is signed out.
+          // ...
+        }
+      });
+    }
+
+    //Username and password signout
+    function signOutUser() {
+      var email;
+      var password;
+
+      document.getElementById('signOut').onclick = function() {
+        var emailText = document.getElementById('email').value;
+        var passwordText = document.getElementById('password').value;
+
+        email = emailText.toString();
+        password = passwordText.toString();
+
+
+        //sign someone who was signed in using username and password
+        firebase.auth().signOut().then(function() {
+          // Sign-out successful.
+        }).catch(function(error) {
+          // An error happened.
+        });
+      }
+    }
+  </script>
+
+</body>
+
+</html>
