@@ -1,6 +1,7 @@
 {
   "projects": {
     "default": "travel-map-9e0cf",
-    "development": "travel-map-dev"
+    "development": "travel-map-dev",
+    "production": "travel-map-9e0cf"
   }
 }

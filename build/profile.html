@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Map</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/map.css">
+
+
+  <!--[if lte IE 9]>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+		<![endif]-->
+	<script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
+
+</head>
+
+<body class="body">
+	<!--<header class="hero-image" role="banner" style="background-image: url(img/waterfall.jpg);">-->
+	<!-- <header class="hero-image-about"> -->
+	<header>
+		<span class="menu-trigger animated fadeInDown">
+		<span class="bar"></span>
+		<span class="bar"></span>
+		<span class="bar"></span>
+		</span>
+
+		<!-- if the user has javascript disabled they can still use the menu -->
+		<noscript>
+					<div class="no-js-menu">
+						<ul>
+							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+							<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
+							<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
+							<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
+							<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
+							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
+						</ul>
+					</div>
+				</noscript>
+		<!-- end no script -->
+
+		<div id="menu-target">
+			<ul>
+				<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+				<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
+						<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
+						<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
+				<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
+				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
+			</ul>
+			<hr>
+		</div>
+	</header>
+
+
+	<div class="title">
+		<!-- <h1>Travel Map Creator</h1>
+		<p>Please Select The State You Wish To Use</p> -->
+		<a id="userDisplay" href="profile.html" class="loggedInUser">Hello, User</a>
+		<!-- Change this to a link to the profile page-->
+
+	</div>
+
+<div class="userProfile">
+  <form>
+    <input type="text" placeholder="Email" id="email" name="email">
+    <input type="text" placeholder="Password" id="password" name="password">
+    <input type="text" placeholder="First Name" id="fName" name="fName">
+    <input type="text" placeholder="Last Name" id="lName" name="lName">
+    <input type="text" placeholder="Address" id="address" name="address">
+    <input type="text" placeholder="State" id="state" name="state">
+    <input type="text" placeholder="County" id="county" name="county">
+    <input type="text" placeholder="Zip Code" id="zipCd" name="zipCode">
+  </form>
+</div>
+<div class="logginModal-footer">
+  <input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
+  <input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
+  <input type="button" onclick="signOutUser()" id="signOut" name="signOut" value="Log Out">
+</div>
+
+<a href="#">Edit Profile</a>
+<a href="#">Save</a>
+</body>
+
+</html>

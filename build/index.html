@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js">
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,74 +19,97 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
 		<![endif]-->
 
-		<script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
+	<script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
 
-	</head>
-  <body class="body">
-		<!--<header class="hero-image" role="banner" style="background-image: url(img/waterfall.jpg);">-->
-			<!-- <header class="hero-image-about"> -->
-			<header>
-				<span class="menu-trigger animated fadeInDown">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</span>
+</head>
 
-				<!-- if the user has javascript disabled they can still use the menu -->
-				<noscript>
+<body class="body">
+	<!--<header class="hero-image" role="banner" style="background-image: url(img/waterfall.jpg);">-->
+	<!-- <header class="hero-image-about"> -->
+	<header>
+		<span class="menu-trigger animated fadeInDown">
+					<span class="bar"></span>
+		<span class="bar"></span>
+		<span class="bar"></span>
+		</span>
+
+		<!-- if the user has javascript disabled they can still use the menu -->
+		<noscript>
 					<div class="no-js-menu">
 						<ul>
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 							<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
 							<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
 							<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
-							<li><i class="fa fa-users"></i><a href="loggin.html">Log In</a></li>
+							<li><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
 							<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 						</ul>
 					</div>
 				</noscript>
-				<!-- end no script -->
+		<!-- end no script -->
 
-				<div id="menu-target">
-					<ul>
-						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-						<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
+		<div id="menu-target">
+			<ul>
+				<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+				<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
 						<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
 						<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
-						<li><i class="fa fa-users"></i><a href="loggin.html">Log In</a></li>
-						<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
-						<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
-					</ul>
-					<hr>
-				</div>
-			</header>
+				<li><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li>
+				<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
+				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
+			</ul>
+			<hr>
+		</div>
+	</header>
+
+	<div id="loginModal" class="logginModalClass">
+		<div class="logginModal-content">
+
+			<div class="logginModal-header">
+				<span class="close">&times;</span>
+				<h2>Log In</h2>
+			</div>
+			<div class="logginModal-body">
+				<form>
+					<input type="text" placeholder="Email" id="email" name="email">
+					<input type="text" placeholder="Password" id="password" name="password">
+				</form>
+			</div>
+			<div class="logginModal-footer">
+				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
+				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
+				<input type="button" onclick="signOutUser()" id="signOut" name="signOut" value="Log Out">
+			</div>
+
+		</div>
+	</div>
+
+	<div class="title">
+		<h1>Travel Map Creator</h1>
+		<p>Please Select The State You Wish To Use</p>
+		<a id="userDisplay" href="profile.html" class="loggedInUser">Hello, User</a>
+		<!-- Change this to a link to the profile page-->
+
+	</div>
 
 
+	<div class="hover-display">
+		<!-- <h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> <br> Id: <span id="id" class="hover-state"> &nbsp; </span> </h3> -->
+		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
+		<p hidden id="id"></p>
+	</div>
 
-      	<div class="title">
-      		<h1>Travel Map Creator</h1>
-      		<p>Please Select The State You Wish To Use</p>
-				
-      	</div>
-
-
-      	<div class="hover-display">
-      		<!-- <h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> <br> Id: <span id="id" class="hover-state"> &nbsp; </span> </h3> -->
-      		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
-      		<p hidden id="id"></p>
-      	</div>
-
-      	<!-- <div class="instructions">
+	<!-- <div class="instructions">
       		<p>Please click on the state that you wish to use.</p>
       	</div> -->
 
-      	<div class="map_container">
-      		<div id="map" class="map"></div>
-      	</div>
+	<div class="map_container">
+		<div id="map" class="map"></div>
+	</div>
 
 
-				<!-- <footer class="single single-page without-readmore">
+	<!-- <footer class="single single-page without-readmore">
 					<div class="container">
 						<div class="col-sm-12">
 							<p>
@@ -99,16 +123,153 @@
 					</div>
 				</footer> -->
 
-				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-				<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+		window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+	</script>
 
-				<script src="js/vendor/jquery.jpanelmenu.min.js"></script>
-				<script src="js/vendor/bootstrap.min.js"></script>
-				<script src="js/vendor/fastclick.min.js"></script>
+	<script src="js/vendor/jquery.jpanelmenu.min.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/vendor/fastclick.min.js"></script>
 
 
-				<script src="js/main.js"></script>
-        <script src="js/raphael.js"></script>
-        <script src="js/usa_map.js"></script>
-			</body>
-			</html>
+	<script src="js/main.js"></script>
+	<script src="js/raphael.js"></script>
+	<script src="js/usa_map.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+
+	<script type="text/javascript">
+
+	// Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyAMN2ml4dlYJqpzlWLmCLl_-5s0U2TrsnU",
+		// authDomain: "travel-map-9e0cf.firebaseapp.com",
+		authDomain: "www.officetoadventure.com",
+		// authDomain: "travel-map-dev.firebaseapp.com", // Use this for DEV
+		databaseURL: "https://travel-map-9e0cf.firebaseio.com/"
+		// storageBucket: "<BUCKET>.appspot.com",
+		// messagingSenderId: "<SENDER_ID>",
+	};
+	firebase.initializeApp(config);
+
+	//username and password create account
+	var createUser = function() {
+
+		var emailText = document.getElementById('email').value;
+		var passwordText = document.getElementById('password').value;
+
+		var email = emailText.toString();
+		var password = passwordText.toString();
+
+
+		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+			// Handle Errors here.
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			// ...
+		});
+
+		firebase.auth().onAuthStateChanged(function(user) {
+			if (user) {
+				// User is signed in.
+				var displayName = user.displayName;
+				var email = user.email;
+				var emailVerified = user.emailVerified;
+				var photoURL = user.photoURL;
+				var isAnonymous = user.isAnonymous;
+				var uid = user.uid;
+				var providerData = user.providerData;
+				// ...
+			} else {
+				// User is signed out.
+				// ...
+			}
+		});
+	}
+
+	// Username and password sign in
+	function signInUser() {
+		var email;
+		var password;
+
+		document.getElementById('signIn').onclick = function() {
+			var emailText = document.getElementById('email').value;
+			var passwordText = document.getElementById('password').value;
+
+			email = emailText.toString();
+			password = passwordText.toString();
+		}
+
+
+		// Sign in a user using email and password
+		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+			// Handle Errors here.
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			// ...
+		});
+
+		firebase.auth().onAuthStateChanged(function(user) {
+			if (user) {
+				// User is signed in.
+				var displayName = user.displayName;
+				var email = user.email;
+				var emailVerified = user.emailVerified;
+				var photoURL = user.photoURL;
+				var isAnonymous = user.isAnonymous;
+				var uid = user.uid;
+				var providerData = user.providerData;
+				// ...
+			} else {
+				// User is signed out.
+				// ...
+			}
+		});
+	}
+
+	//Username and password signout
+	function signOutUser() {
+		var email;
+		var password;
+
+		document.getElementById('signOut').onclick = function() {
+			var emailText = document.getElementById('email').value;
+			var passwordText = document.getElementById('password').value;
+
+			email = emailText.toString();
+			password = passwordText.toString();
+
+
+			//sign someone who was signed in using username and password
+			firebase.auth().signOut().then(function() {
+				// Sign-out successful.
+			}).catch(function(error) {
+				// An error happened.
+			});
+		}
+	}
+
+
+		var modal = document.getElementById("loginModal");
+		var btn = document.getElementById("modalButton");
+		var span = document.getElementsByClassName("close")[0];
+
+		var logginModal = function() {
+			modal.style.display = "block"
+		};
+
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		window.onclick = function() {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+
+	</script>
+</body>
+
+</html>

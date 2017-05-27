@@ -66,6 +66,12 @@ padding-top: .1px
 	}
 }
 
+.loggedInUser{
+	text-align: right;
+	position: absolute;
+	color: white;
+}
+
 .container{
 	background-color: slategray;
 	width:959px;

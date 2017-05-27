@@ -24,8 +24,7 @@
 </head>
 
 <body class="body">
-	<!--<header class="hero-image" role="banner" style="background-image: url(img/waterfall.jpg);">-->
-	<!-- <header class="hero-image-about"> -->
+
 	<header>
 		<span class="menu-trigger animated fadeInDown">
 					<span class="bar"></span>
@@ -41,7 +40,7 @@
 							<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
 							<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
 							<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
-							<li><i class="fa fa-users"></i><a href="loggin.html">Log In</a></li>
+							<li><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
 							<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 						</ul>
@@ -55,7 +54,7 @@
 				<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
 						<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
 						<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li>-->
-						<li><i class="fa fa-users"></i><a href="loggin.html">Log In</a></li>
+				<li><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
 				<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
 				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 			</ul>
@@ -63,10 +62,33 @@
 		</div>
 	</header>
 
+	<div id="loginModal" class="logginModalClass">
+		<div class="logginModal-content">
+
+			<div class="logginModal-header">
+				<span class="close">&times;</span>
+				<h2>Log In</h2>
+			</div>
+			<div class="logginModal-body">
+				<form>
+					<input type="text" placeholder="Email" id="email" name="email">
+					<input type="text" placeholder="Password" id="password" name="password">
+				</form>
+			</div>
+			<div class="logginModal-footer">
+				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
+				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
+				<input type="button" onclick="signOutUser()" id="signOut" name="signOut" value="Log Out">
+			</div>
+
+		</div>
+	</div>
+
 
 	<div class="title">
 		<h1>Image Editor</h1>
 		<p>Load And Edit Your Image To Fit Inside The Selected State</p>
+		<a id="userDisplay" href="profile.html" class="loggedInUser">Hello, User</a>
 	</div>
 
 	<div class="load-image">
@@ -120,8 +142,6 @@
 	</div>
 
 
-
-
 	<!-- <footer class="single single-page without-readmore">
 					<div class="container">
 						<div class="col-sm-12">
@@ -153,6 +173,26 @@
 	<!-- <script src="js/raphael.js"></script> -->
 	<script src="js/usa_map.js"></script>
 	<script src="js/state_editor.js"></script>
+
+	<script type="text/javascript">
+		var modal = document.getElementById("loginModal");
+		var btn = document.getElementById("modalButton");
+		var span = document.getElementsByClassName("close")[0];
+
+		var logginModal = function() {
+			modal.style.display = "block"
+		};
+
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
+
+		window.onclick = function() {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
 
 </body>
 
