@@ -727,12 +727,13 @@ for (var i = 0; i < states.length; i++) {
   });
 }
 
+
 var modal = document.getElementById('myModal');
 var mapImg = document.getElementById('map');
 var span = document.getElementById("close");
-//var modalImg = document.getElementById('state');
 
-// var captionText = document.getElementById("caption");
+
+
 mapImg.onclick = function() {
   // Below is used to remove items in storage if needed
   // localStorage.removeItem('myState');

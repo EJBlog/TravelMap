@@ -727,6 +727,10 @@ for (var i = 0; i < states.length; i++) {
   });
 }
 
+var modal = document.getElementById('myModal');
+var mapImg = document.getElementById('map');
+var span = document.getElementById("close");
+
 
 mapImg.onclick = function() {
   // Below is used to remove items in storage if needed
