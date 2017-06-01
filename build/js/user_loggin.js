@@ -15,32 +15,33 @@ const passwordTxt = document.getElementById('password');
 const signOutBtn = document.getElementById('signOut');
 const signInBtn = document.getElementById('signIn');
 const CreateUserBtn = document.getElementById('newUser');
-const newUserTxt = document.getElementById('newUserTxt');
 const logOutLink = document.getElementById('logOutLink');
-const logInLink = document.getElementById('logInLink');
+const logInLink = document.getElementById('LogInLink');
 
 //username and password create account
 function createUser() {
   var email = emailTxt.value;
   var password = passwordTxt.value;
+  var errorCode;
+  var errorMessage;
 
-// Need to add some strength checking for passwords
-  // if(password.length < 8){
-  // 	//
-  // 	else{}
-  // }
-  const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
-  promise.catch(e => console.log(e.message));
+  // Sign in a user using email and password
+  const promise = firebase.auth().signInWithEmailAndPassword(email, password);
+  // Can add in addition error message handling here
+  promise.catch(function(error) {
+    errorCode = error.code;
+    errorMessage = error.message;
+    document.getElementById("errorMsg").innerHTML = errorMessage;
 
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      document.getElementById('user-email').innerHTML = email;
-      logOutLink.classList.remove('hide');
-    } else {
-      // User is not signed in
-    }
+    console.log(error);
   });
+
+  if (errorCode == undefined) {
+    span.onclick();
+    // location.reload();
+  } else {
+
+  }
 }
 
 
@@ -48,35 +49,40 @@ function createUser() {
 function signInUser() {
   var email = emailTxt.value;
   var password = passwordTxt.value;
+  var errorCode;
+  var errorMessage;
 
   // Sign in a user using email and password
   const promise = firebase.auth().signInWithEmailAndPassword(email, password);
-  promise.catch(e => console.log(e.message));
+  // Can add in addition error message handling here
+  promise.catch(function(error) {
+    errorCode = error.code;
+    errorMessage = error.message;
+    document.getElementById("errorMsg").innerHTML = errorMessage;
 
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      document.getElementById('user-email').innerHTML = email;
-      logOutLink.classList.remove('hide');
-    } else {
-      // User is not signed in
-    }
+    console.log(error);
   });
+
+
+  if (errorCode == undefined) {
+    span.onclick();
+    // location.reload();
+  } else {
+
+  }
+
 }
 
 
 //Username and password signout
 function signOutUser() {
-  var email = emailTxt.value;
-  var password = passwordTxt.value;
-
-  document.getElementById('user-email').innerHTML = email;
 
   firebase.auth().signOut().then(function() {
     console.log("User Signed Out Successfully");
   }).catch(function(error) {
     console.log("User was NOT signed out");
   });
+
 }
 
 // Getting a users provider-specific profile information
@@ -115,22 +121,13 @@ firebase.auth().onAuthStateChanged(function(user) {
     console.log(user);
     console.log("User is Logged In");
     logOutLink.classList.remove('hide');
-    logInLink.classList.add('hide');
-    signOutBtn.classList.remove('hide');
-    signInBtn.classList.add('hide');
-    CreateUserBtn.classList.add('hide');
-    newUserTxt.classList.add('hide');
     document.getElementById("userDisplay").innerHTML = email;
-    document.getElementById('user-email').innerHTML = email;
-
+    document.getElementById("errorMsg").innerHTML = "";
   } else {
     // User is not signed in
-    logOutLink.classList.add('hide');
     logInLink.classList.remove('hide');
+    logOutLink.classList.add('hide');
     console.log("User Not Logged In");
-    signOutBtn.classList.add('hide');
-    signInBtn.classList.remove('hide');
-    CreateUserBtn.classList.remove('hide');
     document.getElementById("userDisplay").innerHTML = "";
   }
 });

@@ -41,8 +41,8 @@
 							<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
 							<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
 							<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
-							<li id="logInLink"><i class="fa fa-users"></i><a id="logginLink" href="#" onclick="logginModal()">Log In</a></li>
-							<li id="logOutLink" ><i class="fa fa-users"></i><a  id="LOmodalButton" href="#" onclick="loModal()">Log Out</a></li>
+							<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li>
+							<li id="logOutLink"><i class="fa fa-users"></i><a href="index.html" onclick="signOutUser()">Log Out</a></li>
 							<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 						</ul>
@@ -56,8 +56,8 @@
 				<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
 						<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
 						<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
-				<li id="logInLink"><i class="fa fa-users"></i><a id="logginLink" id="modalButton" href="#" onclick="logginModal()">Log In</a></li>
-				<li id="logOutLink"><i class="fa fa-users"></i><a id="LOmodalButton" href="#" onclick="loModal()">Log Out</a></li>
+				<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li>
+				<li id="logOutLink"><i class="fa fa-users"></i><a href="index.html" onclick="signOutUser()">Log Out</a></li>
 				<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
 				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 			</ul>
@@ -78,28 +78,15 @@
 					<input type="password" placeholder="Password" id="password" name="password">
 				</form>
 				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
-				<input class="hide" type="button" onclick="signOutUser()" id="signOut" name="signOut" value="Log Out">
+				<p id="errorMsg" class="errorMsg"></p>
 			</div>
 			<div class="logginModal-footer">
-				<p id="newUserTxt">First Time? Create your account.</p>
+				<p style="margin-bottom:10px">First Time? Create an account.</p>
 				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
 			</div>
 
 		</div>
 	</div>
-
-	<div id="logoutModal" class="logginModalClass">
-
-	<div class="logginModal-content">
-		<div class="logginModal-header">
-			<span class="loClose">&times;</span>
-		</div>
-
-		<div class="logginModal-body">
-			<h3> <span id="user-email" > &nbsp;</span> has been logged out</h3>
-		</div>
-	</div>
-</div>
 
 
 	<div class="title">
@@ -136,7 +123,6 @@
 	<script type="text/javascript">
 
 		var modal = document.getElementById("loginModal");
-		var LOmodal = document.getElementById("logoutModal");
 		var btn = document.getElementById("modalButton");
 		var span = document.getElementsByClassName("close")[0];
 		var loSpan = document.getElementsByClassName("loClose")[0];
@@ -145,24 +131,13 @@
 			modal.style.display = "block"
 		};
 
-		var loModal = function() {
-			LOmodal.style.display = "block";
-			signOutUser();
-		};
-
 		span.onclick = function() {
 			modal.style.display = "none";
 		}
 
-		loSpan.onclick = function() {
-			LOmodal.style.display = "none";
-		}
-
 		window.onclick = function() {
-			// if (event.target == modal || LOmodal) {
 			if (event.target == modal) {
 				modal.style.display = "none";
-				// LOmodal.style.display = "none";
 			}
 		}
 	</script>

@@ -226,3 +226,9 @@ padding-top: .1px
 	text-align: left;
 	font-size: 17px;
 }
+
+.errorMsg{
+	color:red;
+	font-size: 13px;
+
+}
