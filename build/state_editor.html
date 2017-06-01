@@ -40,7 +40,8 @@
 							<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
 							<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
 							<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
-							<li><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
+							<li id="logInLink"><i class="fa fa-users"></i><a id="logginLink" href="#" onclick="logginModal()">Log In</a></li>
+							<li id="logOutLink" ><i class="fa fa-users"></i><a id="LOmodalButton" href="#" onclick="loModal()">Log Out</a></li>
 							<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 						</ul>
@@ -54,7 +55,8 @@
 				<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
 						<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
 						<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li>-->
-				<li><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
+				<li id="logInLink"><i class="fa fa-users"></i><a id="logginLink" href="#" onclick="logginModal()">Log In</a></li>
+				<li id="logOutLink"><i class="fa fa-users"></i><a id="LOmodalButton" href="#" onclick="loModal()">Log Out</a></li>
 				<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
 				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 			</ul>
@@ -72,36 +74,42 @@
 			<div class="logginModal-body">
 				<form>
 					<input type="text" placeholder="Email" id="email" name="email">
-					<input type="text" placeholder="Password" id="password" name="password">
+					<input type="password" placeholder="Password" id="password" name="password">
 				</form>
+				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
+				<input class="hide" type="button" onclick="signOutUser()" id="signOut" name="signOut" value="Log Out">
 			</div>
 			<div class="logginModal-footer">
+				<p id="newUserTxt">First Time? Create your account.</p>
 				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
-				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
-				<input type="button" onclick="signOutUser()" id="signOut" name="signOut" value="Log Out">
 			</div>
 
 		</div>
 	</div>
 
+	<div id="logoutModal" class="logginModalClass">
+
+	<div class="logginModal-content">
+		<div class="logginModal-header">
+			<span class="loClose">&times;</span>
+		</div>
+
+		<div class="logginModal-body">
+			<h3> <span id="user-email" > &nbsp;</span> has been logged out</h3>
+		</div>
+	</div>
+</div>
+
 
 	<div class="title">
 		<h1>Image Editor</h1>
 		<p>Load And Edit Your Image To Fit Inside The Selected State</p>
-		<a id="userDisplay" href="profile.html" class="loggedInUser">Hello, User</a>
+		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
 	</div>
 
 	<div class="load-image">
 		<h3>Upload Your Image</h3>
 		<input type="file" id="UploadImage" href="#" title="Upload Your Image"></input>
-
-		<!-- <div class="border-color">
-						<h5><strong>Change State Border Color</strong></h5>
-						<form>
-							<input id="borderColor" type="radio" onclick="changeBorderBlack()" name="borderColor" value="black" checked> Black<br>
-							<input id="borderColor" type="radio" onclick="changeBorderWhite()" name="borderColor" value="white"> White<br>
-						</form>
-					</div> -->
 
 
 
@@ -141,55 +149,49 @@
 		</section>
 	</div>
 
-
-	<!-- <footer class="single single-page without-readmore">
-					<div class="container">
-						<div class="col-sm-12">
-							<p>
-								<a href="about.html">About</a>
-								<i class="link-spacer"></i>
-								<a href="author_evan.html">Neises</a>
-								<i class="link-spacer"></i>
-								<a href="author_jake.html">Ellis</a>
-							</p>
-						</div>
-					</div>
-				</footer> -->
-
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>
 		window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
 	</script>
-
 	<script src="js/vendor/jquery.jpanelmenu.min.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/vendor/fastclick.min.js"></script>
-
-
 	<script src="js/main.js"></script>
-	<!-- <script src="jquery/jquery-1.12.4.min.js"></script>
-				<script src="jquery/jquery-ui-1.10.3.js"></script> -->
 	<script src="js/Fabric_JS/fabric.min.js"></script>
-	<!-- <script src="js/raphael.js"></script> -->
-	<script src="js/usa_map.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+	<!-- <script src="js/usa_map.js"></script> -->
 	<script src="js/state_editor.js"></script>
+	<script src="js/user_loggin.js"></script>
 
 	<script type="text/javascript">
+
 		var modal = document.getElementById("loginModal");
+		var LOmodal = document.getElementById("logoutModal");
 		var btn = document.getElementById("modalButton");
 		var span = document.getElementsByClassName("close")[0];
+		var loSpan = document.getElementsByClassName("loClose")[0];
 
 		var logginModal = function() {
 			modal.style.display = "block"
+		};
+
+		var loModal = function() {
+			LOmodal.style.display = "block";
+			signOutUser();
 		};
 
 		span.onclick = function() {
 			modal.style.display = "none";
 		}
 
+		loSpan.onclick = function() {
+			LOmodal.style.display = "none";
+		}
+
 		window.onclick = function() {
 			if (event.target == modal) {
 				modal.style.display = "none";
+				LOmodal.style.display = "none";
 			}
 		}
 	</script>

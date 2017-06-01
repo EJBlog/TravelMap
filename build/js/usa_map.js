@@ -757,5 +757,4 @@ mapImg.onclick = function() {
   // }
 
   window.open("state_editor.html", "_self");
-
 };

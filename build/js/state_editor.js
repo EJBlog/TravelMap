@@ -179,65 +179,7 @@ document.getElementById('UploadImage').onchange = function handleImage(e) {
       document.getElementById("UploadImage").value = "";
       canvas.renderAll();
     }
-    // The below function is used for testing
-    // removeImage: function() {
-    //   canvas.remove(userImage);
-    //   imageRemoved = true;
-    // }
-    //,
 
-    // Reset: function() {
-    //   canvas.clear();
-    //   canvas.set({ backgroundColor: 'whitesmoke'});
-    //   canvas.add(overlayState);
-    //   canvas.setOverlayImage(overlayState);
-    //   canvas.controlsAboveOverlay = true;
-    //   canvas.renderAll();
-    //   imageRemoved = true;
-    // },
-
-
-  //   trim: function(){
-  //     var editedImage = JSON.stringify(canvas);
-  //     canvas.clear();
-  //     canvas.loadFromJSON(editedImage, canvas.renderAll.bind(canvas), function(o, object) {
-  //
-  //       object.set({
-  //         // stroke:'black',
-  //         // fill:'red',
-  //         stroke:'transparent',
-  //         fill:'transparent',
-  //         selectable: false,
-  //         clipTo: function(ctx) {
-  //           overlayState.set({
-  //
-  //             width: ctx.width,
-  //             length: ctx.length,
-  //             height:ctx.height,
-  //             selectable: false,
-  //             scaleX: 2.5,
-  //             scaleY: 2.5,
-  //             fill:'transparent',
-  //             stroke:'transparent'
-  //             // stroke:'black',
-  //             // fill:'blue'
-  //
-  //           });
-  //           canvas.setOverlayImage(object);
-  //           canvas.controlsAboveOverlay = true;
-  //           overlayState.render(ctx);
-  //         }
-  //       });
-  //
-  //       // fabric.log(o, object);
-  //       // canvas.remove(object);
-  //     });
-  //
-  //     // window.open(canvas.toDataURL({
-  //     //   format: 'png'
-  //     // }));
-  //
-    // }
   };
 
   $("#toolbar").children().click(function(e) {
@@ -247,21 +189,3 @@ document.getElementById('UploadImage').onchange = function handleImage(e) {
   });
 
 })(jQuery);
-
-// function changeBorderBlack() {
-//
-//   overlayState.set({
-//     stroke: 'black'
-//   });
-//   canvas.renderAll();
-//
-// };
-//
-// function changeBorderWhite() {
-//
-//   overlayState.set({
-//     stroke: 'white'
-//   });
-//   canvas.renderAll();
-//
-// };
