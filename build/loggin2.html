@@ -169,7 +169,7 @@
 
     var form = document.querySelector(“form”);
     form.addEventListener(“submit”, function(event) {
-    event.preventDefault();
+    event.preventDefault()};
 
     var timestamp = Number(new Date());
     var storageRef = firebase.storage().ref(timestamp.toString());
