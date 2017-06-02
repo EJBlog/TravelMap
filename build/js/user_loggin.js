@@ -26,7 +26,7 @@ function createUser() {
   var errorMessage;
 
   // Sign in a user using email and password
-  const promise = firebase.auth().signInWithEmailAndPassword(email, password);
+  const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
   // Can add in addition error message handling here
   promise.catch(function(error) {
     errorCode = error.code;
@@ -62,7 +62,6 @@ function signInUser() {
 
     console.log(error);
   });
-
 
   if (errorCode == undefined) {
     span.onclick();
