@@ -167,27 +167,41 @@
 
 
 
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script>
     // Initialize Firebase
     var config = {
-      apiKey: "AIzaSyAMN2ml4dlYJqpzlWLmCLl_-5s0U2TrsnU",
+      //apiKey: "AIzaSyAMN2ml4dlYJqpzlWLmCLl_-5s0U2TrsnU",//for Prod
+      apiKey: "AIzaSyDe8J79UZpqZShe7JG6YrnmocRYeIT58QE",//for Dev
       // authDomain: "travel-map-9e0cf.firebaseapp.com",
-      authDomain: "www.officetoadventure.com",
-      // authDomain: "travel-map-dev.firebaseapp.com", // Use this for DEV
-      databaseURL: "https://travel-map-9e0cf.firebaseio.com/"
-      // storageBucket: "<BUCKET>.appspot.com",
+      //authDomain: "www.officetoadventure.com",
+      authDomain: "travel-map-dev.firebaseapp.com", // Use this for DEV
+      databaseURL: "https://travel-map-dev.firebaseio.com/",
+      storageBucket: "travel-map-dev.appspot.com"
       // messagingSenderId: "<SENDER_ID>",
     };
     firebase.initializeApp(config);
 
+
     //username and password create account
     var createUser = function() {
 
-      var emailText = document.getElementById('email').value;
-      var passwordText = document.getElementById('password').value;
+        var emailText = document.getElementById('email').value;
+        var passwordText = document.getElementById('password').value;
 
-      var email = emailText.toString();
-      var password = passwordText.toString();
+        var email = emailText.toString();
+        var password = passwordText.toString();
 
+        var usersData = firebase.database().ref("users/");
+
+        // usersData.set -- Write or replace data to defined path, like messages/users/<username>
+        // usersData.push -- Add to a list of data in the database. Creates a unique key each entry
+        // usersData.update -- Update some of the keys for a defined path without replacing all of the data
+
+        usersData.push({ //push will add a new object
+           email: email,
+           password: password
+         });
 
       firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
