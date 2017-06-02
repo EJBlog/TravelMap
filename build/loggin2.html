@@ -129,6 +129,10 @@
         <input type="button" onclick="signOutUser()" id="signOut" name="signOut" value="Log Out">
       </div>
 
+      <div>
+        <input type=”file” id=”uploadImg” name=”icon”>
+        <button type=”submit”>Upload Image</button>
+      </div>
 
     </div>
   </div>
@@ -161,6 +165,19 @@
         modal.style.display = "none";
       }
     }
+
+
+    var form = document.querySelector(“form”);
+    form.addEventListener(“submit”, function(event) {
+    event.preventDefault();
+
+    var timestamp = Number(new Date());
+    var storageRef = firebase.storage().ref(timestamp.toString());
+
+    var $ = jQuery;
+    var file_data = $(‘#uploadImg’).prop(‘files’)[0];
+
+    storageRef.put(file_data);
 
     // Initialize Firebase
     var config = {
