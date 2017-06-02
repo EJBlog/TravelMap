@@ -69,9 +69,12 @@
 
 			<div class="logginModal-header">
 				<span class="close">&times;</span>
-				<h2>Log In</h2>
 			</div>
-			<div class="logginModal-body">
+			<div id="signInModalContent" class="logginModal-body hide">
+				<p style="padding-top:85px; padding-left:50px;">You Have Logged In successfully!</p>
+			</div>
+			<div id="modalBody" class="logginModal-body">
+				<h2>Log In</h2>
 				<form>
 					<input type="text" placeholder="Email" id="email" name="email">
 					<input type="password" placeholder="Password" id="password" name="password">
@@ -79,11 +82,10 @@
 				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
 				<p id="errorMsg" class="errorMsg"></p>
 			</div>
-			<div class="logginModal-footer">
+			<div id="modalFooter" class="logginModal-footer">
 				<p style="margin-bottom:10px">First Time? Create an account.</p>
 				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
 			</div>
-
 		</div>
 	</div>
 
@@ -163,11 +165,13 @@
 
 		span.onclick = function() {
 			modal.style.display = "none";
+			logInReload();
 		}
 
 		window.onclick = function() {
 			if (event.target == modal) {
 				modal.style.display = "none";
+				logInReload();
 			}
 		}
 	</script>

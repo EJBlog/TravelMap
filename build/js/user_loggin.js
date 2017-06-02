@@ -17,6 +17,13 @@ const signInBtn = document.getElementById('signIn');
 const CreateUserBtn = document.getElementById('newUser');
 const logOutLink = document.getElementById('logOutLink');
 const logInLink = document.getElementById('LogInLink');
+const modalBody = document.getElementById("modalBody");
+const modalFooter = document.getElementById("modalFooter");
+const signInModalContent = document.getElementById("signInModalContent");
+
+function logInReload(){
+    location.reload();
+};
 
 //username and password create account
 function createUser() {
@@ -36,14 +43,12 @@ function createUser() {
     console.log(error);
   });
 
-  if (errorCode == undefined) {
-    span.onclick();
-    // location.reload();
-  } else {
+  modalBody.classList.add('hide');
+  modalFooter.classList.add('hide');
+  document.getElementById("userDisplay").innerHTML = email;
+  signInModalContent.classList.remove('hide');
 
-  }
 }
-
 
 // Username and password sign in
 function signInUser() {
@@ -63,12 +68,10 @@ function signInUser() {
     console.log(error);
   });
 
-  if (errorCode == undefined) {
-    span.onclick();
-    // location.reload();
-  } else {
-
-  }
+  modalBody.classList.add('hide');
+  modalFooter.classList.add('hide');
+  document.getElementById("userDisplay").innerHTML = email;
+  signInModalContent.classList.remove('hide');
 
 }
 

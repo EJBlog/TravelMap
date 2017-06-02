@@ -69,29 +69,32 @@ document.getElementById('UploadImage').onchange = function handleImage(e) {
 
   if (userImage.height > 0 && imageRemoved == false) {
 
-    if (confirm("An image has already been loaded. Did you mean to load a second image?") === true) {
-      var reader = new FileReader();
-      reader.onload = function(event) {
+    alert("An image has already been loaded. Please reset the editor before loading another image.")
 
-        var imgObj = new Image();
-        imgObj.src = event.target.result;
-        imgObj.onload = function() {
-
-          userImage = new fabric.Image(imgObj);
-          userImage.set({
-            left: 10,
-            top: 10,
-            width: canvas.width - 10,
-            height: canvas.height - 10,
-            opacity: 1
-          });
-          canvas.add(userImage);
-          userImage.globalCompositeOperation = 'source-atop';
-          canvas.renderAll();
-        }
-      }
-      reader.readAsDataURL(e.target.files[0]);
-    }
+// Removing the ability to add multiple images
+    // if (confirm("An image has already been loaded. Did you mean to load a second image?") === true) {
+    //   var reader = new FileReader();
+    //   reader.onload = function(event) {
+    //
+    //     var imgObj = new Image();
+    //     imgObj.src = event.target.result;
+    //     imgObj.onload = function() {
+    //
+    //       userImage = new fabric.Image(imgObj);
+    //       userImage.set({
+    //         left: 10,
+    //         top: 10,
+    //         width: canvas.width - 10,
+    //         height: canvas.height - 10,
+    //         opacity: 1
+    //       });
+    //       canvas.add(userImage);
+    //       userImage.globalCompositeOperation = 'source-atop';
+    //       canvas.renderAll();
+    //     }
+    //   }
+    //   reader.readAsDataURL(e.target.files[0]);
+    // }
     //end of if for "confirm"
 
   } else {
