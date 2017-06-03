@@ -35,25 +35,30 @@ function createUser() {
   email = emailTxt.value;
   password = passwordTxt.value;
 
-  firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
     modalBody.classList.add('hide');
     modalFooter.classList.add('hide');
     document.getElementById("userDisplay").innerHTML = email;
     signInModalContent.classList.remove('hide');
+
+    var user = firebase.auth().currentUser;
+
+    var usersData = firebase.database().ref("users/" + user.uid);
+
+    usersData.push({
+      email: user.email,
+      password: user.password,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified
+    });
+
   }, function(error) {
     errorCode = error.code;
     errorMessage = error.message;
     document.getElementById("errorMsg").innerHTML = errorMessage;
     console.log(error);
   });
-
-  // const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
-  // promise.catch(function(error) {
-  //   errorCode = error.code;
-  //   errorMessage = error.message;
-  //   document.getElementById("errorMsg").innerHTML = errorMessage;
-  //   console.log(error);
-  // });
 
 }
 
@@ -63,7 +68,7 @@ function signInUser() {
   password = passwordTxt.value;
 
   // Sign in a user using email and password
-  firebase.auth().signInWithEmailAndPassword(email, password).then(function(user){
+  firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
     modalBody.classList.add('hide');
     modalFooter.classList.add('hide');
     document.getElementById("userDisplay").innerHTML = email;
