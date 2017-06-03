@@ -43,11 +43,11 @@ function createUser() {
 
     var user = firebase.auth().currentUser;
 
-    var usersData = firebase.database().ref("users/" + user.uid);
-
-    usersData.push({
-      email: user.email,
-      password: user.password,
+    firebase.database().ref("users/" + user.uid).push({
+      // email: user.email,
+      // password: user.password,
+      email: email,
+      password: password,
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
@@ -90,6 +90,31 @@ function signOutUser() {
   }).catch(function(error) {
     console.log("User was NOT signed out");
   });
+
+}
+
+function updateUserInfo(){
+
+  var user = firebase.auth().currentUser;
+  var newEmail = document.getElementById("newEmail");
+  var newPassword = document.getElementById("newPassword");
+
+  firebase.database().ref("users/" + user.uid).update({
+
+    // if (newEmail <> undefined || newEmail <> null) {
+    //   email: newEmail
+    // },
+    email: newEmail,
+    password: newPassword,
+    // displayName: user.displayName,
+    // photoURL: user.photoURL,
+    // emailVerified: user.emailVerified
+  });
+
+  firebase.database().ref("-Users/-KUanJA9egwmPsJCxXpv").update({ displayName: "New trainer" });
+
+
+
 
 }
 
