@@ -1,11 +1,12 @@
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyAMN2ml4dlYJqpzlWLmCLl_-5s0U2TrsnU",
+  //apiKey: "AIzaSyAMN2ml4dlYJqpzlWLmCLl_-5s0U2TrsnU",//for Prod
+  apiKey: "AIzaSyDe8J79UZpqZShe7JG6YrnmocRYeIT58QE", //for Dev
   // authDomain: "travel-map-9e0cf.firebaseapp.com",
-  authDomain: "www.officetoadventure.com",
-  // authDomain: "travel-map-dev.firebaseapp.com", // Use this for DEV
-  databaseURL: "https://travel-map-9e0cf.firebaseio.com/"
-  // storageBucket: "<BUCKET>.appspot.com",
+  //authDomain: "www.officetoadventure.com",
+  authDomain: "travel-map-dev.firebaseapp.com", // Use this for DEV
+  databaseURL: "https://travel-map-dev.firebaseio.com/",
+  storageBucket: "travel-map-dev.appspot.com"
   // messagingSenderId: "<SENDER_ID>",
 };
 firebase.initializeApp(config);
@@ -20,61 +21,61 @@ const logInLink = document.getElementById('LogInLink');
 const modalBody = document.getElementById("modalBody");
 const modalFooter = document.getElementById("modalFooter");
 const signInModalContent = document.getElementById("signInModalContent");
+var email;
+var password;
+var errorCode;
+var errorMessage;
 
-function logInReload(){
-    location.reload();
+function logInReload() {
+  location.reload();
 };
 
 //username and password create account
 function createUser() {
-  var email = emailTxt.value;
-  var password = passwordTxt.value;
-  var errorCode;
-  var errorMessage;
+  email = emailTxt.value;
+  password = passwordTxt.value;
 
-  // Sign in a user using email and password
-  const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
-  // Can add in addition error message handling here
-  promise.catch(function(error) {
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
+    modalBody.classList.add('hide');
+    modalFooter.classList.add('hide');
+    document.getElementById("userDisplay").innerHTML = email;
+    signInModalContent.classList.remove('hide');
+  }, function(error) {
     errorCode = error.code;
     errorMessage = error.message;
     document.getElementById("errorMsg").innerHTML = errorMessage;
-
     console.log(error);
   });
 
-  modalBody.classList.add('hide');
-  modalFooter.classList.add('hide');
-  document.getElementById("userDisplay").innerHTML = email;
-  signInModalContent.classList.remove('hide');
+  // const promise = firebase.auth().createUserWithEmailAndPassword(email, password);
+  // promise.catch(function(error) {
+  //   errorCode = error.code;
+  //   errorMessage = error.message;
+  //   document.getElementById("errorMsg").innerHTML = errorMessage;
+  //   console.log(error);
+  // });
 
 }
 
 // Username and password sign in
 function signInUser() {
-  var email = emailTxt.value;
-  var password = passwordTxt.value;
-  var errorCode;
-  var errorMessage;
+  email = emailTxt.value;
+  password = passwordTxt.value;
 
   // Sign in a user using email and password
-  const promise = firebase.auth().signInWithEmailAndPassword(email, password);
-  // Can add in addition error message handling here
-  promise.catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(email, password).then(function(user){
+    modalBody.classList.add('hide');
+    modalFooter.classList.add('hide');
+    document.getElementById("userDisplay").innerHTML = email;
+    signInModalContent.classList.remove('hide');
+  }, function(error) {
     errorCode = error.code;
     errorMessage = error.message;
     document.getElementById("errorMsg").innerHTML = errorMessage;
-
     console.log(error);
   });
 
-  modalBody.classList.add('hide');
-  modalFooter.classList.add('hide');
-  document.getElementById("userDisplay").innerHTML = email;
-  signInModalContent.classList.remove('hide');
-
 }
-
 
 //Username and password signout
 function signOutUser() {

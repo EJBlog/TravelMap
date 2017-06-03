@@ -258,27 +258,6 @@
 	cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
-	color: #000;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.loClose {
-	color: black;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.loClose:hover,
-.loClose:focus {
-	color: #000;
-	text-decoration: none;
-	cursor: pointer;
-}
-
 .logginModal-header {
 	padding: 2px 16px;
 	background-color: white;
@@ -296,4 +275,9 @@
 	color: black;
 	text-align: left;
 	font-size: 17px;
+}
+
+.errorMsg{
+	color:red;
+	font-size: 13px;
 }
