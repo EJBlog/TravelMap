@@ -25,6 +25,7 @@ var email;
 var password;
 var errorCode;
 var errorMessage;
+var isSignedIn = false;
 
 function logInReload() {
   location.reload();
@@ -272,6 +273,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     document.getElementById("errorMsg").innerHTML = "";
     console.log(user);
     console.log("User is Logged In");
+    isSignedIn = true;
 
   } else {
     // User is not signed in
@@ -279,5 +281,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     logOutLink.classList.add('hide');
     console.log("User Not Logged In");
     document.getElementById("userDisplay").innerHTML = "";
+    isSignedIn = false;
   }
 });

@@ -733,9 +733,6 @@ var span = document.getElementById("close");
 
 
 mapImg.onclick = function() {
-  // Below is used to remove items in storage if needed
-  // localStorage.removeItem('myState');
-  // localStorage.removeItem('myStateId');
 
   var clickedStateName = document.getElementById('state-name').innerHTML;
   var ClickedIdName = document.getElementById('id').innerHTML;
@@ -749,12 +746,12 @@ mapImg.onclick = function() {
     stateIsClicked = false;
   } else {
     stateIsClicked = true;
-  }
+  };
 
-  // if( confirm("Did you mean to choose " + clickedStateName + "?") === true)
-  // {    // window.open("http://www.officetoadventure.com/map2.html","_self");
-  //     window.open("map2.html","_self");
-  // }
+  if (isSignedIn == true) {
+    window.open("state_editor.html", "_self");
+  } else {
+    logginModal();
+  };
 
-  window.open("state_editor.html", "_self");
 };
