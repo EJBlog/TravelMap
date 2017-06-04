@@ -39,10 +39,69 @@ function createUser() {
     var CurrentUser = firebase.auth().currentUser;
 
     firebase.database().ref("Users/" + CurrentUser.uid).set({
-      // email: user.email,
-      // password: user.password,
       email: email,
-      password: password
+      password: password,
+      displayName: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      city: "",
+      countyCd: "",
+      stateCd: "",
+      zipCd: "",
+      AK: "",
+      HI: "",
+      AL: "",
+      AR: "",
+      AZ: "",
+      CA: "",
+      CO: "",
+      CT: "",
+      DE: "",
+      FL: "",
+      GA: "",
+      IA: "",
+      ID: "",
+      IL: "",
+      IN: "",
+      KS: "",
+      KY: "",
+      LA: "",
+      MA: "",
+      MD: "",
+      ME: "",
+      MI: "",
+      MN: "",
+      MO: "",
+      MS: "",
+      MT: "",
+      NC: "",
+      ND: "",
+      NE: "",
+      NH: "",
+      NJ: "",
+      NM: "",
+      NV: "",
+      NY: "",
+      OH: "",
+      OK: "",
+      OR: "",
+      PA: "",
+      RI: "",
+      SC: "",
+      SD: "",
+      TN: "",
+      TX: "",
+      UT: "",
+      VA: "",
+      VT: "",
+      WA: "",
+      WI: "",
+      WV: "",
+      WY: ""
+      // photoURL: document.getElementById("").value
+      // emailVerified: document.getElementById("").value
+
     });
 
   }, function(error) {
@@ -94,20 +153,78 @@ function signOutUser() {
 function updateUserInfo() {
   var CurrentUser = firebase.auth().currentUser;
 
+  // if (document.getElementById("newEmail").value == "") {
+  //   var newEmail = CurrentUser.email;
+  // } else {
+  //   var newEmail = document.getElementById("newEmail").value
+  // };
+  //
+  // if (document.getElementById("newEmail").value == "") {
+  //   var newPassword = CurrentUser.email;
+  // } else {
+  //   var newPassword = document.getElementById("newEmail").value
+  // };
+
+  if (document.getElementById("newFName").value == "") {
+    var newFName = CurrentUser.firstName;
+  } else {
+    var newFName = document.getElementById("newFName").value
+  };
+
+  if (document.getElementById("newLName").value == "") {
+    var newLName = CurrentUser.lastName;
+  } else {
+    var newLName = document.getElementById("newLName").value
+  };
+
+  if (document.getElementById("newFName").value == "") {
+    var newDisplayName = CurrentUser.firstName + CurrentUser.lastName;
+  } else {
+    var newDisplayName = document.getElementById("newFName").value + " " + document.getElementById("newLName").value
+  };
+
+  if (document.getElementById("newCounty").value == "") {
+    var newCounty = CurrentUser.countyCd;
+  } else {
+    var newCounty = document.getElementById("newCounty").value
+  };
+
+  if (document.getElementById("newState").value == "") {
+    var newState = CurrentUser.stateCd;
+  } else {
+    var newState = document.getElementById("newState").value
+  };
+
+  if (document.getElementById("newCity").value == "") {
+    var newCity = CurrentUser.city;
+  } else {
+    var newCity = document.getElementById("newCity").value
+  };
+
+  if (document.getElementById("newZipCd").value == "") {
+    var newZipCd = CurrentUser.zipCd;
+  } else {
+    var newZipCd = document.getElementById("newZipCd").value
+  };
+
+  if (document.getElementById("newAddress").value == "") {
+    var newAddress = CurrentUser.address;
+  } else {
+    var newAddress = document.getElementById("newAddress").value
+  };
+
   firebase.database().ref("Users/" + CurrentUser.uid).update({
 
-    // if (newEmail <> undefined || newEmail <> null) {
-    //   email: newEmail
-    // },
-    email: document.getElementById("newEmail").value,
-    password: document.getElementById("newPassword").value,
+    // email: newEmail,
+    // password: newPassword,
     displayName: document.getElementById("newFName").value + " " + document.getElementById("newLName").value,
-    firstName: document.getElementById("newFName").value,
-    lastName: document.getElementById("newLName").value,
-    address: document.getElementById("newAddress").value,
-    countyCd: document.getElementById("newCounty").value,
-    stateCd: document.getElementById("newState").value,
-    zipCd: document.getElementById("newZipCd").value
+    firstName: newFName,
+    lastName: newLName,
+    address: newAddress,
+    city: newCity,
+    countyCd: newCounty,
+    stateCd: newState,
+    zipCd: newZipCd
     // photoURL: document.getElementById("").value
     // emailVerified: document.getElementById("").value
   });
@@ -125,6 +242,7 @@ function displayUserInfo() {
       document.getElementById("oldLName").innerHTML = snapshot.val().lastName,
       document.getElementById("oldCounty").innerHTML = snapshot.val().countyCd,
       document.getElementById("oldState").innerHTML = snapshot.val().stateCd,
+      document.getElementById("oldCity").innerHTML = snapshot.val().city,
       document.getElementById("oldZipCd").innerHTML = snapshot.val().zipCd,
       document.getElementById("oldAddress").innerHTML = snapshot.val().address
 
@@ -132,34 +250,20 @@ function displayUserInfo() {
     console.log("Error: " + error.code);
   });
 
-  // firebase.database().ref("Users/" + user.uid).update({
-  //
-  //   // if (newEmail <> undefined || newEmail <> null) {
-  //   //   email: newEmail
-  //   // },
-  //   email: document.getElementById("newEmail").value,
-  //   password: document.getElementById("newPassword").value,
-  //   displayName: document.getElementById("newFName").value + document.getElementById("newLName").value,
-  //   firstName: document.getElementById("newFName").value,
-  //   LastName: ddocument.getElementById("newLName").value,
-  //   // photoURL: document.getElementById("").value
-  //   // emailVerified: document.getElementById("").value
-  // });
-
 }
 
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-
+    //User is signed in
     var CurrentUser = firebase.auth().currentUser;
     firebase.database().ref("Users/" + CurrentUser.uid).on("value", function(snapshot) {
 
-        if ( snapshot.val().displayName != null ) {
-          document.getElementById("userDisplay").innerHTML = snapshot.val().displayName;
-        } else {
-          document.getElementById("userDisplay").innerHTML = snapshot.val().email;
-        }
+      if (snapshot.val().displayName != "") {
+        document.getElementById("userDisplay").innerHTML = snapshot.val().displayName;
+      } else {
+        document.getElementById("userDisplay").innerHTML = snapshot.val().email;
+      }
     }, function(error) {
       console.log("Error: " + error.code);
     });
