@@ -50,56 +50,56 @@ function createUser() {
       countyCd: "",
       stateCd: "",
       zipCd: "",
-      AK: "",
-      HI: "",
-      AL: "",
-      AR: "",
-      AZ: "",
-      CA: "",
-      CO: "",
-      CT: "",
-      DE: "",
-      FL: "",
-      GA: "",
-      IA: "",
-      ID: "",
-      IL: "",
-      IN: "",
-      KS: "",
-      KY: "",
-      LA: "",
-      MA: "",
-      MD: "",
-      ME: "",
-      MI: "",
-      MN: "",
-      MO: "",
-      MS: "",
-      MT: "",
-      NC: "",
-      ND: "",
-      NE: "",
-      NH: "",
-      NJ: "",
-      NM: "",
-      NV: "",
-      NY: "",
-      OH: "",
-      OK: "",
-      OR: "",
-      PA: "",
-      RI: "",
-      SC: "",
-      SD: "",
-      TN: "",
-      TX: "",
-      UT: "",
-      VA: "",
-      VT: "",
-      WA: "",
-      WI: "",
-      WV: "",
-      WY: ""
+      AK: "N",
+      HI: "N",
+      AL: "N",
+      AR: "N",
+      AZ: "N",
+      CA: "N",
+      CO: "N",
+      CT: "N",
+      DE: "N",
+      FL: "N",
+      GA: "N",
+      IA: "N",
+      ID: "N",
+      IL: "N",
+      IN: "N",
+      KS: "N",
+      KY: "N",
+      LA: "N",
+      MA: "N",
+      MD: "N",
+      ME: "N",
+      MI: "N",
+      MN: "N",
+      MO: "N",
+      MS: "N",
+      MT: "N",
+      NC: "N",
+      ND: "N",
+      NE: "N",
+      NH: "N",
+      NJ: "N",
+      NM: "N",
+      NV: "N",
+      NY: "N",
+      OH: "N",
+      OK: "N",
+      OR: "N",
+      PA: "N",
+      RI: "N",
+      SC: "N",
+      SD: "N",
+      TN: "N",
+      TX: "N",
+      UT: "N",
+      VA: "N",
+      VT: "N",
+      WA: "N",
+      WI: "N",
+      WV: "N",
+      WY: "N"
       // photoURL: document.getElementById("").value
       // emailVerified: document.getElementById("").value
 
@@ -250,9 +250,7 @@ function displayUserInfo() {
   }, function(error) {
     console.log("Error: " + error.code);
   });
-
 }
-
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -284,3 +282,19 @@ firebase.auth().onAuthStateChanged(function(user) {
     isSignedIn = false;
   }
 });
+
+// // Need to create a list of state abbreviations that have value of "Y" in the database for the current user.
+// // Then use that list to change the color of those states in the "States" Array
+// function editedStates() {
+//   var CurrentUser = firebase.auth().currentUser;
+//   var queryStatesEdited = firebase.database().ref("Users/" + CurrentUser.uid).orderByKey();
+//   queryStatesEdited.once("value")
+//     .then(function(snapshot) {
+//         snapshot.forEach(function(childSnapshot) {
+//           var key = childSnapshot.key;
+//           console.log("Key: " + key);
+//           var childData = childSnapshot.val();
+//           console.log("Child Data: " + childData)
+//         });
+//       }
+//     });

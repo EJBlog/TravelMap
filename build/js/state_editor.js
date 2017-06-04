@@ -133,11 +133,18 @@ document.getElementById('UploadImage').onchange = function handleImage(e) {
       if (!fabric.Canvas.supports('toDataURL')) {
         alert('This browser doesn\'t provide means to serialize canvas to an image');
       } else {
-
         window.open(canvas.toDataURL({
           format: 'png'
         }))
       }
+
+      var CurrentUser = firebase.auth().currentUser;
+      firebase.database().ref("Users/" + CurrentUser.uid).update({
+
+        // email: newEmail,
+        [idNameStored]: "Y"
+      });
+
 
 // Below is a way to download the image straight to the users computer without having to right click and save as
       // function downloadCanvas(link, canvasId, filename) {

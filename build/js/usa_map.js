@@ -727,7 +727,7 @@ for (var i = 0; i < states.length; i++) {
   });
 }
 
-var modal = document.getElementById('myModal');
+// var modal = document.getElementById('myModal');
 var mapImg = document.getElementById('map');
 var span = document.getElementById("close");
 
