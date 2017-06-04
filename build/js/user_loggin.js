@@ -36,21 +36,13 @@ function createUser() {
   password = passwordTxt.value;
 
   firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
-    modalBody.classList.add('hide');
-    modalFooter.classList.add('hide');
-    document.getElementById("userDisplay").innerHTML = email;
-    signInModalContent.classList.remove('hide');
+    var CurrentUser = firebase.auth().currentUser;
 
-    var user = firebase.auth().currentUser;
-
-    firebase.database().ref("Users/" + user.uid).set({
+    firebase.database().ref("Users/" + CurrentUser.uid).set({
       // email: user.email,
       // password: user.password,
       email: email,
-      password: password,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      password: password
     });
 
   }, function(error) {
@@ -59,6 +51,10 @@ function createUser() {
     document.getElementById("errorMsg").innerHTML = errorMessage;
     console.log(error);
   });
+
+  modalBody.classList.add('hide');
+  modalFooter.classList.add('hide');
+  signInModalContent.classList.remove('hide');
 
 }
 
@@ -71,14 +67,16 @@ function signInUser() {
   firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
     modalBody.classList.add('hide');
     modalFooter.classList.add('hide');
-    document.getElementById("userDisplay").innerHTML = email;
     signInModalContent.classList.remove('hide');
+
   }, function(error) {
     errorCode = error.code;
     errorMessage = error.message;
     document.getElementById("errorMsg").innerHTML = errorMessage;
     console.log(error);
   });
+
+
 
 }
 
@@ -93,18 +91,17 @@ function signOutUser() {
 
 }
 
-function updateUserInfo(){
+function updateUserInfo() {
+  var CurrentUser = firebase.auth().currentUser;
 
-  var user = firebase.auth().currentUser;
-
-  firebase.database().ref("Users/" + user.uid).update({
+  firebase.database().ref("Users/" + CurrentUser.uid).update({
 
     // if (newEmail <> undefined || newEmail <> null) {
     //   email: newEmail
     // },
     email: document.getElementById("newEmail").value,
     password: document.getElementById("newPassword").value,
-    displayName: document.getElementById("newFName").value + "" + document.getElementById("newLName").value,
+    displayName: document.getElementById("newFName").value + " " + document.getElementById("newLName").value,
     firstName: document.getElementById("newFName").value,
     lastName: document.getElementById("newLName").value,
     address: document.getElementById("newAddress").value,
@@ -117,24 +114,23 @@ function updateUserInfo(){
 
 }
 
-function displayUserInfo(){
+function displayUserInfo() {
+  var CurrentUser = firebase.auth().currentUser;
 
-  var user = firebase.auth().currentUser;
-
-  firebase.database().ref("Users/" + user.uid).on("value", function(snapshot) {
+  firebase.database().ref("Users/" + CurrentUser.uid).on("value", function(snapshot) {
     document.getElementById("oldEmail").innerHTML = snapshot.val().email,
-    document.getElementById("oldPassword").innerHTML = snapshot.val().password,
-    document.getElementById("oldDisplayName").innerHTML = snapshot.val().firstName + "" + snapshot.val().lastName ,
-    document.getElementById("oldFName").innerHTML = snapshot.val().firstName,
-    document.getElementById("oldLName").innerHTML = snapshot.val().lastName,
-    document.getElementById("oldCounty").innerHTML = snapshot.val().countyCd,
-    document.getElementById("oldState").innerHTML = snapshot.val().stateCd,
-    document.getElementById("oldZipCd").innerHTML = snapshot.val().zipCd,
-    document.getElementById("oldAddress").innerHTML = snapshot.val().address
+      document.getElementById("oldPassword").innerHTML = snapshot.val().password,
+      document.getElementById("oldDisplayName").innerHTML = snapshot.val().firstName + " " + snapshot.val().lastName,
+      document.getElementById("oldFName").innerHTML = snapshot.val().firstName,
+      document.getElementById("oldLName").innerHTML = snapshot.val().lastName,
+      document.getElementById("oldCounty").innerHTML = snapshot.val().countyCd,
+      document.getElementById("oldState").innerHTML = snapshot.val().stateCd,
+      document.getElementById("oldZipCd").innerHTML = snapshot.val().zipCd,
+      document.getElementById("oldAddress").innerHTML = snapshot.val().address
 
-}, function (error) {
-   console.log("Error: " + error.code);
-});
+  }, function(error) {
+    console.log("Error: " + error.code);
+  });
 
   // firebase.database().ref("Users/" + user.uid).update({
   //
@@ -152,44 +148,27 @@ function displayUserInfo(){
 
 }
 
-// Getting a users provider-specific profile information
-// var user = firebase.auth().currentUser;
-//
-// if (user != null) {
-//   user.providerData.forEach(function(profile) {
-//     console.log("Sign-in provider: " + profile.providerId);
-//     console.log("  Provider-specific UID: " + profile.uid);
-//     console.log("  Name: " + profile.displayName);
-//     console.log("  Email: " + profile.email);
-//     console.log("  Photo URL: " + profile.photoURL);
-//   });
-// }
-//
-// // Updating a user's profile
-// user.updateProfile({
-//   displayName: "Jane Q. User",
-//   photoURL: "https://example.com/jane-q-user/profile.jpg"
-// }).then(function() {
-//   // Update successful.
-// }, function(error) {
-//   // An error happened.
-// });
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    // User is signed in.
-    var displayName = user.displayName;
-    var email = user.email;
-    var emailVerified = user.emailVerified;
-    var photoURL = user.photoURL;
-    var isAnonymous = user.isAnonymous;
-    var uid = user.uid;
-    var providerData = user.providerData;
+
+    var CurrentUser = firebase.auth().currentUser;
+    firebase.database().ref("Users/" + CurrentUser.uid).on("value", function(snapshot) {
+
+        if ( snapshot.val().displayName != null ) {
+          document.getElementById("userDisplay").innerHTML = snapshot.val().displayName;
+        } else {
+          document.getElementById("userDisplay").innerHTML = snapshot.val().email;
+        }
+    }, function(error) {
+      console.log("Error: " + error.code);
+    });
+
+    logOutLink.classList.remove('hide');
+    document.getElementById("errorMsg").innerHTML = "";
     console.log(user);
     console.log("User is Logged In");
-    logOutLink.classList.remove('hide');
-    document.getElementById("userDisplay").innerHTML = email;
-    document.getElementById("errorMsg").innerHTML = "";
+
   } else {
     // User is not signed in
     logInLink.classList.remove('hide');
