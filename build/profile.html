@@ -91,10 +91,10 @@
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
 	</div>
 
-  <div class="userProfile">
+  <div class="updateUserProfile">
     <form>
-      <p>New Email Address: <input type="text" placeholder="Email" id="newEmail" name="email"></p><br>
-      <p>New Password: <input type="text" placeholder="Password" id="newPassword" name="password"></p><br>
+      <p>New Email Address: <input type="text" placeholder="Email" id="newEmail" name="email"></p>
+      <p>New Password: <input type="text" placeholder="Password" id="newPassword" name="password"></p>
       <p>New First Name: <input type="text" placeholder="First Name" id="newFName" name="fName"></p><br>
       <p>New Last Name: <input type="text" placeholder="Last Name" id="newLName" name="lName"></p><br>
       <p>New Address: <input type="text" placeholder="Address" id="newAddress" name="address"></p><br>
@@ -105,7 +105,22 @@
   </div>
   <div class="logginModal-footer">
     <input type="button" onclick="updateUserInfo()" id="updateUserInfo"  value="Submit">
+		<input type="button" onclick="displayUserInfo()" id="displayUserInfo"  value="Display User Info">
   </div>
+
+	<div class="updateUserProfile">
+		<form>
+			<p>Email Address: <span id="oldEmail"></span></p>
+			<p>Password: <span id="oldPassword"></span></p>
+			<p>Display Name: <span id="oldDisplayName"></span></p>
+			<p>First Name: <span id="oldFName"></span></p>
+			<p>Last Name: <span id="oldLName"></span></p>
+			<p>Address: <span id="oldAddress"></span></p>
+			<p>State: <span id="oldState"></span></p>
+			<p>County: <span id="oldCounty"></span></p>
+			<p>Zip Code: <span id="oldZipCd"></span></p>
+		</form>
+	</div>
 
 
 

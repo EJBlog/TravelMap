@@ -43,7 +43,7 @@ function createUser() {
 
     var user = firebase.auth().currentUser;
 
-    firebase.database().ref("users/" + user.uid).push({
+    firebase.database().ref("Users/" + user.uid).set({
       // email: user.email,
       // password: user.password,
       email: email,
@@ -96,25 +96,59 @@ function signOutUser() {
 function updateUserInfo(){
 
   var user = firebase.auth().currentUser;
-  var newEmail = document.getElementById("newEmail");
-  var newPassword = document.getElementById("newPassword");
 
-  firebase.database().ref("users/" + user.uid).update({
+  firebase.database().ref("Users/" + user.uid).update({
 
     // if (newEmail <> undefined || newEmail <> null) {
     //   email: newEmail
     // },
-    email: newEmail,
-    password: newPassword,
-    // displayName: user.displayName,
-    // photoURL: user.photoURL,
-    // emailVerified: user.emailVerified
+    email: document.getElementById("newEmail").value,
+    password: document.getElementById("newPassword").value,
+    displayName: document.getElementById("newFName").value + "" + document.getElementById("newLName").value,
+    firstName: document.getElementById("newFName").value,
+    lastName: document.getElementById("newLName").value,
+    address: document.getElementById("newAddress").value,
+    countyCd: document.getElementById("newCounty").value,
+    stateCd: document.getElementById("newState").value,
+    zipCd: document.getElementById("newZipCd").value
+    // photoURL: document.getElementById("").value
+    // emailVerified: document.getElementById("").value
   });
 
-  firebase.database().ref("-Users/-KUanJA9egwmPsJCxXpv").update({ displayName: "New trainer" });
+}
 
+function displayUserInfo(){
 
+  var user = firebase.auth().currentUser;
 
+  firebase.database().ref("Users/" + user.uid).on("value", function(snapshot) {
+    document.getElementById("oldEmail").innerHTML = snapshot.val().email,
+    document.getElementById("oldPassword").innerHTML = snapshot.val().password,
+    document.getElementById("oldDisplayName").innerHTML = snapshot.val().firstName + "" + snapshot.val().lastName ,
+    document.getElementById("oldFName").innerHTML = snapshot.val().firstName,
+    document.getElementById("oldLName").innerHTML = snapshot.val().lastName,
+    document.getElementById("oldCounty").innerHTML = snapshot.val().countyCd,
+    document.getElementById("oldState").innerHTML = snapshot.val().stateCd,
+    document.getElementById("oldZipCd").innerHTML = snapshot.val().zipCd,
+    document.getElementById("oldAddress").innerHTML = snapshot.val().address
+
+}, function (error) {
+   console.log("Error: " + error.code);
+});
+
+  // firebase.database().ref("Users/" + user.uid).update({
+  //
+  //   // if (newEmail <> undefined || newEmail <> null) {
+  //   //   email: newEmail
+  //   // },
+  //   email: document.getElementById("newEmail").value,
+  //   password: document.getElementById("newPassword").value,
+  //   displayName: document.getElementById("newFName").value + document.getElementById("newLName").value,
+  //   firstName: document.getElementById("newFName").value,
+  //   LastName: ddocument.getElementById("newLName").value,
+  //   // photoURL: document.getElementById("").value
+  //   // emailVerified: document.getElementById("").value
+  // });
 
 }
 
