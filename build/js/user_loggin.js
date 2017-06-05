@@ -285,16 +285,32 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 // // Need to create a list of state abbreviations that have value of "Y" in the database for the current user.
 // // Then use that list to change the color of those states in the "States" Array
-// function editedStates() {
-//   var CurrentUser = firebase.auth().currentUser;
-//   var queryStatesEdited = firebase.database().ref("Users/" + CurrentUser.uid).orderByKey();
-//   queryStatesEdited.once("value")
-//     .then(function(snapshot) {
-//         snapshot.forEach(function(childSnapshot) {
-//           var key = childSnapshot.key;
-//           console.log("Key: " + key);
-//           var childData = childSnapshot.val();
-//           console.log("Child Data: " + childData)
-//         });
-//       }
-//     });
+var temp = [];
+var statesEdited = [];
+
+function editedStates() {
+  var CurrentUser = firebase.auth().currentUser;
+  var queryStatesEdited = firebase.database().ref("Users/" + CurrentUser.uid).orderByKey();
+  queryStatesEdited.once("value")
+    .then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var key = childSnapshot.key;
+        // console.log("Key: " + key);
+        var childData = childSnapshot.val();
+        // console.log("Child Data: " + childData)
+
+        temp.push(key + childData);
+
+      });
+      for (var i = 0; i < 51; i++) {
+        if (temp[i].substring(3, 2) == "Y") {
+          statesEdited = temp[i].substring(0, 2);
+          console.log(statesEdited);
+        } else {
+          console.log(temp[i].substring(0, 2) + " has not been edited")
+        }
+
+        console.log(statesEdited);
+      }
+    });
+}
