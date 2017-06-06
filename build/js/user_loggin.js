@@ -26,6 +26,8 @@ var password;
 var errorCode;
 var errorMessage;
 var isSignedIn = false;
+var temp = [];
+var statesEdited = [];
 
 function logInReload() {
   location.reload();
@@ -252,6 +254,32 @@ function displayUserInfo() {
   });
 }
 
+function editedStates() {
+  var CurrentUser = firebase.auth().currentUser;
+  var queryStatesEdited = firebase.database().ref("Users/" + CurrentUser.uid).orderByKey();
+  queryStatesEdited.once("value")
+    .then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var key = childSnapshot.key;
+        // console.log("Key: " + key);
+        var childData = childSnapshot.val();
+        // console.log("Child Data: " + childData)
+
+        temp.push(key + childData);
+
+      });
+      for (var i = 0; i < 51; i++) {
+        if (temp[i].substring(3, 2) == "Y") {
+          stateId = temp[i].substring(0, 2);
+          statesEdited.push(stateId);
+          // console.log(statesEdited);
+        }
+      }
+      console.log(statesEdited);
+      showEditedStates();
+    });
+}
+
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     //User is signed in
@@ -273,6 +301,14 @@ firebase.auth().onAuthStateChanged(function(user) {
     console.log("User is Logged In");
     isSignedIn = true;
 
+    if (document.URL.indexOf("index.html") >= 0 || document.URL.indexOf("") >= 0 || document.URL.indexOf("/#") >= 0) {
+      var x = document.URL;
+      console.log(x.substring(x.lastIndexOf('/') + 1))
+      editedStates();
+    } else {
+      console.log("Nope");
+    }
+
   } else {
     // User is not signed in
     logInLink.classList.remove('hide');
@@ -282,35 +318,3 @@ firebase.auth().onAuthStateChanged(function(user) {
     isSignedIn = false;
   }
 });
-
-// // Need to create a list of state abbreviations that have value of "Y" in the database for the current user.
-// // Then use that list to change the color of those states in the "States" Array
-var temp = [];
-var statesEdited = [];
-
-function editedStates() {
-  var CurrentUser = firebase.auth().currentUser;
-  var queryStatesEdited = firebase.database().ref("Users/" + CurrentUser.uid).orderByKey();
-  queryStatesEdited.once("value")
-    .then(function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        var key = childSnapshot.key;
-        // console.log("Key: " + key);
-        var childData = childSnapshot.val();
-        // console.log("Child Data: " + childData)
-
-        temp.push(key + childData);
-
-      });
-      for (var i = 0; i < 51; i++) {
-        if (temp[i].substring(3, 2) == "Y") {
-          statesEdited = temp[i].substring(0, 2);
-          console.log(statesEdited);
-        } else {
-          console.log(temp[i].substring(0, 2) + " has not been edited")
-        }
-
-        console.log(statesEdited);
-      }
-    });
-}

@@ -95,7 +95,16 @@
 		<h1>Travel Map Creator</h1>
 		<p>Please Select The State You Wish To Use</p>
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
+		<!-- <input type="button" onclick="editedStates()"  value="Show Edited States" style="top: 0px; position: absolute;"> -->
+	</div>
 
+	<div class="instructions">
+		<p>
+			<h3>Legend:</h3>
+			<ol>
+				<li>If a state is colored GREEN then that state has previously been edited.</li>
+			</ol>
+		</p>
 	</div>
 
 
@@ -143,6 +152,32 @@
 				logInReload();
 			}
 		}
+
+function showEditedStates(){
+	//This works with one state
+
+	for (var i = 0, b=0; i < states.length; i++) {
+
+		if (states[i].data('id') == statesEdited[b]) {
+			console.log(states[i].data('id') + " State was found in states list");
+			states[i].node.style.fill = "#4BB543";
+
+			if (statesEdited[b + 1] != undefined) {
+				b++
+			} else {
+				console.log(statesEdited[b] + "had an error");
+			}
+
+		} else {
+			console.log(states[i].data('id') + " errored and " + statesEdited[b] + " errored");
+		}
+
+	}
+
+}
+
+
+
 	</script>
 </body>
 
