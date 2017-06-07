@@ -41,6 +41,7 @@ function createUser() {
   firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
     var CurrentUser = firebase.auth().currentUser;
 
+
     firebase.database().ref("Users/" + CurrentUser.uid).set({
       email: email,
       password: password,
@@ -52,6 +53,7 @@ function createUser() {
       countyCd: "",
       stateCd: "",
       zipCd: "",
+      emailVerified: false,
       AK: "N",
       HI: "N",
       AL: "N",
@@ -120,10 +122,23 @@ function createUser() {
 
 }
 
+//Verification Email
+function verifyEmail() {
+
+  var CurrentUser = firebase.auth().currentUser;
+  CurrentUser.sendEmailVerification().then(function() {
+    // Email sent.
+  }, function(error) {
+    // An error happened.
+  });
+
+}
+
 // Username and password sign in
 function signInUser() {
   email = emailTxt.value;
   password = passwordTxt.value;
+  emailVerified = false;
 
   // Sign in a user using email and password
   firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
@@ -247,7 +262,8 @@ function displayUserInfo() {
       document.getElementById("oldState").innerHTML = snapshot.val().stateCd,
       document.getElementById("oldCity").innerHTML = snapshot.val().city,
       document.getElementById("oldZipCd").innerHTML = snapshot.val().zipCd,
-      document.getElementById("oldAddress").innerHTML = snapshot.val().address
+      document.getElementById("oldAddress").innerHTML = snapshot.val().address,
+      document.getElementById("emailVerified").innerHTML = snapshot.val().emailVerified
 
   }, function(error) {
     console.log("Error: " + error.code);
