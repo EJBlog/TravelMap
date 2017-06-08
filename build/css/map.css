@@ -67,7 +67,7 @@ padding-top: .1px
 }
 
 .loggedInUser{
-	top: 55px;
+	top: 70px;
 	position: absolute;
 	color: white;
 	right: 10px;
@@ -117,6 +117,38 @@ padding-top: .1px
 	font-size: 20px;
 	float:right;
 }
+@media (max-width: 1457px) {
+  .instructions{
+  	height:auto;
+  	width:8%;
+  	position: absolute;
+  	right: 0;
+  	font-family: sans-serif;
+  	font-size: 17px;
+  	float:right;
+  }
+}
+@media (max-width: 1128px) {
+		.instructions{
+	  	height:auto;
+	  	width:20%;
+	    margin-left: 20px;
+	  	position: absolute;
+	  	left: 0;
+			float:left;
+	  	font-family: sans-serif;
+	  	font-size: 17px;
+			color: white;
+  }
+}
+@media (max-width: 860px) {
+		.instructions{
+			display: none;
+  }
+}
+  ol,ul,li{
+    font-size: 17px;
+  }
 
 /* The Modal (background) */
 

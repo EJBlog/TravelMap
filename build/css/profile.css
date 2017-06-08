@@ -13,7 +13,17 @@
   padding: 2px 16px;
   left: 0px;
   margin-top: 10px;
+  margin-left: 20px;
   position: absolute;
   width: 50%;
   height: 100%;
+  font-weight: bold;
+} p {
+  margin-bottom: 0px;
+  padding-bottom: 10px;
+}
+
+.oldProfileInfo{
+  font-weight: normal;
+  /*margin-bottom: 0px;*/
 }
