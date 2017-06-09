@@ -2834,6 +2834,7 @@ a:hover, a:active, a:focus {
   position: absolute;
   right:0px;
   width:40%;
+  padding-right: 200px;
 }
 .about_evan p {
   color: white;
