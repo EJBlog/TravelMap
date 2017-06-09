@@ -4,173 +4,83 @@
 <head>
 	<meta charset="utf-8">
 	<meta https-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Map</title>
+	<title>Home</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="css/custom.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/map.css">
-
-	<!--[if lte IE 9]>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
-		<![endif]-->
 
 	<script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
 
 </head>
 
 <body class="body">
-	<!--<header class="hero-image" role="banner" style="background-image: url(img/waterfall.jpg);">-->
-	<!-- <header class="hero-image-about"> -->
-	<header>
-		<span class="menu-trigger animated fadeInDown">
-		<span class="bar"></span>
-		<span class="bar"></span>
-		<span class="bar"></span>
-		</span>
 
-		<!-- if the user has javascript disabled they can still use the menu -->
-		<noscript>
-					<div class="no-js-menu">
-						<ul>
-							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-							<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
-							<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
-							<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
-							<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li>
-							<li id="logOutLink"><i class="fa fa-users"></i><a href="index.html" onclick="signOutUser()">Log Out</a></li>
-							<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
-							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
-						</ul>
-					</div>
-				</noscript>
-		<!-- end no script -->
-
-		<div id="menu-target">
-			<ul>
-				<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-				<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
-						<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
-						<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
-				<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li>
-				<li id="logOutLink"><i class="fa fa-users"></i><a href="index.html" onclick="signOutUser()">Log Out</a></li>
-				<li><i class="fa fa-beer"></i><a href="about.html">About</a></li>
-				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
-			</ul>
-			<hr>
-		</div>
-	</header>
-
-	<div id="loginModal" class="logginModalClass">
-		<div class="logginModal-content">
-
-			<div class="logginModal-header">
-				<span class="close">&times;</span>
-			</div>
-			<div id="signInModalContent" class="logginModal-body hide">
-				<p style="padding-top:85px; padding-left:50px;">You Have Logged In successfully!</p>
-			</div>
-			<div id="modalBody" class="logginModal-body">
-				<h2>Log In</h2>
-				<form>
-					<input type="text" placeholder="Email" id="email" name="email">
-					<input type="password" placeholder="Password" id="password" name="password">
-				</form>
-				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
-				<p id="errorMsg" class="errorMsg"></p>
-			</div>
-			<div id="modalFooter" class="logginModal-footer">
-				<p style="margin-bottom:10px">First Time? Create an account.</p>
-				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
-			</div>
+	<div class="home-menu-bar">
+		<p id="ota" style="text-decoration: none;"> <span style="color:white">Office</span> To <span style="color:#A30000">Adventure</span></p>
+		<div class="home-menu-links">
+			<a href="contact.html" style="text-decoration: none;">Contact Us</a>
+			<!-- <a  href="about.html" style="text-decoration: none;">About</a> -->
+			<!-- <a  onclick=""style="text-decoration: none;">Blog</a> -->
+			<a href="map.html" style="text-decoration: none;">Travel Map</a>
 		</div>
 	</div>
 
+	<div class="main-home-image" role="banner">
+		<img class="mySlides" src="img/rach_travel_map.jpg">
+		<img class="mySlides" src="img/louisville_downtown_sunset.jpg">
+		<img class="mySlides" src="img/smith_rock.jpg">
+		<!-- <img class="mySlides" src="img/.jpg" style="width:100%" height="500px" width="500px"> -->
 
-	<div class="title">
-		<h1>Travel Map Creator</h1>
-		<p>Please Select The State You Wish To Use</p>
-		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
-		<!-- <input type="button" onclick="editedStates()"  value="Show Edited States" style="top: 0px; position: absolute;"> -->
+		<button class="gallery-button gallery-button-display-left" onclick="plusDivs(-1)">&#10094;</button>
+		<button class="gallery-button gallery-button-display-right" onclick="plusDivs(1)">&#10095;</button>
 	</div>
 
-	<div class="instructions">
-		<p>
-			<h3>Legend:</h3>
-			<ol>
-				<li>If a state is colored GREEN then that state has previously been edited.</li>
-			</ol>
-		</p>
+	<div class="home-footer">
+		<h2 style="text-align:center;">About Us</h2>
+
+		<div class="about_jake">
+			<img src="img/about_jake.jpg" height="250px" width="250px">
+			<h3>Jake Ellis</h3>
+			<p>University Of Louisville graduating class of 2013. Currently traveling the United States with my girlfriend and dog to find the best food, views, and climb as many classic routes as possible</p>
+		</div>
+
+		<div class="about_evan">
+			<img src="img/about_jake.jpg" height="250px" width="250px">
+			<h3>Evan Neises</h3>
+			<p>Class of 2015 graduate of the University of Louisville with a BSBA in Computer Information Systems with a focus in web development and a minor in Marketing.</p>
+		</div>
+
 	</div>
-
-
-	<div class="hover-display">
-		<!-- <h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> <br> Id: <span id="id" class="hover-state"> &nbsp; </span> </h3> -->
-		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
-		<p hidden id="id"></p>
-	</div>
-
-	<div class="map_container">
-		<div id="map" class="map" title="If you have edited a state it will be colored green"></div>
-	</div>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script>
-		window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
-	</script>
-	<script src="js/vendor/jquery.jpanelmenu.min.js"></script>
-	<script src="js/vendor/bootstrap.min.js"></script>
-	<script src="js/vendor/fastclick.min.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/raphael.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-	<script src="js/usa_map.js"></script>
-	<script src="js/user_loggin.js"></script>
 
 	<script type="text/javascript">
-		var modal = document.getElementById("loginModal");
-		var btn = document.getElementById("modalButton");
-		var span = document.getElementsByClassName("close")[0];
+		// image slide show
+		var slideIndex = 1;
+		showDivs(slideIndex);
 
-		var logginModal = function() {
-			modal.style.display = "block"
-		};
-
-		span.onclick = function() {
-			modal.style.display = "none";
-			logInReload();
+		function plusDivs(n) {
+			showDivs(slideIndex += n);
 		}
 
-		window.onclick = function() {
-			if (event.target == modal) {
-				modal.style.display = "none";
-				logInReload();
+		function showDivs(n) {
+			var i;
+			var x = document.getElementsByClassName("mySlides");
+			if (n > x.length) {
+				slideIndex = 1
 			}
-		}
-
-		function showEditedStates() {
-
-			for (var i = 0, b = 0; i < states.length; i++) {
-
-				if (states[i].data('id') == statesEdited[b]) {
-					console.log(states[i].data('id') + " State was found in states list");
-					states[i].node.style.fill = "#4BB543";
-
-					if (statesEdited[b + 1] != undefined) {
-						b++;
-						i = 0;
-					} else {
-						console.log(statesEdited[b] + "had an error");
-					}
-				} 
+			if (n < 1) {
+				slideIndex = x.length
 			}
+			for (i = 0; i < x.length; i++) {
+				x[i].style.display = "none";
+			}
+			x[slideIndex - 1].style.display = "block";
 		}
-
 	</script>
+
 </body>
 
 </html>

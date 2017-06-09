@@ -5,18 +5,15 @@
   margin-top: 10px;
   position: absolute;
   width: 50%;
-  height: 100%;
 }
 
 .displayUserProfile{
   font-size: 16px;
   padding: 2px 16px;
-  left: 0px;
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 28%;
   position: absolute;
   width: 50%;
-  height: 100%;
   font-weight: bold;
 } p {
   margin-bottom: 0px;

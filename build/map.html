@@ -3,15 +3,15 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Editor</title>
+	<meta https-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Map</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/editor.css">
+	<link rel="stylesheet" href="css/map.css">
 
 	<!--[if lte IE 9]>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
@@ -23,7 +23,8 @@
 </head>
 
 <body class="body">
-
+	<!--<header class="hero-image" role="banner" style="background-image: url(img/waterfall.jpg);">-->
+	<!-- <header class="hero-image-about"> -->
 	<header>
 		<span class="menu-trigger animated fadeInDown">
 		<span class="bar"></span>
@@ -36,8 +37,10 @@
 					<div class="no-js-menu">
 						<ul>
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-							<li><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
-							<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
+							<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
+							<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
+							<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
+							<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li>
 							<li id="logOutLink"><i class="fa fa-users"></i><a href="index.html" onclick="signOutUser()">Log Out</a></li>
 							<!-- <li><i class="fa fa-beer"></i><a href="about.html">About</a></li> -->
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
@@ -49,8 +52,10 @@
 		<div id="menu-target">
 			<ul>
 				<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-				<li><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
-				<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
+				<!-- <li><i class="fa fa-th"></i><a href="category.html">Categories</a></li>
+						<li><i class="fa fa-user"></i><a href="author_evan.html">Evan Neises</a></li>
+						<li><i class="fa fa-user"></i><a href="author_jake.html">Jake Ellis</a></li> -->
+				<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li>
 				<li id="logOutLink"><i class="fa fa-users"></i><a href="index.html" onclick="signOutUser()">Log Out</a></li>
 				<!-- <li><i class="fa fa-beer"></i><a href="about.html">About</a></li> -->
 				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
@@ -66,7 +71,7 @@
 				<span class="close">&times;</span>
 			</div>
 			<div id="signInModalContent" class="logginModal-body hide">
-				<p style="padding-top:85px; padding-left:50px;">You Have Logged In Successfully!</p>
+				<p style="padding-top:85px; padding-left:50px;">You Have Logged In successfully!</p>
 			</div>
 			<div id="modalBody" class="logginModal-body">
 				<h2>Log In</h2>
@@ -84,50 +89,32 @@
 		</div>
 	</div>
 
+
 	<div class="title">
-		<h1>Image Editor</h1>
-		<p>Load And Edit Your Image To Fit Inside The Selected State</p>
+		<h1>Travel Map Creator</h1>
+		<p>Please Select The State You Wish To Use</p>
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
-	</div>
-
-	<div class="load-image">
-		<h3>Upload Your Image</h3>
-		<input type="file" id="UploadImage" href="#" title="Upload Your Image"></input>
-
-
-
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<a href="https://www.surveymonkey.com/r/PKZJZTN" class="feedback"> Please Provide Feedback Here! </a>
+		<!-- <input type="button" onclick="editedStates()"  value="Show Edited States" style="top: 0px; position: absolute;"> -->
 	</div>
 
 	<div class="instructions">
 		<p>
-			<h3>Instructions:</h3>
+			<h3>Legend:</h3>
 			<ol>
-				<li>Upload an image from your computer</li>
-				<li>Move and resize your image to fit into the shape of the selected state</li>
-				<li>Press the "Show Entire Image" button to see your full image. Press the "Trim State" button to only show what fits inside the state</li>
-				<li>Once you have finished resizing your image, press the "Save" button</li>
-				<li>When the new tab opens, right click on the image and press "Save Image As"</li>
-				<li>Save the image to your own computer</li>
-				<li>Print and cut the image for your Travel Map</li>
-				<li>Provide Feedback!</li>
+				<li>If a state is colored GREEN then that state has previously been edited.</li>
 			</ol>
 		</p>
 	</div>
 
-	<div id="imageEditor">
-		<section id="toolbar">
-			<a id="save" href="#" title="Save">Save</a>
-			|<a id="ReCenter" href="#" title="Re-Center Your Image">Re-Center</a> |
-			<a id="showImage" href="#" title="Show Entire Image">Show Entire Image</a> |
-			<a id="trim" href="#" title="Trim Image">Trim State</a> |
-			<a id="reset" href="#" title="Reset">Reset</a>
-		</section>
 
-		<section id="editorContainer">
-			<canvas id="editor" style="width: 574px; height: 574px; border:1px solid #000000"></canvas>
-		</section>
+	<div class="hover-display">
+		<!-- <h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> <br> Id: <span id="id" class="hover-state"> &nbsp; </span> </h3> -->
+		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
+		<p hidden id="id"></p>
+	</div>
+
+	<div class="map_container">
+		<div id="map" class="map" title="If you have edited a state it will be colored green"></div>
 	</div>
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
@@ -138,18 +125,14 @@
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/vendor/fastclick.min.js"></script>
 	<script src="js/main.js"></script>
-	<script src="js/Fabric_JS/fabric.min.js"></script>
+	<script src="js/raphael.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-	<script src="js/state_editor.js"></script>
+	<script src="js/usa_map.js"></script>
 	<script src="js/user_loggin.js"></script>
 
 	<script type="text/javascript">
-
 		var modal = document.getElementById("loginModal");
-		var LOmodal = document.getElementById("logoutModal");
-		var btn = document.getElementById("modalButton");
 		var span = document.getElementsByClassName("close")[0];
-		var loSpan = document.getElementsByClassName("loClose")[0];
 
 		var logginModal = function() {
 			modal.style.display = "block"
@@ -166,8 +149,24 @@
 				logInReload();
 			}
 		}
-	</script>
 
+		function showEditedStates() {
+
+			for (var i = 0, b = 0; i < states.length; i++) {
+
+				if (states[i].data('id') == statesEdited[b]) {
+					// console.log(states[i].data('id') + " State was found in states list");
+					states[i].node.style.fill = "#4BB543";
+
+					if (statesEdited[b + 1] != undefined) {
+						b++;
+						i = 0;
+					}
+				}
+			}
+		}
+
+	</script>
 </body>
 
 </html>

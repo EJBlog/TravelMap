@@ -389,7 +389,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     isSignedIn = true;
 
     //Still need to fix this.
-    if (document.URL.indexOf("index.html") >= 0 || document.URL.indexOf("") >= 0 || document.URL.indexOf("/#") >= 0) {
+    if (document.URL.indexOf("map.html") >= 0 ) {
       var x = document.URL;
       console.log(x.substring(x.lastIndexOf('/') + 1))
       editedStates();
