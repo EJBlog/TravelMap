@@ -733,6 +733,7 @@ var span = document.getElementById("close");
 
 
 mapImg.onclick = function() {
+  var CurrentUser = firebase.auth().currentUser;
 
   var clickedStateName = document.getElementById('state-name').innerHTML;
   var ClickedIdName = document.getElementById('id').innerHTML;
@@ -749,7 +750,14 @@ mapImg.onclick = function() {
   };
 
   if (isSignedIn == true) {
-    window.open("state_editor.html", "_self");
+    
+    if (CurrentUser.emailVerified == true) {
+      window.open("state_editor.html", "_self");
+    } else {
+      console.log("User is signed in but has not verified their email address");
+      alert("Please verify your email before creating your Travel Map");
+    };
+
   } else {
     logginModal();
   };

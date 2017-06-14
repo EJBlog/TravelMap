@@ -80,6 +80,11 @@
 				<p style="margin-bottom:10px">First Time? Create an account.</p>
 				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
 			</div>
+
+			<div id="verifyEmailModalContent" class="logginModal-footer hide">
+				<p style="padding-left:50px; color:red;">A verification email has been sent to <strong> <span id="userEmail"</span> </strong>. Please verify your email before creating your Travel Map.</p>
+			</div>
+
 		</div>
 	</div>
 
@@ -88,7 +93,6 @@
 		<h1>Travel Map Creator</h1>
 		<p>Please Select The State You Wish To Use</p>
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
-		<!-- <input type="button" onclick="editedStates()"  value="Show Edited States" style="top: 0px; position: absolute;"> -->
 	</div>
 
 	<div class="instructions">
@@ -159,6 +163,7 @@
 				}
 			}
 		}
+
 
 	</script>
 </body>

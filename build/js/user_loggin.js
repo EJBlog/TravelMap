@@ -21,6 +21,7 @@ const logInLink = document.getElementById('LogInLink');
 const modalBody = document.getElementById("modalBody");
 const modalFooter = document.getElementById("modalFooter");
 const signInModalContent = document.getElementById("signInModalContent");
+const verifyEmailModalContent = document.getElementById("verifyEmailModalContent");
 var usernamePasswordCheck;
 var email;
 var password;
@@ -84,7 +85,7 @@ function createUser() {
         countyCd: "",
         stateCd: "",
         zipCd: "",
-        emailVerified: false,
+        emailVerificationSent: "N",
         AK: "N",
         HI: "N",
         AL: "N",
@@ -135,14 +136,13 @@ function createUser() {
         WI: "N",
         WV: "N",
         WY: "N"
-        // photoURL: document.getElementById("").value
-        // emailVerified: document.getElementById("").value
 
       });
 
       modalBody.classList.add('hide');
       modalFooter.classList.add('hide');
       signInModalContent.classList.remove('hide');
+      verifyEmailModalContent.classList.remove('hide');
 
     }, function(error) {
       errorCode = error.code;
@@ -152,20 +152,48 @@ function createUser() {
 
     });
 
-  } else {
-    console.log("Username or Password needs to be corrected");
   }
-
 }
 
-//Verification Email
 function verifyEmail() {
+  var CurrentUser = firebase.auth().currentUser;
+
+  firebase.database().ref("Users/" + CurrentUser.uid).on("value", function(snapshot) {
+
+    if (snapshot.val().emailVerificationSent == "N") {
+
+      CurrentUser.sendEmailVerification().then(function() {
+
+        firebase.database().ref("Users/" + CurrentUser.uid).update({
+          emailVerificationSent: "Y"
+        });
+        console.log("Verification Email has been sent");
+
+      }, function(error) {
+        console.log("There was an error so the Verification Email has NOT been sent");
+      });
+
+    }
+  });
+  // , function(error) {
+  //   console.log("Error: " + error.code);
+  // });
+}
+
+function reVerifyEmail() {
 
   var CurrentUser = firebase.auth().currentUser;
-  CurrentUser.sendEmailVerification().then(function() {
-    // Email sent.
-  }, function(error) {
-    // An error happened.
+  firebase.database().ref("Users/" + CurrentUser.uid).on("value", function(snapshot) {
+
+    if (snapshot.val().emailVerificationSent == "Y" && CurrentUser.emailVerified == true) {
+      console.log("The user has already verified their email.");
+    }
+    else if (snapshot.val().emailVerificationSent == "Y" && CurrentUser.emailVerified == false) {
+      CurrentUser.sendEmailVerification().then(function() {
+      console.log("Verification Email has been re-sent");
+      });
+    }
+
   });
 
 }
@@ -189,8 +217,6 @@ function signInUser() {
     console.log(error);
   });
 
-
-
 }
 
 //Username and password signout
@@ -204,20 +230,63 @@ function signOutUser() {
 
 }
 
+function changePassword() {
+  var CurrentUser = firebase.auth().currentUser;
+  var emailAddress = CurrentUser.email;
+
+  firebase.auth().sendPasswordResetEmail(emailAddress).then(function() {
+    // Email sent.
+  }, function(error) {
+    // An error happened.
+  });
+  
+}
+
 function displayUserInfo() {
   var CurrentUser = firebase.auth().currentUser;
 
   firebase.database().ref("Users/" + CurrentUser.uid).on("value", function(snapshot) {
-    // document.getElementById("oldEmail").innerHTML = snapshot.val().email,
-    //   document.getElementById("oldPassword").innerHTML = snapshot.val().password,
-      // document.getElementById("oldDisplayName").innerHTML = snapshot.val().firstName + " " + snapshot.val().lastName,
-      document.getElementById("oldFName").innerHTML = snapshot.val().firstName,
-      document.getElementById("oldLName").innerHTML = snapshot.val().lastName,
-      document.getElementById("oldCounty").innerHTML = snapshot.val().countyCd,
-      document.getElementById("oldState").innerHTML = snapshot.val().stateCd,
-      document.getElementById("oldCity").innerHTML = snapshot.val().city,
-      document.getElementById("oldZipCd").innerHTML = snapshot.val().zipCd,
+    if (snapshot.val().firstName != "") {
+      document.getElementById("oldFName").innerHTML = snapshot.val().firstName
+    } else {
+      document.getElementById("oldFName").innerHTML = "Please update"
+    };
+
+    if (snapshot.val().lastName != "") {
+      document.getElementById("oldLName").innerHTML = snapshot.val().lastName
+    } else {
+      document.getElementById("oldLName").innerHTML = "Please update"
+    };
+
+    if (snapshot.val().countyCd != "") {
+      document.getElementById("oldCounty").innerHTML = snapshot.val().countyCd
+    } else {
+      document.getElementById("oldCounty").innerHTML = "Please update"
+    };
+
+    if (snapshot.val().stateCd != "") {
+      document.getElementById("oldState").innerHTML = snapshot.val().stateCd
+    } else {
+      document.getElementById("oldState").innerHTML = "Please update"
+    };
+
+    if (snapshot.val().city != "") {
+      document.getElementById("oldCity").innerHTML = snapshot.val().city
+    } else {
+      document.getElementById("oldCity").innerHTML = "Please update"
+    };
+
+    if (snapshot.val().zipCd != "") {
+      document.getElementById("oldZipCd").innerHTML = snapshot.val().zipCd
+    } else {
+      document.getElementById("oldZipCd").innerHTML = "Please update"
+    };
+
+    if (snapshot.val().address != "") {
       document.getElementById("oldAddress").innerHTML = snapshot.val().address
+    } else {
+      document.getElementById("oldAddress").innerHTML = "Please update"
+    };
 
   }, function(error) {
     console.log("Error: " + error.code);
@@ -225,9 +294,9 @@ function displayUserInfo() {
 }
 
 function updateUserInfo() {
-    var CurrentUser = firebase.auth().currentUser;
+  var CurrentUser = firebase.auth().currentUser;
 
-    firebase.database().ref("Users/" + CurrentUser.uid).on("value", function(snapshot) {
+  firebase.database().ref("Users/" + CurrentUser.uid).on("value", function(snapshot) {
 
     if (document.getElementById("newFName").value == "") {
 
@@ -327,8 +396,6 @@ function updateUserInfo() {
 
     firebase.database().ref("Users/" + CurrentUser.uid).update({
 
-      // email: newEmail,
-      // password: newPassword,
       displayName: newDisplayName,
       firstName: newFName,
       lastName: newLName,
@@ -337,8 +404,6 @@ function updateUserInfo() {
       countyCd: newCounty,
       stateCd: newState,
       zipCd: newZipCd
-      // photoURL: document.getElementById("").value
-      // emailVerified: document.getElementById("").value
     });
 
   }, function(error) {
@@ -382,20 +447,31 @@ firebase.auth().onAuthStateChanged(function(user) {
       console.log("Error: " + error.code);
     });
 
-    logOutLink.classList.remove('hide');
-    document.getElementById("errorMsg").innerHTML = "";
-    console.log(user);
+    if (document.URL.indexOf("map.html") >= 0) {
+      editedStates();
+    }
+
+    if (CurrentUser.emailVerified == false) {
+      verifyEmail();
+    } else {
+      console.log("User has already verified their email");
+    };
+
+    if (document.URL.indexOf("profile.html") >= 0) {
+      if (CurrentUser.emailVerified == false) {
+        document.getElementById("resendEmailVerification").classList.remove('hide');
+      }
+    };
+
+    // if (document.URL.indexOf("profile.html") == 0) {
+    //   console.log(document.URL.indexOf("profile.html"));
+    //   logOutLink.classList.remove('hide');
+    //   document.getElementById("errorMsg").innerHTML = "";
+    // };
+
     console.log("User is Logged In");
     isSignedIn = true;
-
-    //Still need to fix this.
-    if (document.URL.indexOf("map.html") >= 0 ) {
-      var x = document.URL;
-      console.log(x.substring(x.lastIndexOf('/') + 1))
-      editedStates();
-    } else {
-      console.log("Nope");
-    }
+    document.getElementById("userEmail").innerHTML = CurrentUser.email;
 
   } else {
     // User is not signed in

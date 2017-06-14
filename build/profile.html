@@ -8,7 +8,6 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="css/custom.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/main.css">
@@ -40,7 +39,6 @@
 							<li><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
 							<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li>
 							<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
-							<!-- <li><i class="fa fa-beer"></i><a href="about.html">About</a></li> -->
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 						</ul>
 					</div>
@@ -53,7 +51,6 @@
 				<li><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
 				<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li>
 				<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
-				<!-- <li><i class="fa fa-beer"></i><a href="about.html">About</a></li> -->
 				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 			</ul>
 			<hr>
@@ -105,6 +102,7 @@
 		</form>
 		<div class="logginModal-footer">
 			<input type="button" onclick="editUserInfo()" id="editUserInfo" value="Edit Profile Info">
+			<input class="hide" type="button" id="resendEmailVerification" onclick="reVerifyEmail()" value="Resend Verification Email">
 		</div>
 	</div>
 
@@ -137,21 +135,12 @@
 
 	<script type="text/javascript">
 
-		// $(document).ready(function() {
-		// 	displayUserInfo();
-		// });
-
 		function editUserInfo() {
 			document.getElementById("updateUserProfile").classList.remove("hide");
 		};
 
-		// window.onload = function() {
-		// 	if (document.getElementById("userDisplay").innerHTML != "") {
-		// 		displayUserInfo();
-		// 	};
-		// }
-
 		window.onload = setTimeout(displayUserInfo, 3000);
+
 
 		// should not need this if we add in functionality to limit what pages users can access when they are not logged in
 		// var modal = document.getElementById("loginModal");
@@ -173,6 +162,8 @@
 		// 		logInReload();
 		// 	}
 		// }
+
+
 	</script>
 </body>
 
