@@ -30,6 +30,7 @@ var errorMessage;
 var isSignedIn = false;
 var temp = [];
 var statesEdited = [];
+var failedAttempts = 0;
 
 function logInReload() {
   location.reload();
@@ -187,10 +188,9 @@ function reVerifyEmail() {
 
     if (snapshot.val().emailVerificationSent == "Y" && CurrentUser.emailVerified == true) {
       console.log("The user has already verified their email.");
-    }
-    else if (snapshot.val().emailVerificationSent == "Y" && CurrentUser.emailVerified == false) {
+    } else if (snapshot.val().emailVerificationSent == "Y" && CurrentUser.emailVerified == false) {
       CurrentUser.sendEmailVerification().then(function() {
-      console.log("Verification Email has been re-sent");
+        console.log("Verification Email has been re-sent");
       });
     }
 
@@ -198,24 +198,33 @@ function reVerifyEmail() {
 
 }
 
-// Username and password sign in
+
 function signInUser() {
   email = emailTxt.value;
   password = passwordTxt.value;
   emailVerified = false;
 
-  // Sign in a user using email and password
-  firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
-    modalBody.classList.add('hide');
-    modalFooter.classList.add('hide');
-    signInModalContent.classList.remove('hide');
+  if (failedAttempts < 4) {
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+      modalBody.classList.add('hide');
+      modalFooter.classList.add('hide');
+      signInModalContent.classList.remove('hide');
 
-  }, function(error) {
-    errorCode = error.code;
-    errorMessage = error.message;
-    document.getElementById("errorMsg").innerHTML = errorMessage;
-    console.log(error);
-  });
+    }, function(error) {
+      errorCode = error.code;
+      errorMessage = error.message;
+      document.getElementById("errorMsg").innerHTML = errorMessage;
+      console.log(error);
+      failedAttempts++;
+    });
+
+  }
+  else {
+    console.log("Too many failed attempts. Please reset your password");
+    document.getElementById("signIn").classList.add('hide');
+    // document.getElementById("changePasswordLink").classList.remove('hide');
+  }
+
 
 }
 
@@ -230,16 +239,34 @@ function signOutUser() {
 
 }
 
+// Need to add validation to make sure the email they entered is in our system
 function changePassword() {
-  var CurrentUser = firebase.auth().currentUser;
-  var emailAddress = CurrentUser.email;
 
-  firebase.auth().sendPasswordResetEmail(emailAddress).then(function() {
-    // Email sent.
-  }, function(error) {
-    // An error happened.
-  });
-  
+  if (document.URL.indexOf("profile.html") >= 0) {
+    var CurrentUser = firebase.auth().currentUser;
+    var emailAddress = CurrentUser.email;
+
+    firebase.auth().sendPasswordResetEmail(emailAddress).then(function() {
+      console.log("Change password email was sent");
+    }, function(error) {
+      console.log("Change password email was NOT sent");
+    });
+  }
+
+  if (document.URL.indexOf("changepassword.html") >= 0) {
+    var emailAddress = document.getElementById("emailAddressForPasswordChange").value;
+
+    firebase.auth().sendPasswordResetEmail(emailAddress).then(function() {
+      console.log("Change password email was sent");
+      document.getElementById("ChangeFailMessage").classList.add('hide');
+      document.getElementById("ChangeSuccessMessage").classList.remove('hide');
+      setTimeout(window.location.assign("https://travel-map-dev.firebaseapp.com/map.html"), 20000);
+    }, function(error) {
+      console.log("Change password email was NOT sent");
+      document.getElementById("ChangeFailMessage").classList.remove('hide');
+    });
+  }
+
 }
 
 function displayUserInfo() {
