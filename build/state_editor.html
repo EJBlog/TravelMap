@@ -71,33 +71,35 @@
 			<div id="modalBody" class="logginModal-body">
 				<h2>Log In</h2>
 				<form>
-					<input type="text" placeholder="Email" id="email" name="email">
-					<input type="password" placeholder="Password" id="password" name="password">
+					<input type="text" placeholder="Email" id="email" name="email"/>
+					<input type="password" placeholder="Password" id="password" name="password"/>
 				</form>
-				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
+				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in"/>
 				<p id="errorMsg" class="errorMsg"></p>
 			</div>
 			<div id="modalFooter" class="logginModal-footer">
 				<p style="margin-bottom:10px">First Time? Create an account.</p>
-				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
+				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account"/>
 			</div>
 		</div>
 	</div>
 
 	<div class="title">
-		<h1>Image Editor</h1>
-		<p>Load And Edit Your Image To Fit Inside The Selected State</p>
+		<!-- <h1>Image Editor</h1> -->
+		<img src="/img/ota_plane_right.png" alt="">
+		<!-- <img src="/img/ota_final.png" alt=""> -->
+		<p>Office To <h2>Adventure</h2></p>
+		<!-- <h4>Load And Edit Your Image To Fit Inside The Selected State</h4> -->
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
 	</div>
 
 	<div class="load-image">
-		<h3>Upload Your Image</h3>
+		<h4>Upload Your Image</h4>
 		<input type="file" id="UploadImage" href="#" title="Upload Your Image"></input>
-
-
-
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<a href="https://www.surveymonkey.com/r/PKZJZTN" class="feedback"> Please Provide Feedback Here! </a>
+		<br><br>
+		<progress value="0" max="100" id="uploader">0%</progress>
+		<input type="button" value="Display Stored Image" onclick="displayCroppedImage()"/>
+		<img id="displayImage" src=""/>
 	</div>
 
 	<div class="instructions">
@@ -111,15 +113,15 @@
 				<li>When the new tab opens, right click on the image and press "Save Image As"</li>
 				<li>Save the image to your own computer</li>
 				<li>Print and cut the image for your Travel Map</li>
-				<li>Provide Feedback!</li>
 			</ol>
 		</p>
 	</div>
 
 	<div id="imageEditor">
 		<section id="toolbar">
-			<a id="save" href="#" title="Save">Save</a>
-			|<a id="ReCenter" href="#" title="Re-Center Your Image">Re-Center</a> |
+			<a id="print" href="#" title="Print">Print This State Image</a>|
+			<a id="saveImageBtn" href="#" title="Save" >Save To Map</a>|
+			<a id="ReCenter" href="#" title="Re-Center Your Image">Re-Center</a> |
 			<a id="showImage" href="#" title="Show Entire Image">Show Entire Image</a> |
 			<a id="trim" href="#" title="Trim Image">Trim State</a> |
 			<a id="reset" href="#" title="Reset">Reset</a>
@@ -128,6 +130,11 @@
 		<section id="editorContainer">
 			<canvas id="editor" style="width: 574px; height: 574px; border:1px solid #000000"></canvas>
 		</section>
+
+	</div>
+
+	<div class="editor-footer">
+		<p></p>
 	</div>
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->

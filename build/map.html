@@ -20,6 +20,12 @@
 
 	<script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
 
+	<style media="screen">
+		#image{
+			fill: url(gs://travel-map-dev.appspot.com/sj5MCetdkxPkcBuRx7sOyNuMWes2/TX/cropped_state_image.png);
+		}
+	</style>
+
 </head>
 
 <body class="body">
@@ -70,21 +76,21 @@
 			<div id="modalBody" class="logginModal-body">
 				<h2>Log In</h2>
 				<form>
-					<input type="text" placeholder="Email" id="email" name="email">
-					<input type="password" placeholder="Password" id="password" name="password">
+					<input type="text" placeholder="Email" id="email" name="email"/>
+					<input type="password" placeholder="Password" id="password" name="password"/>
 				</form>
-				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
+				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in"/>
 				<p id="errorMsg" class="errorMsg"></p>
 				<!-- <a id="changePasswordLink" class="hide" href="/changepassword.html">Change Your Password</a> -->
 				<a id="changePasswordLink" href="/changepassword.html">Forgot Password?</a>
 			</div>
 			<div id="modalFooter" class="logginModal-footer">
 				<p style="margin-bottom:10px">First Time? Create an account.</p>
-				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
+				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account"/>
 			</div>
 
 			<div id="verifyEmailModalContent" class="logginModal-footer hide">
-				<p style="padding-left:50px; color:red;">A verification email has been sent to <strong> <span id="userEmail"</span> </strong>. Please verify your email before creating your Travel Map.</p>
+				<p style="padding-left:50px; color:red;">A verification email has been sent to <strong> <span id="userEmail"></span> </strong>. Please verify your email before creating your Travel Map.</p>
 			</div>
 
 		</div>
@@ -92,29 +98,38 @@
 
 
 	<div class="title">
-		<h1>Travel Map Creator</h1>
-		<p>Please Select The State You Wish To Use</p>
+		<!-- <p id="ota" style="text-decoration: none;"> <span style="color:white">Office</span> To <span style="color:#A30000">Adventure</span></p> -->
+		<img src="/img/ota_plane_right.png" alt=""></img>
+		<!-- <img src="/img/ota_final.png" alt=""> -->
+		<p>Office To <h2>Adventure</h2></p>
+		<!-- <h1>Travel Map Creator</h1> -->
+		<h4>Please Select The State You Wish To Use</h4>
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
 	</div>
 
 	<div class="instructions">
-		<p>
+		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
+		<!-- <p>
 			<h3>Legend:</h3>
 			<ol>
 				<li>If a state is colored GREEN then that state has previously been edited.</li>
 			</ol>
-		</p>
+		</p> -->
 	</div>
 
 
 	<div class="hover-display">
 		<!-- <h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> <br> Id: <span id="id" class="hover-state"> &nbsp; </span> </h3> -->
-		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
+		<!-- <h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3> -->
 		<p hidden id="id"></p>
 	</div>
 
 	<div class="map_container">
 		<div id="map" class="map" title="If you have edited a state it will be colored green"></div>
+	</div>
+
+	<div class="map-footer">
+		<p></p>
 	</div>
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
@@ -150,21 +165,77 @@
 			}
 		}
 
+		// function showEditedStates() {
+		//
+		// 	for (var i = 0, b = 0; i < states.length; i++) {
+		//
+		// 		if (states[i].data('id') == statesEdited[b]) {
+		//
+		// 			states[i].node.style.fill = "#4BB543";
+		//
+		// 			console.log("SRC: " + states[i].node.style.src);
+		// 			console.log("backgroundImage: " + states[i].node.style.backgroundImage);
+		//
+		// 			if (statesEdited[b + 1] != undefined) {
+		// 				b++;
+		// 				i = 0;
+		// 			}
+		// 		}
+		// 	}
+		// }
+
 		function showEditedStates() {
+		  var CurrentUser = firebase.auth().currentUser;
 
-			for (var i = 0, b = 0; i < states.length; i++) {
+		  // for (var i = 0, b = 0; i < states.length - 1; i++) {
+			for (var i = 0, b = 0; i < 1; i++) {
+				console.log(states[i].data('id') + " and " + statesEdited[b]);
 
-				if (states[i].data('id') == statesEdited[b]) {
-					// console.log(states[i].data('id') + " State was found in states list");
-					states[i].node.style.fill = "#4BB543";
+		    if (states[i].data('id') == statesEdited[b]) {
+					console.log(states[i].data('id') + " and " + statesEdited[b] + " matched");
 
-					if (statesEdited[b + 1] != undefined) {
-						b++;
-						i = 0;
-					}
-				}
-			}
-		}
+		      firebase.storage().ref(CurrentUser.uid + "/" + statesEdited[b] + "/").child('cropped_state_image.png').getDownloadURL().then(function(url) {
+
+		          if (url != null) {
+
+		            // var img = document.getElementById('displayImage');
+		            // img.src = url;
+								// console.log("bkrd Image before: " + states[0].node.style.backgroundImage);
+								// console.log("SRC before: " + states[0].node.style.src);
+								console.log("Fill before: " + states[0].node.style.fill);
+
+							  states[0].node.style.fill = "url(" + url + ")"; // This changes the image on the map but its like the state just disappears
+								// states[42].node.style.fill  =	"url(/img/2.png)"
+
+								console.log("Fill after: " + states[0].node.style.fill);
+
+								//  states[0].node.style.fill = "green";
+
+		            console.log(states[i].data('id') + " and " + statesEdited[b]);
+		            console.log("State cropped image was sent to the map");
+
+		            if (statesEdited[b + 1] != undefined) {
+		              b++;
+		              i = 0;
+		            };
+
+		          } else {
+
+		            states[i].node.style.fill = "#4BB543";
+
+		            if (statesEdited[b + 1] != undefined) {
+		              b++;
+		              i = 0;
+		            };
+
+		          };
+		        }, function(error) {
+		          console.log("something bad happened");
+		          console.log(error);
+		      });
+		      }
+		    }
+		  }
 
 
 	</script>

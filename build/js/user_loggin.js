@@ -504,6 +504,10 @@ firebase.auth().onAuthStateChanged(function(user) {
     // User is not signed in
     logInLink.classList.remove('hide');
     logOutLink.classList.add('hide');
+
+    // logInLink.className = "fa fa-users";
+    // logOutLink.className = "fa fa-users hide";
+
     console.log("User Not Logged In");
     document.getElementById("userDisplay").innerHTML = "";
     isSignedIn = false;

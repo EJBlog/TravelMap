@@ -2694,6 +2694,7 @@ a:hover, a:active, a:focus {
 }
 
 .gallery-button-display-left {
+  src: url("/img/ota_plane_left.png");
   position: absolute;
   top: 50%;
   left: 10%;
@@ -2763,33 +2764,58 @@ a:hover, a:active, a:focus {
 }
 
 .home-menu-bar {
-  background-color: #00A3A3;
+  /*background-color: #00A3A3;*/
+  background-color: whitesmoke;
   top: 0px;
   width: 100%;
-  height: 10%;
+  height: 76px;
   font-size: 20px;
-  z-index: 1;
   position: absolute;
 }
 .home-menu-bar p {
-  float: left;
-  font-weight: bold;
-  padding-left: 20px;
-  padding-top: 15px;
-  font-size: 30px;
+  position: absolute;
+  top: -5px;
+  left:270px;
+  font-size: 50px;
+}
+.home-menu-bar h2 {
+  font-family: "agency FB";
+  position: absolute;
+  top: -12px;
+  left:494px;
+  color: red;
+  font-size: 50px
 }
 .home-menu-bar a {
   float: right;
-  color: white;
+  color: black;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 33px;
   text-decoration: none;
   border-bottom:none;
 }
+.home-menu-bar img {
+  transform: rotate(73deg);
+  top: -22px;
+  left: -7px;
+  position: absolute;
+  height: 300px;
+  width:300px;
+}
 
 .home-menu-links {
   padding-right: 80px;
+}
+
+.main-ota-logo{
+  z-index: 1;
+  top: -51px;
+  left: -37px;
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  transform: rotate(-43deg);
 }
 
 .main-home-image {
@@ -2798,20 +2824,29 @@ a:hover, a:active, a:focus {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 71px;
+  padding-top: 76px;
   padding-left: 17%;
-  background-color: whitesmoke;
+  background-color: white;
 }
+
 
 .home-footer {
   width: 100%;
-  height: 500px;
+  height: inherit;
   background-color: rgba(33, 33, 33, 1);
   position: absolute;
   align-items: center;
 }
 .home-footer p, h2 {
   color: white;
+}
+
+.home-footer-desc{
+  text-align: center;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 15px;
+  border-bottom: none;
 }
 
 .about_jake{
