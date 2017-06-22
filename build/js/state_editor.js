@@ -22,18 +22,24 @@ fabric.Object.prototype.set({
 var canvas = new fabric.Canvas('editor', {
   width: $("#editor").width(),
   height: $("#editor").height()
-  // ,backgroundColor: 'whitesmoke'
 });
 
 // loading the background/overlay image from SVG of the state that was cicked
 fabric.loadSVGFromURL("svg/usa_map.svg", function(objects) {
     var stateObjects = new fabric.Group(groupStates);
+
     stateObjects.set({
       left: 10,
       top: 10,
       width: canvas.width - 10,
       height: canvas.height - 10
     });
+
+    // var fimg = fabric.Image.fromURL(img.src, function(fimg) {
+    // fimg.set('top',20).set('width',50).set('height',50).set('left',20);
+    // myCanvas.add(fimg);
+    // myCanvas.setActiveObject(fimg);
+    // });
 
 
     for (var i = 0; i < objects.length; i++) {
@@ -44,19 +50,16 @@ fabric.loadSVGFromURL("svg/usa_map.svg", function(objects) {
           left: 0,
           top: 0,
           stroke: 'black',
-          // fill: 'transparent',
           fill: 'white',
           height: 250,
           width: 300, // Changed the size of the state so that it fits better in the canvas. This ties with the scaling X and Y
           selectable: false,
           scaleX: 2,
-          scaleY: 2 // Increasing the size of the state image so it is easier for the user to fit their image into the shape of the state.\
+          scaleY: 2 // Increasing the size of the state image so it is easier for the user to fit their image into the shape of the state.
         })
 
         canvas.add(overlayState);
         canvas.renderAll();
-        // canvas.setOverlayImage(overlayState);
-        // canvas.controlsAboveOverlay = true;
 
       }
     }
@@ -126,6 +129,7 @@ document.getElementById('UploadImage').onchange = function handleImage(e) {
     imageRemoved = false;
   }
 };
+
 
 (function($) {
   // 	toolbar functions

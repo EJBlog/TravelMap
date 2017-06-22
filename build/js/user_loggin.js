@@ -11,17 +11,17 @@ var config = {
 };
 firebase.initializeApp(config);
 
-const emailTxt = document.getElementById('email');
-const passwordTxt = document.getElementById('password');
-const signOutBtn = document.getElementById('signOut');
-const signInBtn = document.getElementById('signIn');
-const CreateUserBtn = document.getElementById('newUser');
-const logOutLink = document.getElementById('logOutLink');
-const logInLink = document.getElementById('LogInLink');
-const modalBody = document.getElementById("modalBody");
-const modalFooter = document.getElementById("modalFooter");
-const signInModalContent = document.getElementById("signInModalContent");
-const verifyEmailModalContent = document.getElementById("verifyEmailModalContent");
+var emailTxt = document.getElementById('email');
+var passwordTxt = document.getElementById('password');
+var signOutBtn = document.getElementById('signOut');
+var signInBtn = document.getElementById('signIn');
+var CreateUserBtn = document.getElementById('newUser');
+var logOutLink = document.getElementById('logOutLink');
+var logInLink = document.getElementById('LogInLink');
+var modalBody = document.getElementById("modalBody");
+var modalFooter = document.getElementById("modalFooter");
+var signInModalContent = document.getElementById("signInModalContent");
+var verifyEmailModalContent = document.getElementById("verifyEmailModalContent");
 var usernamePasswordCheck;
 var email;
 var password;
@@ -490,12 +490,6 @@ firebase.auth().onAuthStateChanged(function(user) {
       }
     };
 
-    // if (document.URL.indexOf("profile.html") == 0) {
-    //   console.log(document.URL.indexOf("profile.html"));
-    //   logOutLink.classList.remove('hide');
-    //   document.getElementById("errorMsg").innerHTML = "";
-    // };
-
     console.log("User is Logged In");
     isSignedIn = true;
     document.getElementById("userEmail").innerHTML = CurrentUser.email;
@@ -504,9 +498,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     // User is not signed in
     logInLink.classList.remove('hide');
     logOutLink.classList.add('hide');
-
-    // logInLink.className = "fa fa-users";
-    // logOutLink.className = "fa fa-users hide";
 
     console.log("User Not Logged In");
     document.getElementById("userDisplay").innerHTML = "";

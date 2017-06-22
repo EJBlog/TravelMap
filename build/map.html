@@ -18,6 +18,12 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
 		<![endif]-->
 
+		<!--[if IE]>
+		<script type="text/javascript">
+			window.onload = alert("I see you are using Internet Explorer. For the best experience, please use a different browser such as Edge, Firefox, or Chrome");
+		</script>
+			<![endif]-->
+
 	<script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
 
 	<style media="screen">
@@ -43,9 +49,11 @@
 					<div class="no-js-menu">
 						<ul>
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-							<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li>
+							<!--[if IE]>
+							<li id="LogInLink"><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
 							<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
-							<!-- <li><i class="fa fa-beer"></i><a href="about.html">About</a></li> -->
+							<![endif]-->
+							<!--[if !IE]><!-->
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 							<li><i class="fa fa-credit-card"></i><a href="checkout.html">Checkout</a></li>
 						</ul>
@@ -56,9 +64,11 @@
 		<div id="menu-target">
 			<ul>
 				<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-				<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li>
+				<!--[if IE]>
+				<li id="LogInLink"><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
 				<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
-				<!-- <li><i class="fa fa-beer"></i><a href="about.html">About</a></li> -->
+				<![endif]-->
+				<!--[if !IE]><!-->
 				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 				<li><i class="fa fa-credit-card"></i><a href="checkout.html">Checkout</a></li>
 			</ul>
@@ -200,16 +210,17 @@
 
 		          if (url != null) {
 
-		            // var img = document.getElementById('displayImage');
-		            // img.src = url;
-								// console.log("bkrd Image before: " + states[0].node.style.backgroundImage);
-								// console.log("SRC before: " + states[0].node.style.src);
-								console.log("Fill before: " + states[0].node.style.fill);
+								var imageTag = document.createElement("img");
+								imageTag.src = url;
+								document.getElementById("map").appendChild(imageTag);
 
-							  states[0].node.style.fill = "url(" + url + ")"; // This changes the image on the map but its like the state just disappears
-								// states[42].node.style.fill  =	"url(/img/2.png)"
+								// states[0].data('xlink:href') = url;
+								states[0].attrs.path.data("xlink:href") = url;
 
-								console.log("Fill after: " + states[0].node.style.fill);
+								//in the svg file - in the path for alaska - if we add xlink:href = the path in the url variable then we can see the image on the map
+
+							  //states[0].node.style.fill = "url(" + url + ")"; // This changes the image on the map but its like the state just disappears
+								//https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/sj5MCetdkxPkcBuRx7sOyNuMWes2%2FAK%2Fcropped_state_image.png?alt=media&token=a1933bf7-4d52-4529-b84f-3ea18f19901a
 
 								//  states[0].node.style.fill = "green";
 

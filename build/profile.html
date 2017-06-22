@@ -37,7 +37,7 @@
 						<ul>
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 							<li><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
-							<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li>
+							<!-- <li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li> -->
 							<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 						</ul>
@@ -49,40 +49,13 @@
 			<ul>
 				<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 				<li><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
-				<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li>
+				<!-- <li id="LogInLink" class="hide"><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li> -->
 				<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
 				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 			</ul>
 			<hr>
 		</div>
 	</header>
-
-
-	<!-- should not need the below code if we add in functionality to limit what pages users can access when they are not logged in -->
-	<!-- <div id="loginModal" class="logginModalClass">
-		<div class="logginModal-content">
-
-			<div class="logginModal-header">
-				<span class="close">&times;</span>
-			</div>
-			<div id="signInModalContent" class="logginModal-body hide">
-				<p style="padding-top:85px; padding-left:50px;">You Have Logged In successfully!</p>
-			</div>
-			<div id="modalBody" class="logginModal-body">
-				<h2>Log In</h2>
-				<form>
-					<input type="text" placeholder="Email" id="email" name="email">
-					<input type="password" placeholder="Password" id="password" name="password">
-				</form>
-				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
-				<p id="errorMsg" class="errorMsg"></p>
-			</div>
-			<div id="modalFooter"  class="logginModal-footer">
-				<p style="margin-bottom:10px">First Time? Create an account.</p>
-				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
-			</div>
-		</div>
-	</div> -->
 
 
 	<div class="title">
@@ -140,30 +113,7 @@
 			document.getElementById("updateUserProfile").classList.remove("hide");
 		};
 
-		window.onload = setTimeout(displayUserInfo, 3000);
-
-
-		// should not need this if we add in functionality to limit what pages users can access when they are not logged in
-		// var modal = document.getElementById("loginModal");
-		// var btn = document.getElementById("modalButton");
-		// var span = document.getElementsByClassName("close")[0];
-		//
-		// var logginModal = function() {
-		// 	modal.style.display = "block"
-		// };
-		//
-		// span.onclick = function() {
-		// 	modal.style.display = "none";
-		// 	logInReload();
-		// }
-		//
-		// window.onclick = function() {
-		// 	if (event.target == modal) {
-		// 		modal.style.display = "none";
-		// 		logInReload();
-		// 	}
-		// }
-
+		window.onload = setTimeout(displayUserInfo, 2000);
 
 	</script>
 </body>
