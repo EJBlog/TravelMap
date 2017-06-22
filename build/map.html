@@ -121,6 +121,8 @@
 
 	<div class="instructions">
 		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
+		<a id="showEditedStates" href="#" title="showEditedStates">Show State Images</a>
+		<a id="showEditedStatesG" href="#" title="showEditedStatesG">Green State Images</a>
 		<!-- <p>
 			<h3>Legend:</h3>
 			<ol>
@@ -177,24 +179,24 @@
 			}
 		}
 
-		// function showEditedStates() {
-		//
-		// 	for (var i = 0, b = 0; i < states.length; i++) {
-		//
-		// 		if (states[i].data('id') == statesEdited[b]) {
-		//
-		// 			states[i].node.style.fill = "#4BB543";
-		//
-		// 			console.log("SRC: " + states[i].node.style.src);
-		// 			console.log("backgroundImage: " + states[i].node.style.backgroundImage);
-		//
-		// 			if (statesEdited[b + 1] != undefined) {
-		// 				b++;
-		// 				i = 0;
-		// 			}
-		// 		}
-		// 	}
-		// }
+		function showEditedStatesG() {
+
+			for (var i = 0, b = 0; i < states.length; i++) {
+
+				if (states[i].data('id') == statesEdited[b]) {
+
+					states[i].node.style.fill = "#4BB543";
+
+					console.log("SRC: " + states[i].node.style.src);
+					console.log("backgroundImage: " + states[i].node.style.backgroundImage);
+
+					if (statesEdited[b + 1] != undefined) {
+						b++;
+						i = 0;
+					}
+				}
+			}
+		}
 
 		function showEditedStates() {
 		  var CurrentUser = firebase.auth().currentUser;
