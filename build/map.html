@@ -121,8 +121,8 @@
 
 	<div class="instructions">
 		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
-		<a id="showEditedStates" href="#" title="showEditedStates">Show State Images</a>
-		<a id="showEditedStatesG" href="#" title="showEditedStatesG">Green State Images</a>
+		<a id="showEditedStates" href="#" onclick="showEditedStates()" title="showEditedStates">Show State Images</a>
+		<a id="showEditedStatesG" href="#" onclick="showEditedStatesG()" title="showEditedStatesG">Green State Images</a>
 		<!-- <p>
 			<h3>Legend:</h3>
 			<ol>
@@ -202,7 +202,7 @@
 		  var CurrentUser = firebase.auth().currentUser;
 
 		  // for (var i = 0, b = 0; i < states.length - 1; i++) {
-			for (var i = 0, b = 0; i < 1; i++) {
+			for (var i = 0, b = 0; i < states.length; i++) {
 				console.log(states[i].data('id') + " and " + statesEdited[b]);
 
 		    if (states[i].data('id') == statesEdited[b]) {
@@ -212,12 +212,24 @@
 
 		          if (url != null) {
 
-								var imageTag = document.createElement("img");
-								imageTag.src = url;
-								document.getElementById("map").appendChild(imageTag);
+								// var imageTag = document.createElement("img");
+								// imageTag.src = url;
+								// document.getElementById("map").appendChild(imageTag);
+
+								//states[0].node.style.fill = "url(" + url + ")";
+
+								states[0].data('xlink:href') = url;
+
+
+
+								// texas = document.getElementById("TX");
+								// texas.setAttributeNS('http://www.w3.org/1999/xlink','href', 'https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=89158472-26de-402e-a7cc-06cadefbe92b');
+
+								//document.querySelector('#TX').src = url;
+								//states[i].href.baseval = url;
 
 								// states[0].data('xlink:href') = url;
-								states[0].attrs.path.data("xlink:href") = url;
+								//states[0].attrs.path.data("xlink:href") = url;
 
 								//in the svg file - in the path for alaska - if we add xlink:href = the path in the url variable then we can see the image on the map
 

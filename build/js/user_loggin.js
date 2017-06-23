@@ -455,7 +455,7 @@ function editedStates() {
           statesEdited.push(stateId);
         }
       }
-      showEditedStates();
+      //showEditedStates();
     });
 }
 
