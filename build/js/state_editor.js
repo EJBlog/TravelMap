@@ -168,12 +168,14 @@ document.getElementById('UploadImage').onchange = function handleImage(e) {
     // function saveImageBtn() {
     saveImageBtn: function() {
 
-        // saveImageBtn.addEventListener('change',function(e){
         var CurrentUser = firebase.auth().currentUser;
+
+        firebase.database().ref("Users/" + CurrentUser.uid).update({
+          [idNameStored]: "Y"
+        });
 
 
         // Get file
-        // var croppedImage = e.target.files[0];
         var canvasImg = canvas.toDataURL("image/png");
         var croppedImage = dataURItoBlob(canvasImg);
         croppedImage.name = "cropped_state_image.png"
@@ -201,9 +203,9 @@ document.getElementById('UploadImage').onchange = function handleImage(e) {
           }
 
         );
-      }
-      // });
-      ,
+      },
+
+      
     ReCenter: function() {
       canvas.centerObject(userImage);
       canvas.renderAll();

@@ -18,10 +18,13 @@ var AK = rsr.path("M161.1,453.7 l-0.3,85.4 1.6,1 3.1,0.2 1.5,-1.1 h2.6 l0.2,2.9 
   id: 'AK',
   //fill: "url('https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=89158472-26de-402e-a7cc-06cadefbe92b')",
   fill: '#D3D3D3',
+  href: ' ',
+  src: ' ',
   //src: "https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=89158472-26de-402e-a7cc-06cadefbe92b",
   parent: 'outlines',
   'stroke-width': '0',
-  'stroke-opacity': '1'
+  'stroke-opacity': '1',
+  'xlink:href': ' '
 }).data({
   'id': 'AK',
   'state-name': 'Alaska',

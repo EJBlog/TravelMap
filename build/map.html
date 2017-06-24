@@ -54,6 +54,9 @@
 							<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
 							<![endif]-->
 							<!--[if !IE]><!-->
+							<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
+							<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
+							<!--<![endif]-->
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 							<li><i class="fa fa-credit-card"></i><a href="checkout.html">Checkout</a></li>
 						</ul>
@@ -69,6 +72,9 @@
 				<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
 				<![endif]-->
 				<!--[if !IE]><!-->
+				<li id="LogInLink" class="hide"><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
+				<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
+				<!--<![endif]-->
 				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
 				<li><i class="fa fa-credit-card"></i><a href="checkout.html">Checkout</a></li>
 			</ul>
@@ -212,9 +218,6 @@
 
 		          if (url != null) {
 
-								// var imageTag = document.createElement("img");
-								// imageTag.src = url;
-								// document.getElementById("map").appendChild(imageTag);
 
 							// 	if(states[i].data('url') != null) {
 							// 	states[0].node.style.fill = states[0].data('url');
@@ -225,16 +228,14 @@
 
 
 								//states[0].data('xlink:href') = url;
+								console.log(states[0].attrs.src);
+								console.log(states[0].attrs.href);
+								states[0].attrs.src = url;
+								states[0].attrs.href = url;
 
+								console.log(states[0].attrs.src);
+								console.log(states[0].attrs.href);
 
-								// texas = document.getElementById("TX");
-								// texas.setAttributeNS('http://www.w3.org/1999/xlink','href', 'https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=89158472-26de-402e-a7cc-06cadefbe92b');
-
-								//document.querySelector('#TX').src = url;
-								//states[i].href.baseval = url;
-
-								// states[0].data('xlink:href') = url;
-								//states[0].attrs.path.data("xlink:href") = url;
 
 								//in the svg file - in the path for alaska - if we add xlink:href = the path in the url variable then we can see the image on the map
 
