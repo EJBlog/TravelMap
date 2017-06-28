@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html class="no-js" >
 
 <head>
 	<meta charset="utf-8">
@@ -34,7 +34,7 @@
 
 </head>
 
-<body class="body">
+<body class="body" style="overflow-x:auto">
 	<!--<header class="hero-image" role="banner" style="background-image: url(img/waterfall.jpg);">-->
 	<!-- <header class="hero-image-about"> -->
 	<header>
@@ -120,14 +120,13 @@
 		<img src="/img/ota_plane_right.png" alt=""></img>
 		<!-- <img src="/img/ota_final.png" alt=""> -->
 		<p>Office To <h2>Adventure</h2></p>
-		<!-- <h1>Travel Map Creator</h1> -->
-		<h4>Please Select The State You Wish To Use</h4>
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
 	</div>
 
 	<div class="instructions">
 		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
-		<a id="showEditedStates" href="#" onclick="showEditedStates()" title="showEditedStates">Show State Images</a>
+		<p hidden id="id"></p><!-- Do not remove this.. It is needed for the state id that the user has selected -->
+		<a id="showEditedStates" href="#" onclick="showEditedStates()" title="showEditedStates">Show State Images</a><br>
 		<a id="showEditedStatesG" href="#" onclick="showEditedStatesG()" title="showEditedStatesG">Green State Images</a>
 		<!-- <p>
 			<h3>Legend:</h3>
@@ -138,13 +137,9 @@
 	</div>
 
 
-	<div class="hover-display">
-		<!-- <h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> <br> Id: <span id="id" class="hover-state"> &nbsp; </span> </h3> -->
-		<!-- <h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3> -->
-		<p hidden id="id"></p>
-	</div>
 
 	<div class="map_container">
+		<h4>Please Select The State You Wish To Use</h4>
 		<div id="map" class="map" title="If you have edited a state it will be colored green"></div>
 	</div>
 

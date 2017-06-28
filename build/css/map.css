@@ -1,16 +1,16 @@
 
-.hover-display
+.hover-displayzzzzz
 {
 	float: left;
 	/*width:208px;*/
 	width: auto;
 	height: auto;
-	position: absolute;
-	margin-top:10px;
+	/*position: absolute;*/
+	margin-top:60px;
 	margin-left: 30px;
 }
 @media (max-width: 1320px) {
-	.hover-display{
+	.hover-displayzzzz{
 		float: left;
 		/*width:208px;*/
 		width: auto;
@@ -23,7 +23,7 @@
 	}
 }
 @media (max-width: 850px) {
-	.hover-display{
+	.hover-displayzzzz{
 		float: left;
 		width: auto;
 		height: auto;
@@ -36,60 +36,10 @@
 }
 
 
-
 .hover-state{
 font-size: 20px;
 font-family: sans-serif;
-/*float: left;*/
-}
-
-
-.title{
-font-size: 25px;
-font-family: initial;
-background-color: whitesmoke;
-color: black;
-text-align: center;
-height:76px;
-padding-top: .1px
-}
-.title p{
-	position: absolute;
-  top: -5px;
-  left:270px;
-  font-size: 50px;
-	font-family: "Droid Serif";
-}
-.title h2{
-	font-family: "agency FB";
-  position: absolute;
-  top: -12px;
-  left:494px;
-  color: red;
-  font-size: 50px
-}
-.title h4{
-padding-top: 70px;
-}
-.title img{
-	transform: rotate(73deg);
-	top: -22px;
-	left: -7px;
-	position: absolute;
-	height: 300px;
-	width:300px;
-}
-@media (max-width: 850px) {
-	.title{
-	font-size: 25px;
-	font-family: initial;
-	background-color: black;
-	color: white;
-	text-align: center;
-	height:76px;
-	padding-top: .1px;
-	width:958px;
-	}
+z-index: 1
 }
 
 .loggedInUser{
@@ -102,13 +52,19 @@ padding-top: 70px;
 }
 
 .map_container{
+	position: absolute;
 	margin-left: 250px;
-	/*background-color: slategray;*/
-	background-color: royalblue;
+	background-color: slategray;
 	width:959px;
 	padding-left: 0px;
-	margin-top:0px;
+	top:77px;
+	/*padding-top:100px;*/
 }
+.map_container h4{
+	margin-left: 300px;
+	position: absolute;
+}
+
 @media (max-width: 1320px) {
 	.map_container{
 		margin-left: 220px;
@@ -121,7 +77,7 @@ padding-top: 70px;
 @media (max-width: 850px) {
 	.map_container{
 		margin-left: 10px;
-		background-color: royalblue;
+		background-color: slategray;
 		width:959px;
 		padding-left: 0px;
 		margin-top:0px;
@@ -132,6 +88,7 @@ padding-top: 70px;
 	border-style: solid;
 	padding-left: 20px;
 	width:959px;
+	/*padding-top:100px;*/
 }
 
 
@@ -144,6 +101,13 @@ padding-top: 70px;
 	font-size: 20px;
 	float:right;
 }
+.instructions h3 {
+	position: absolute;
+	top: 24px;
+	right: 400px;
+	width: 220px;
+}
+
 @media (max-width: 1457px) {
   .instructions{
   	height:auto;
@@ -177,8 +141,20 @@ padding-top: 70px;
     font-size: 17px;
   }
 
-/* The Modal (background) */
+	.map-footer {
+		width: 100%;
+		height: 30px;
+		background-color: rgba(33, 33, 33, 1);
+		position: absolute;
+		align-items: center;
+		bottom:0px;
+	}
+	.map-footer p, h2 {
+		color: white;
+	}
 
+
+/* The Modal (background) */
 .logginModalClass {
 	display: none;
 	/* Hidden by default */
@@ -274,15 +250,4 @@ padding-top: 70px;
 .errorMsg{
 	color:red;
 	font-size: 13px;
-}
-
-.map-footer {
-	width: 100%;
-	height: 82px;
-	background-color: rgba(33, 33, 33, 1);
-	position: absolute;
-	align-items: center;
-}
-.map-footer p, h2 {
-	color: white;
 }
