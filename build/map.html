@@ -89,10 +89,10 @@
 				<span class="close">&times;</span>
 			</div>
 			<div id="signInModalContent" class="logginModal-body hide">
-				<p style="padding-top:85px; padding-left:50px;">You Have Logged In successfully!</p>
+				<h1 style="padding-top:25px; padding-bottom:25px; padding-left:35px;">You Have Logged In successfully!</h1>
 			</div>
 			<div id="modalBody" class="logginModal-body">
-				<h2>Log In</h2>
+				<h2 class="logginModal-header">Log In</h2>
 				<form>
 					<input type="text" placeholder="Email" id="email" name="email"/>
 					<input type="password" placeholder="Password" id="password" name="password"/>
@@ -123,7 +123,7 @@
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
 	</div>
 
-	<div class="instructions">
+	<div class="hover-display">
 		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
 		<p hidden id="id"></p><!-- Do not remove this.. It is needed for the state id that the user has selected -->
 		<a id="showEditedStates" href="#" onclick="showEditedStates()" title="showEditedStates">Show State Images</a><br>
@@ -221,25 +221,27 @@
 							// 	console.log("Didn't find path URL.");
 							// }
 
+							AK.attr({ fill: 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)',
+						'stroke-width': '1',
+						'stroke-opacity': '1'
+						// 'x':'10',
+						// 'y':'10',
+						// 'height':'1500',
+						// 'width':'1500'
+					});
 
-								//states[0].data('xlink:href') = url;
-								console.log(states[0].attrs.src);
-								console.log(states[0].attrs.href);
-								states[0].attrs.src = url;
-								states[0].attrs.href = url;
+					var pat = document.getElementById("raphael-pattern");
+					var pat0 = document.getElementById("raphael-pattern-0");
+					var pat1 = document.getElementById("raphael-pattern-1");
+					var pat2 = document.getElementById("raphael-pattern-2");
+					var pat3 = document.getElementById("raphael-pattern-3");
+					var pat4 = document.getElementById("raphael-pattern-4");
+					var pat5 = document.getElementById("raphael-pattern-5");
+					pat.setAttribute("height", pat.getAttribute("height")*0.5);
+					pat.setAttribute("width", pat.getAttribute("width")*0.5);
 
-								console.log(states[0].attrs.src);
-								console.log(states[0].attrs.href);
 
-
-								//in the svg file - in the path for alaska - if we add xlink:href = the path in the url variable then we can see the image on the map
-
-							  //states[0].node.style.fill = "url(" + url + ")"; // This changes the image on the map but its like the state just disappears
-								//https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/sj5MCetdkxPkcBuRx7sOyNuMWes2%2FAK%2Fcropped_state_image.png?alt=media&token=a1933bf7-4d52-4529-b84f-3ea18f19901a
-
-								//  states[0].node.style.fill = "green";
-
-		            console.log(states[i].data('id') + " and " + statesEdited[b]);
+		            // console.log(states[i].data('id') + " and " + statesEdited[b]);
 		            console.log("State cropped image was sent to the map");
 
 		            if (statesEdited[b + 1] != undefined) {

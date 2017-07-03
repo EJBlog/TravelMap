@@ -365,13 +365,13 @@ body{
     padding-left: 8px;
     background-color: white;
   }
-  .home-menu-bar p {
+  .title p {
     position: absolute;
     top: -5px;
     left:120px;
     font-size: 50px;
   }
-  .home-menu-bar h2 {
+  .title h2 {
     font-family: "agency FB";
     position: absolute;
     top: -12px;
@@ -379,7 +379,7 @@ body{
     color: red;
     font-size: 50px
   }
-  .home-menu-bar img {
+  .title img {
     transform: rotate(73deg);
     top: -22px;
     left: -7px;
@@ -416,13 +416,13 @@ body{
     padding-left: 8px;
     background-color: white;
   }
-  .home-menu-bar p {
+  .titlep {
     position: absolute;
     top: -5px;
     left:120px;
     font-size: 50px;
   }
-  .home-menu-bar h2 {
+  .title h2 {
     font-family: "agency FB";
     position: absolute;
     top: -12px;
@@ -430,7 +430,7 @@ body{
     color: red;
     font-size: 50px
   }
-  .home-menu-bar img {
+  .title img {
     transform: rotate(73deg);
     top: -22px;
     left: -7px;
@@ -492,7 +492,7 @@ body{
 
 
 @media (max-width: 779px) and (min-width: 500px ) {
-  .home-menu-bar {
+  .title {
     background-color: whitesmoke;
     top: 0px;
     width: 779px;
@@ -508,6 +508,16 @@ body{
     align-items: center;
   }
 }
+
+/*@media (max-width: 499px) {
+  .html{
+    display: none;
+  }
+
+  .body{
+    display: none;
+  }
+}*/
 
 
 
