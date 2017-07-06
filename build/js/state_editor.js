@@ -3,11 +3,11 @@ var groupStates = [];
 var overlayState;
 var stateNameStored = localStorage.getItem('storedStateName');
 var idNameStored = localStorage.getItem('storedIdName');
+var editedImageURL;
 var userImage = new fabric.Image();
 var imageRemoved = false;
-// var saveImageBtn = document.getElementById("saveImage");
 var uploadBar = document.getElementById("uploader");
-
+var cart={};
 
 // Did not Initialize Firebase because we also reference the user loggin js file which has the initialization
 
@@ -34,13 +34,6 @@ fabric.loadSVGFromURL("svg/usa_map.svg", function(objects) {
       width: canvas.width - 10,
       height: canvas.height - 10
     });
-
-    // var fimg = fabric.Image.fromURL(img.src, function(fimg) {
-    // fimg.set('top',20).set('width',50).set('height',50).set('left',20);
-    // myCanvas.add(fimg);
-    // myCanvas.setActiveObject(fimg);
-    // });
-
 
     for (var i = 0; i < objects.length; i++) {
       if (stateObjects._objects[i].id == idNameStored) {
@@ -78,32 +71,6 @@ document.getElementById('UploadImage').onchange = function handleImage(e) {
 
     alert("An image has already been loaded. Please reset the editor before loading another image.")
 
-    // Removing the ability to add multiple images
-    // if (confirm("An image has already been loaded. Did you mean to load a second image?") === true) {
-    //   var reader = new FileReader();
-    //   reader.onload = function(event) {
-    //
-    //     var imgObj = new Image();
-    //     imgObj.src = event.target.result;
-    //     imgObj.onload = function() {
-    //
-    //       userImage = new fabric.Image(imgObj);
-    //       userImage.set({
-    //         left: 10,
-    //         top: 10,
-    //         width: canvas.width - 10,
-    //         height: canvas.height - 10,
-    //         opacity: 1
-    //       });
-    //       canvas.add(userImage);
-    //       userImage.globalCompositeOperation = 'source-atop';
-    //       canvas.renderAll();
-    //     }
-    //   }
-    //   reader.readAsDataURL(e.target.files[0]);
-    // }
-    //end of if for "confirm"
-
   } else {
     var reader = new FileReader();
     reader.onload = function(event) {
@@ -130,127 +97,104 @@ document.getElementById('UploadImage').onchange = function handleImage(e) {
   }
 };
 
+function preview() {
 
-(function($) {
-  // 	toolbar functions
-  var tools = {
+  trim();
+  if (!fabric.Canvas.supports('toDataURL')) {
+    alert('This browser doesn\'t provide means to serialize canvas to an image');
+  } else {
+    var ota_logo = document.getElementById("watermark");
+    var watermark = new fabric.Image(ota_logo);
+    watermark.set({
+      opacity: .7,
+      top: 130,
+      left: 180,
+      height: 250,
+      width: 250
+    });
+    canvas.add(watermark);
+    window.open(canvas.toDataURL({
+      format: 'png'
+    }))
+    canvas.remove(watermark);
+  }
 
-    //output to <img>
-    print: function() {
+}
 
-      if (!fabric.Canvas.supports('toDataURL')) {
-        alert('This browser doesn\'t provide means to serialize canvas to an image');
-      } else {
-        window.open(canvas.toDataURL({
-          format: 'png'
-        }))
-      }
+function saveImageBtn() {
 
-      var CurrentUser = firebase.auth().currentUser;
-      firebase.database().ref("Users/" + CurrentUser.uid).update({
+    var CurrentUser = firebase.auth().currentUser;
 
-        [idNameStored]: "Y"
-      });
+    firebase.database().ref("Users/" + CurrentUser.uid).update({
+      [idNameStored]: "Y"
+    });
 
+    document.getElementById("loaderProgress").classList.remove('hide');
 
-      // Below is a way to download the image straight to the users computer without having to right click and save as
-      // function downloadCanvas(link, canvasId, filename) {
-      //     link.href = document.getElementById(canvasId).toDataURL();
-      //     link.download = filename;
-      // }
-      //
-      // document.getElementById('download').addEventListener('click', function() {
-      //     downloadCanvas(this, 'canvas', 'test.png');
-      // }, false);
+    trim();
+    var canvasImg = canvas.toDataURL("image/png");
+    var croppedImage = dataURItoBlob(canvasImg);
+    croppedImage.name = "cropped_state_image.png"
 
-    },
+    var ref = firebase.storage().ref(CurrentUser.uid + "/" + idNameStored + "/" + croppedImage.name);
+    var task = ref.put(croppedImage);
 
-    // function saveImageBtn() {
-    saveImageBtn: function() {
+    task.on('state_changed',
 
-        var CurrentUser = firebase.auth().currentUser;
-
-        firebase.database().ref("Users/" + CurrentUser.uid).update({
-          [idNameStored]: "Y"
-        });
-
-
-        // Get file
-        var canvasImg = canvas.toDataURL("image/png");
-        var croppedImage = dataURItoBlob(canvasImg);
-        croppedImage.name = "cropped_state_image.png"
-
-        // Store file
-        var ref = firebase.storage().ref(CurrentUser.uid + "/" + idNameStored + "/" + croppedImage.name);
-        // + "cropped_state_image.png")
-        var task = ref.put(croppedImage);
-
-        // update progress bar
-        task.on('state_changed',
-
-          function progress(snapshot) {
-            var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            uploadBar.value;
-            uploadBar.value = percent;
-          },
-
-          function error(error) {
-            console.log(error);
-          },
-
-          function complete() {
-            console.log("The image has been loaded to the firebase storage!");
-          }
-
-        );
+      function progress(snapshot) {
+        var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        uploadBar.value;
+        uploadBar.value = percent;
       },
 
-      
-    ReCenter: function() {
-      canvas.centerObject(userImage);
-      canvas.renderAll();
-    },
+      function error(error) {
+        console.log(error);
+      },
 
-    showImage: function() {
-
-      if (userImage.height > 0) {
-        overlayState.set({
-          fill: 'transparent'
-        });
-        userImage.globalCompositeOperation = 'destination-over';
-        //userImage.globalCompositeOperation = 'lighter';
-        canvas.renderAll();
+      function complete() {
+        console.log("The image has been loaded to the firebase storage!");
       }
 
-    },
+    );
+  }
 
-    trim: function() {
-      overlayState.set({
-        fill: 'white'
-      });
-      userImage.globalCompositeOperation = 'source-atop';
-      //userImage.globalCompositeOperation = 'lighter';
-      canvas.renderAll();
 
-    },
+function ReCenter(){
+  canvas.centerObject(userImage);
+  canvas.renderAll();
+}
 
-    reset: function() {
-      canvas.clear();
-      canvas.add(overlayState);
-      imageRemoved = true;
-      document.getElementById("UploadImage").value = "";
-      canvas.renderAll();
-    }
+function showImage() {
 
-  };
+  if (userImage.height > 0) {
+    overlayState.set({
+      fill: 'transparent'
+    });
+    userImage.globalCompositeOperation = 'destination-over';
+    //userImage.globalCompositeOperation = 'lighter';
+    canvas.renderAll();
+  }
 
-  $("#toolbar").children().click(function(e) {
-    e.preventDefault();
-    //call the relevant function
-    tools[this.id].call(this);
+}
+
+function trim() {
+  overlayState.set({
+    fill: 'white'
   });
+  userImage.globalCompositeOperation = 'source-atop';
+  //userImage.globalCompositeOperation = 'lighter';
+  canvas.renderAll();
 
-})(jQuery);
+}
+
+function reset() {
+  canvas.clear();
+  canvas.add(overlayState);
+  imageRemoved = true;
+  document.getElementById("UploadImage").value = "";
+  canvas.renderAll();
+}
+
 
 function dataURItoBlob(dataURI) {
   // convert base64/URLEncoded data component to raw binary data held in a string
@@ -274,28 +218,57 @@ function dataURItoBlob(dataURI) {
   });
 }
 
-function displayCroppedImage() {
+// function displayCroppedImage() {
+//   var CurrentUser = firebase.auth().currentUser;
+//
+//   firebase.storage().ref(CurrentUser.uid + "/" + idNameStored + "/").child('cropped_state_image.png').getDownloadURL().then(function(url) {
+//     // `url` is the download URL for 'images/stars.jpg'
+//
+//     //// This can be downloaded directly:
+//     // var xhr = new XMLHttpRequest();
+//     // xhr.responseType = 'blob';
+//     // xhr.onload = function(event) {
+//     //   var blob = xhr.response;
+//     // };
+//     // xhr.open('GET', url);
+//     // xhr.send();
+//
+//     // Or inserted into an <img> element:
+//     var img = document.getElementById('displayImage');
+//     img.src = url;
+//   }).catch(function(error) {
+//     // Handle any errors
+//     console.log("An error happened");
+//     console.log(error);
+//   });
+//
+// }
+
+function addIndividualImgToCart(){
+  //find what image they stored
+  saveImageBtn();
   var CurrentUser = firebase.auth().currentUser;
-
   firebase.storage().ref(CurrentUser.uid + "/" + idNameStored + "/").child('cropped_state_image.png').getDownloadURL().then(function(url) {
-    // `url` is the download URL for 'images/stars.jpg'
 
-    //// This can be downloaded directly:
-    // var xhr = new XMLHttpRequest();
-    // xhr.responseType = 'blob';
-    // xhr.onload = function(event) {
-    //   var blob = xhr.response;
-    // };
-    // xhr.open('GET', url);
-    // xhr.send();
+    // editedImageURL = url;
+    cart.editedImageUrl = url;
+    localStorage.setItem('storedCart', JSON.stringify(cart));
 
-    // Or inserted into an <img> element:
-    var img = document.getElementById('displayImage');
-    img.src = url;
   }).catch(function(error) {
-    // Handle any errors
-    console.log("An error happened");
     console.log(error);
   });
+
+  //add it to a local storage array named "cart" along with the quanity and price of the image.
+  cart.editedStateName = stateNameStored;
+  cart.editedStateId = idNameStored;
+
+  localStorage.setItem('storedCart', JSON.stringify(cart));
+  var storedCart = localStorage.getItem('storedCart');
+
+  console.log(storedCart);
+  console.log(cart);
+  console.log(JSON.parse(localStorage.getItem('storedCart')));
+
+  //display this information on the checkout page
 
 }

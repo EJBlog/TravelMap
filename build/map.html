@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" >
+<html class="no-js">
 
 <head>
 	<meta charset="utf-8">
@@ -18,7 +18,7 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
 		<![endif]-->
 
-		<!--[if IE]>
+	<!--[if IE]>
 		<script type="text/javascript">
 			window.onload = alert("I see you are using Internet Explorer. For the best experience, please use a different browser such as Edge, Firefox, or Chrome");
 		</script>
@@ -27,7 +27,7 @@
 	<script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
 
 	<style media="screen">
-		#image{
+		#image {
 			fill: url(gs://travel-map-dev.appspot.com/sj5MCetdkxPkcBuRx7sOyNuMWes2/TX/cropped_state_image.png);
 		}
 	</style>
@@ -94,17 +94,17 @@
 			<div id="modalBody" class="logginModal-body">
 				<h2 class="logginModal-header">Log In</h2>
 				<form>
-					<input type="text" placeholder="Email" id="email" name="email"/>
-					<input type="password" placeholder="Password" id="password" name="password"/>
+					<input type="text" placeholder="Email" id="email" name="email" />
+					<input type="password" placeholder="Password" id="password" name="password" />
 				</form>
-				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in"/>
+				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in" />
 				<p id="errorMsg" class="errorMsg"></p>
 				<!-- <a id="changePasswordLink" class="hide" href="/changepassword.html">Change Your Password</a> -->
 				<a id="changePasswordLink" href="/changepassword.html">Forgot Password?</a>
 			</div>
 			<div id="modalFooter" class="logginModal-footer">
 				<p style="margin-bottom:10px">First Time? Create an account.</p>
-				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account"/>
+				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account" />
 			</div>
 
 			<div id="verifyEmailModalContent" class="logginModal-footer hide">
@@ -119,21 +119,17 @@
 		<!-- <p id="ota" style="text-decoration: none;"> <span style="color:white">Office</span> To <span style="color:#A30000">Adventure</span></p> -->
 		<img src="/img/ota_plane_right.png" alt=""></img>
 		<!-- <img src="/img/ota_final.png" alt=""> -->
-		<p>Office To <h2>Adventure</h2></p>
+		<p>Office To
+			<h2>Adventure</h2></p>
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
 	</div>
 
 	<div class="hover-display">
 		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
-		<p hidden id="id"></p><!-- Do not remove this.. It is needed for the state id that the user has selected -->
+		<p hidden id="id"></p>
+		<!-- Do not remove this.. It is needed for the state id that the user has selected -->
 		<a id="showEditedStates" href="#" onclick="showEditedStates()" title="showEditedStates">Show State Images</a><br>
 		<a id="showEditedStatesG" href="#" onclick="showEditedStatesG()" title="showEditedStatesG">Green State Images</a>
-		<!-- <p>
-			<h3>Legend:</h3>
-			<ol>
-				<li>If a state is colored GREEN then that state has previously been edited.</li>
-			</ol>
-		</p> -->
 	</div>
 
 
@@ -200,18 +196,18 @@
 		}
 
 		function showEditedStates() {
-		  var CurrentUser = firebase.auth().currentUser;
+			var CurrentUser = firebase.auth().currentUser;
 
-		  // for (var i = 0, b = 0; i < states.length - 1; i++) {
+			// for (var i = 0, b = 0; i < states.length - 1; i++) {
 			for (var i = 0, b = 0; i < states.length; i++) {
 				console.log(states[i].data('id') + " and " + statesEdited[b]);
 
-		    if (states[i].data('id') == statesEdited[b]) {
+				if (states[i].data('id') == statesEdited[b]) {
 					console.log(states[i].data('id') + " and " + statesEdited[b] + " matched");
 
-		      firebase.storage().ref(CurrentUser.uid + "/" + statesEdited[b] + "/").child('cropped_state_image.png').getDownloadURL().then(function(url) {
+					firebase.storage().ref(CurrentUser.uid + "/" + statesEdited[b] + "/").child('cropped_state_image.png').getDownloadURL().then(function(url) {
 
-		          if (url != null) {
+						if (url != null) {
 
 
 							// 	if(states[i].data('url') != null) {
@@ -221,53 +217,102 @@
 							// 	console.log("Didn't find path URL.");
 							// }
 
-							AK.attr({ fill: 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)',
-						'stroke-width': '1',
-						'stroke-opacity': '1'
-						// 'x':'10',
-						// 'y':'10',
-						// 'height':'1500',
-						// 'width':'1500'
+							AK.attr({
+								fill: 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)',
+								'stroke-width': '1',
+								'stroke-opacity': '1'
+								// 'x':'10',
+								// 'y':'10',
+								// 'height':'1500',
+								// 'width':'1500'
+							});
+
+							KY.attr({
+								fill: 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)',
+								'stroke-width': '1',
+								'stroke-opacity': '1'
+								// 'x':'10',
+								// 'y':'10',
+								// 'height':'1500',
+								// 'width':'1500'
+							});
+
+							CO.attr({
+								fill: 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)',
+								'stroke-width': '1',
+								'stroke-opacity': '1'
+								// 'x':'10',
+								// 'y':'10',
+								// 'height':'1500',
+								// 'width':'1500'
+							});
+
+							AL.attr({
+								fill: 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)',
+								'stroke-width': '1',
+								'stroke-opacity': '1'
+								// 'x':'10',
+								// 'y':'10',
+								// 'height':'1500',
+								// 'width':'1500'
+							});
+
+							OH.attr({
+								fill: 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)',
+								'stroke-width': '1',
+								'stroke-opacity': '1'
+								// 'x':'10',
+								// 'y':'10',
+								// 'height':'1500',
+								// 'width':'1500'
+							});
+
+							CA.attr({
+								fill: 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)',
+								'stroke-width': '1',
+								'stroke-opacity': '1'
+								// 'x':'10',
+								// 'y':'10',
+								// 'height':'1500',
+								// 'width':'1500'
+							});
+
+							var pat = document.getElementById("raphael-pattern");
+							var pat0 = document.getElementById("raphael-pattern-0");
+							var pat1 = document.getElementById("raphael-pattern-1");
+							var pat2 = document.getElementById("raphael-pattern-2");
+							var pat3 = document.getElementById("raphael-pattern-3");
+							var pat4 = document.getElementById("raphael-pattern-4");
+							var pat5 = document.getElementById("raphael-pattern-5");
+							pat.setAttribute("height", pat.getAttribute("height") * 0.5);
+							pat.setAttribute("width", pat.getAttribute("width") * 0.5);
+
+
+							// console.log(states[i].data('id') + " and " + statesEdited[b]);
+							console.log("State cropped image was sent to the map");
+
+							if (statesEdited[b + 1] != undefined) {
+								b++;
+								i = 0;
+							};
+
+						} else {
+
+							states[i].node.style.fill = "#4BB543";
+
+							if (statesEdited[b + 1] != undefined) {
+								b++;
+								i = 0;
+							};
+
+						};
+					}, function(error) {
+						console.log("something bad happened");
+						console.log(error);
 					});
-
-					var pat = document.getElementById("raphael-pattern");
-					var pat0 = document.getElementById("raphael-pattern-0");
-					var pat1 = document.getElementById("raphael-pattern-1");
-					var pat2 = document.getElementById("raphael-pattern-2");
-					var pat3 = document.getElementById("raphael-pattern-3");
-					var pat4 = document.getElementById("raphael-pattern-4");
-					var pat5 = document.getElementById("raphael-pattern-5");
-					pat.setAttribute("height", pat.getAttribute("height")*0.5);
-					pat.setAttribute("width", pat.getAttribute("width")*0.5);
-
-
-		            // console.log(states[i].data('id') + " and " + statesEdited[b]);
-		            console.log("State cropped image was sent to the map");
-
-		            if (statesEdited[b + 1] != undefined) {
-		              b++;
-		              i = 0;
-		            };
-
-		          } else {
-
-		            states[i].node.style.fill = "#4BB543";
-
-		            if (statesEdited[b + 1] != undefined) {
-		              b++;
-		              i = 0;
-		            };
-
-		          };
-		        }, function(error) {
-		          console.log("something bad happened");
-		          console.log(error);
-		      });
-		      }
-		    }
-		  }
-
-
+				}
+			}
+		}
 	</script>
 </body>
 

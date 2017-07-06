@@ -53,6 +53,8 @@
 							<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
 							<!--<![endif]-->
 							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
+							<li><i class="fa fa-credit-card"></i><a href="checkout.html">Checkout</a></li>
+							<li><i class="fa fa-shopping-cart"></i><a href="checkout.html">Checkout</a></li>
 						</ul>
 					</div>
 				</noscript>
@@ -71,6 +73,7 @@
 				<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
 				<!--<![endif]-->
 				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
+				<li><i class="fa fa-credit-card"></i><a href="checkout.html">Checkout</a></li>
 			</ul>
 			<hr>
 		</div>
@@ -106,17 +109,21 @@
 		<img src="/img/ota_plane_right.png" alt="">
 		<!-- <img src="/img/ota_final.png" alt=""> -->
 		<p>Office To <h2>Adventure</h2></p>
-		<!-- <h4>Load And Edit Your Image To Fit Inside The Selected State</h4> -->
+
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a>
+		<a href="checkout.html" class="cartIcon"> <span style="color:black;"> | </span> <i class="fa fa-shopping-cart fa-2x"></i> <span style="color:black;"> Items</span></a>
 	</div>
 
 	<div class="load-image">
 		<h4>Upload Your Image</h4>
 		<input type="file" id="UploadImage" href="#" title="Upload Your Image"></input>
 		<br><br>
-		<progress value="0" max="100" id="uploader">0%</progress>
-		<input type="button" value="Display Stored Image" onclick="displayCroppedImage()"/>
-		<img id="displayImage" src=""/>
+		<div class="hide" id="loaderProgress">
+			<p>Saving Image to Your Map: </p>
+			<progress value="0" max="100" id="uploader">0%</progress>
+		</div>
+		<img src="/img/ota_final.png" class='hide' id="watermark"></img>
+
 	</div>
 
 	<div class="instructions">
@@ -136,12 +143,13 @@
 
 	<div id="imageEditor">
 		<section id="toolbar">
-			<a id="print" href="#" title="Print">Print This State Image</a>|
-			<a id="saveImageBtn" href="#" title="Save" >Save To Map</a>|
-			<a id="ReCenter" href="#" title="Re-Center Your Image">Re-Center</a> |
-			<a id="showImage" href="#" title="Show Entire Image">Show Entire Image</a> |
-			<a id="trim" href="#" title="Trim Image">Trim State</a> |
-			<a id="reset" href="#" title="Reset">Reset</a>
+			<a id="preview" href="#" title="Preview" onclick="preview()">Preview This State</a>|
+			<a id="saveImageBtn" href="#" title="Save" onclick="saveImageBtn()">Save To Map</a>|
+			<a id="ReCenter" href="#" title="Re-Center Your Image" onclick="ReCenter()">Re-Center</a> |
+			<a id="showImage" href="#" title="Show Entire Image" onclick="showImage()">Show Entire Image</a> |
+			<a id="trim" href="#" title="Trim Image" onclick="trim()">Trim State</a> |
+			<a id="reset" href="#" title="Reset" onclick="reset()">Reset</a> |
+			<a id="addImgToCart" href="#" title="Add To Cart" onclick="addIndividualImgToCart()">Add Image To Cart</a>
 		</section>
 
 		<section id="editorContainer">
