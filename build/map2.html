@@ -30,6 +30,15 @@
 		#image {
 			fill: url(gs://travel-map-dev.appspot.com/sj5MCetdkxPkcBuRx7sOyNuMWes2/TX/cropped_state_image.png);
 		}
+
+
+      /*svg:hover #AKg { fill: red; }*/
+        svg #usa_map{background-color:blue}
+
+        #usa_map {background-color:red}
+
+      /*#AKg:hover { fill: red; }*/
+
 	</style>
 
 </head>
@@ -142,16 +151,18 @@
 		<h3>State:  <span id="state-name" class="hover-state"> &nbsp;</span> </h3>
 		<p hidden id="id"></p>
 		<!-- Do not remove this.. It is needed for the state id that the user has selected -->
-		<a id="showEditedStates" href="#" onclick="showEditedStates()" title="showEditedStates" style="position:absolute; right:200px;">Show State Images</a><br>
-		<a id="showEditedStatesG" href="#" onclick="showEditedStatesG()" title="showEditedStatesG" style="position:absolute; right:200px; top:30px;">Green State Images</a>
 	</div>
 
 
 
-	<div class="map_container">
-		<h4>Please Select The State You Wish To Use</h4>
-		<div id="map" class="map" title="If you have edited a state it will be colored green"></div>
-	</div>
+  <object type="image/svg+xml" data="svg/usa_map2.svg">
+  </object>
+
+
+
+
+
+
 
 	<div class="map-footer">
 		<p></p>
@@ -169,6 +180,26 @@
 	<script src="js/user_loggin.js"></script>
 
 	<script type="text/javascript">
+
+  // fabric.loadSVGFromURL("svg/usa_map.svg", function(objects) {
+  //
+  //
+  //       }
+  //     }
+  //   },
+  //   function(item, object) {
+  //     object.set('id', item.getAttribute('id'));
+  //     groupStates.push(object);
+  //   });
+
+
+
+
+
+
+
+
+
 	function openNav() {
 		document.getElementById("menu_trigger").classList.add('hide');
 		document.getElementById("mySidenav").style.width = "250px";

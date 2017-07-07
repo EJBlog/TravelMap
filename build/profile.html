@@ -22,43 +22,29 @@
 </head>
 
 <body class="body" style="overflow-x: scroll">
-	<!--<header class="hero-image" role="banner" style="background-image: url(img/waterfall.jpg);">-->
-	<!-- <header class="hero-image-about"> -->
-	<header>
-		<span class="menu-trigger animated fadeInDown">
-		<span class="bar"></span>
-		<span class="bar"></span>
-		<span class="bar"></span>
-		</span>
 
-		<!-- if the user has javascript disabled they can still use the menu -->
-		<noscript>
-					<div class="no-js-menu">
-						<ul>
-							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-							<li><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
-							<!-- <li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li> -->
-							<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
-							<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
-						</ul>
-					</div>
-				</noscript>
-		<!-- end no script -->
-
-		<div id="menu-target">
-			<ul>
-				<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-				<li><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
-				<!-- <li id="LogInLink" class="hide"><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li> -->
-				<li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
-				<li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
-			</ul>
-			<hr>
-		</div>
+<header>
+	<!-- new slide out menu	 -->
+	<div id="mySidenav" class="sidenav">
+		<ul>
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<li class="sidenav_li" ><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+			<li class="sidenav_li"><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
+			<!-- <li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li> -->
+			<li class="sidenav_li" id="logOutLink" ><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
+			<li class="sidenav_li"><i class="fa fa-paper-plane" ></i><a href="contact.html">Contact</a></li>
+		</ul>
+		<hr style="width:40%">
+	</div>
 	</header>
 
 
 	<div class="title">
+		<span id="menu_trigger" class="menu_trigger" onclick="openNav()">
+			<span class="menu_trigger_bar"></span>
+			<span class="menu_trigger_bar"></span>
+			<span class="menu_trigger_bar"></span>
+		</span>
 		<h1>Profile Information</h1>
 		<a id="userDisplay" href="profile.html" class="loggedInUser" onload="displayUserInfo()"></a>
 	</div>
@@ -99,22 +85,27 @@
 	<script>
 		window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
 	</script>
-	<script src="js/vendor/jquery.jpanelmenu.min.js"></script>
-	<!-- <script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script> -->
 	<script src="js/vendor/bootstrap.min.js"></script>
-	<script src="js/vendor/fastclick.min.js"></script>
-	<script src="js/main.js"></script>
+	<!-- <script src="js/vendor/fastclick.min.js"></script> -->
 	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 	<script src="js/user_loggin.js"></script>
 
 	<script type="text/javascript">
+		function openNav() {
+			document.getElementById("menu_trigger").classList.add('hide');
+			document.getElementById("mySidenav").style.width = "250px";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+			document.getElementById("menu_trigger").classList.remove('hide');
+		}
 
 		function editUserInfo() {
 			document.getElementById("updateUserProfile").classList.remove("hide");
 		};
 
 		window.onload = setTimeout(displayUserInfo, 2000);
-
 	</script>
 </body>
 
