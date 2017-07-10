@@ -24,6 +24,15 @@
 }
 
 
+path:hover {
+  fill: none;
+  stroke: black;
+}
+
+path:hover #KY {
+  fill: green;
+}
+
 
 .hover-state{
 font-size: 20px;
