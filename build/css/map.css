@@ -1,4 +1,17 @@
 
+.map-container{
+  position: absolute;
+  top: 85px;
+  left:100px;
+}
+
+
+
+
+
+
+
+
 @media (max-width: 779px) and (min-width: 500px ) {
   .title {
     background-color: whitesmoke;
