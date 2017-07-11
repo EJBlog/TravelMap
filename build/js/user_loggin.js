@@ -237,6 +237,8 @@ function signOutUser() {
     console.log("User was NOT signed out");
   });
 
+  localStorage.removeItem("storedCart");
+
 }
 
 // Need to add validation to make sure the email they entered is in our system

@@ -3,11 +3,12 @@ var groupStates = [];
 var overlayState;
 var stateNameStored = localStorage.getItem('storedStateName');
 var idNameStored = localStorage.getItem('storedIdName');
-var editedImageURL;
 var userImage = new fabric.Image();
 var imageRemoved = false;
 var uploadBar = document.getElementById("uploader");
-var cart={};
+var product={};
+var cart=[];
+
 
 // Did not Initialize Firebase because we also reference the user loggin js file which has the initialization
 
@@ -218,57 +219,130 @@ function dataURItoBlob(dataURI) {
   });
 }
 
-// function displayCroppedImage() {
-//   var CurrentUser = firebase.auth().currentUser;
-//
-//   firebase.storage().ref(CurrentUser.uid + "/" + idNameStored + "/").child('cropped_state_image.png').getDownloadURL().then(function(url) {
-//     // `url` is the download URL for 'images/stars.jpg'
-//
-//     //// This can be downloaded directly:
-//     // var xhr = new XMLHttpRequest();
-//     // xhr.responseType = 'blob';
-//     // xhr.onload = function(event) {
-//     //   var blob = xhr.response;
-//     // };
-//     // xhr.open('GET', url);
-//     // xhr.send();
-//
-//     // Or inserted into an <img> element:
-//     var img = document.getElementById('displayImage');
-//     img.src = url;
-//   }).catch(function(error) {
-//     // Handle any errors
-//     console.log("An error happened");
-//     console.log(error);
-//   });
-//
-// }
+
+
+
+
+
+
+
+
+
+
+
 
 function addIndividualImgToCart(){
-  //find what image they stored
-  saveImageBtn();
+  //Possibly add checks to see if they want to add the same image twice
+
+
+  // saveImageBtn();
   var CurrentUser = firebase.auth().currentUser;
   firebase.storage().ref(CurrentUser.uid + "/" + idNameStored + "/").child('cropped_state_image.png').getDownloadURL().then(function(url) {
 
-    // editedImageURL = url;
-    cart.editedImageUrl = url;
-    localStorage.setItem('storedCart', JSON.stringify(cart));
+    product.editedStateName = stateNameStored;
+    product.price = .50;
+    product.quantity = 1;
+    product.editedImageUrl = url;
+    product.subtotal = product.price * product.quantity;
+
+    var temp = JSON.parse(localStorage.getItem('storedCart'))
+    if (temp) {
+
+      cart.push(product);
+      for (var i = 0; i < temp.length; i++) {
+        cart.push(temp[i]);
+      }
+
+      localStorage.setItem('storedCart', JSON.stringify(cart));
+      cart.length = 0;
+    } else {
+      cart.push(product);
+      localStorage.setItem('storedCart', JSON.stringify(cart));
+      cart.length = 0;
+    }
+
+    populateCartDropdown();
+
 
   }).catch(function(error) {
     console.log(error);
+
+    if (error.name == "FirebaseError") {
+      alert("Please save your image before adding to your cart.")
+    }
   });
 
-  //add it to a local storage array named "cart" along with the quanity and price of the image.
-  cart.editedStateName = stateNameStored;
-  cart.editedStateId = idNameStored;
 
-  localStorage.setItem('storedCart', JSON.stringify(cart));
-  var storedCart = localStorage.getItem('storedCart');
+}
 
-  console.log(storedCart);
-  console.log(cart);
-  console.log(JSON.parse(localStorage.getItem('storedCart')));
 
-  //display this information on the checkout page
+function populateCartDropdown(){
+
+  var storedCartDisplay = JSON.parse(localStorage.getItem('storedCart'));
+
+  document.getElementsByClassName("shopping-cart")[0].removeChild(document.getElementById("shopping-cart-items"));
+
+  cartItems = document.createElement('Ul');
+  cartItems.setAttribute("class", "shopping-cart-items");
+  cartItems.setAttribute("id", "shopping-cart-items");
+  document.getElementsByClassName("shopping-cart")[0].appendChild(cartItems);
+
+  for (var i = 0; i < storedCartDisplay.length; i++) {
+
+    newLineItem = document.createElement('li');
+    newLineItem.setAttribute("class", "clearfix " + i);
+    document.getElementsByClassName("shopping-cart-items")[0].appendChild(newLineItem);
+
+    newImage = document.createElement("img");
+    newImage.setAttribute("src", storedCartDisplay[i].editedImageUrl);
+    newImage.setAttribute("height", 100);
+    newImage.setAttribute("width", 100);
+    document.getElementsByClassName("clearfix " + i)[0].appendChild(newImage);
+
+    newSpan_name = document.createElement("span");
+    newSpan_name.setAttribute("class", 'item-name');
+    newSpan_name.innerHTML = "State: " + storedCartDisplay[i].editedStateName;
+    document.getElementsByClassName("clearfix " + i)[0].appendChild(newSpan_name);
+
+    newSpan_price = document.createElement("span");
+    newSpan_price.setAttribute('class', 'item-price');
+    newSpan_price.innerHTML = "Price: " + storedCartDisplay[i].price;
+    document.getElementsByClassName("clearfix " + i)[0].appendChild(newSpan_price);
+
+    removeItemLink = document.createElement("a");
+    removeItemLink.setAttribute("id", storedCartDisplay[i].editedStateName );
+    removeItemLink.innerHTML = "Remove Item";
+    removeItemLink.setAttribute("href", "#");
+    // removeItemLink.setAttribute("onclick", "removeItemFromCart(" + "'" + storedCartDisplay[i].editedStateName + "'" + ")" );
+    removeItemLink.setAttribute("onclick", "removeItemFromCart(" + "'" + i + "'" + ")" );
+    document.getElementsByClassName("clearfix " + i)[0].appendChild(removeItemLink);
+
+  }
+
+}
+
+//NEED TO CHANGE THIS FROM NAME TO ARRAY INDEX NUMBER
+function removeItemFromCart(indexNum){
+
+  console.log(indexNum);
+
+  var temp = JSON.parse(localStorage.getItem('storedCart'))
+  // if (temp) {
+  //
+  //   for (var i = 0; i < temp.length; i++) {
+  //     if(temp[i].editedStateName == itemName){
+          // temp.splice(temp[i], 1);
+  //     }
+  //
+  //   }
+    // localStorage.setItem('storedCart', JSON.stringify(temp));
+    // populateCartDropdown();
+  // }
+
+
+  temp.splice(temp[indexNum], 1);
+    localStorage.setItem('storedCart', JSON.stringify(temp));
+    populateCartDropdown();
+
 
 }
