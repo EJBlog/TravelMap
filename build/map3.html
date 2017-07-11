@@ -465,8 +465,16 @@
 
 	<script type="text/javascript">
 
+		var ak = document.getElementById("AK");
 		var akg = document.getElementById("AKg");
 		var clip = document.getElementById("AK_clip");
+
+		//akw = ak.getBoundingClientRect().width;
+		//akh = ak.getBoundingClientRect().height;
+
+		//This calculates the dimensions and location of SVG path
+		var path = ak.getBBox();
+		var pathWidth = path.width, pathHeight = path.height, pathX = path.x, pathY = path.y;
 
 		akg.style.stroke = "red";
 		// clip.style.fill = 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)'
@@ -474,10 +482,15 @@
 		// var newclipPath = g.appendChild(document.createElementNS('clipPath'))
 		var img = g.appendChild(document.createElementNS('http://www.w3.org/2000/svg','image'))
 		img.setAttribute('href', "https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa")
-		img.setAttribute('height', '309.3');
-		img.setAttribute('width', '255.4');
-		img.setAttribute('x', '-20');
-		img.setAttribute('y', '370');
+		img.setAttribute('height', pathHeight);
+		img.setAttribute('width', pathWidth);
+		img.setAttribute('x', pathX);
+		img.setAttribute('y', pathY);
+
+		// img.setAttribute('height', '309.3');
+		// img.setAttribute('width', '255.4');
+		// img.setAttribute('x', '-20');
+		// img.setAttribute('y', '370');
 		g.setAttribute('clipPath', 'url(#AK_clip)')
 
 
