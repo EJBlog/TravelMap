@@ -116,7 +116,7 @@ nav {
   }
 }
 
-.container {
+.cartContainer {
   margin: auto;
   width: 350px;
   padding-top: 50px;
@@ -333,7 +333,7 @@ nav {
 }
 #travelMap {
   color: black;
-  margin-left: 950px;
+  margin-left: 915px;
   margin-top: 20px;
   text-decoration: none;
   border-bottom:none;
@@ -392,6 +392,7 @@ nav {
 }
 
 .home-footer-desc{
+  font-size:16px;
   text-align: center;
   padding-left: 100px;
   padding-right: 100px;
@@ -594,6 +595,9 @@ nav {
 
 
 /* CSS for Credit Card Payment form */
+.checkoutContainer {
+  padding-top: 75px;
+}
 .credit-card-box .panel-title {
     display: inline;
     font-weight: bold;

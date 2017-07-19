@@ -46,24 +46,16 @@
 			<hr style="width:40%">
 		</div>
 
-		<div class="container">
+		<div class="cartContainer">
 			<div class="shopping-cart" style="display:none;">
 				<div class="shopping-cart-header" style="background-color:lightgray;">
 					<div class="shopping-cart-total">
-						<span><strong>Total: </strong></span>
+						<span><strong>Subtotal: $</strong></span>
 						<span id="totalDollars" class="main-color-text"></span>
 					</div>
 				</div>
 
 				<ul id="shopping-cart-items" class="shopping-cart-items">
-
-					<!--
-					<li class="clearfix">
-						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item3.jpg" alt="item1" />
-						<span class="item-name">Kindle, 6" Glare-Free To...</span>
-						<span class="item-price">$129.99</span>
-						<span class="item-quantity">Quantity: 01</span>
-					</li> -->
 				</ul>
 
 				<a href="/checkout.html" class="button">Checkout</a>
@@ -113,7 +105,7 @@
 			<h2>Adventure</h2></p>
 
 		<a id="userDisplay" href="profile.html" class="loggedInUser"></a><span style="color:black; right:125px" class="loggedInUser"> | </span>
-		<a href="#" id="cart" class="cartIcon"><i class="fa fa-shopping-cart fa-2x"></i> Cart <!--<span class="badge">cart{}.length</span>--></a>
+		<a href="#" id="cart" class="cartIcon"><i class="fa fa-shopping-cart fa-2x"></i> Cart <span class="badge" id="badge"></span></a>
 	</div>
 
 	<div class="load-image">
@@ -172,50 +164,10 @@
 	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 	<script src="js/state_editor.js"></script>
 	<script src="js/user_loggin.js"></script>
+	<script src="js/common.js"></script>
 
 	<script type="text/javascript">
-		function openNav() {
-			document.getElementById("menu_trigger").classList.add('hide');
-			document.getElementById("mySidenav").style.width = "250px";
-		}
-
-		function closeNav() {
-			document.getElementById("mySidenav").style.width = "0";
-			document.getElementById("menu_trigger").classList.remove('hide');
-		}
-
-		(function() {
-
-			$("#cart").on("click", function() {
-				$(".shopping-cart").fadeToggle("fast");
-				populateCartDropdown();
-			});
-
-		})();
-
-		var modal = document.getElementById("loginModal");
-		var LOmodal = document.getElementById("logoutModal");
-		var btn = document.getElementById("modalButton");
-		var span = document.getElementsByClassName("close")[0];
-		var loSpan = document.getElementsByClassName("loClose")[0];
-
-		var logginModal = function() {
-			modal.style.display = "block"
-		};
-
-		span.onclick = function() {
-			modal.style.display = "none";
-			logInReload();
-		}
-
-		window.onclick = function() {
-			if (event.target == modal) {
-				modal.style.display = "none";
-				logInReload();
-			}
-
-
-		}
+			document.onload(populateCartDropdown());
 	</script>
 
 </body>

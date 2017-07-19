@@ -6,8 +6,9 @@ var idNameStored = localStorage.getItem('storedIdName');
 var userImage = new fabric.Image();
 var imageRemoved = false;
 var uploadBar = document.getElementById("uploader");
-var product={};
-var cart=[];
+// var product={};
+// var cart=[];
+// var subTotal = 0;
 
 
 // Did not Initialize Firebase because we also reference the user loggin js file which has the initialization
@@ -124,43 +125,45 @@ function preview() {
 
 function saveImageBtn() {
 
-    var CurrentUser = firebase.auth().currentUser;
+  var CurrentUser = firebase.auth().currentUser;
 
-    firebase.database().ref("Users/" + CurrentUser.uid).update({
-      [idNameStored]: "Y"
-    });
+  firebase.database().ref("Users/" + CurrentUser.uid).update({
+    [idNameStored]: "Y"
+  });
 
-    document.getElementById("loaderProgress").classList.remove('hide');
+  document.getElementById("loaderProgress").classList.remove('hide');
 
-    trim();
-    var canvasImg = canvas.toDataURL("image/png");
-    var croppedImage = dataURItoBlob(canvasImg);
-    croppedImage.name = "cropped_state_image.png"
+  trim();
+  // removeBlanks(canvas.width, canvas.height);
 
-    var ref = firebase.storage().ref(CurrentUser.uid + "/" + idNameStored + "/" + croppedImage.name);
-    var task = ref.put(croppedImage);
+  var canvasImg = canvas.toDataURL("image/png");
+  var croppedImage = dataURItoBlob(canvasImg);
+  croppedImage.name = "cropped_state_image.png"
 
-    task.on('state_changed',
+  var ref = firebase.storage().ref(CurrentUser.uid + "/" + idNameStored + "/" + croppedImage.name);
+  var task = ref.put(croppedImage);
 
-      function progress(snapshot) {
-        var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        uploadBar.value;
-        uploadBar.value = percent;
-      },
+  task.on('state_changed',
 
-      function error(error) {
-        console.log(error);
-      },
+    function progress(snapshot) {
+      var percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      uploadBar.value;
+      uploadBar.value = percent;
+    },
 
-      function complete() {
-        console.log("The image has been loaded to the firebase storage!");
-      }
+    function error(error) {
+      console.log(error);
+    },
 
-    );
-  }
+    function complete() {
+      console.log("The image has been loaded to the firebase storage!");
+    }
+
+  );
+}
 
 
-function ReCenter(){
+function ReCenter() {
   canvas.centerObject(userImage);
   canvas.renderAll();
 }
@@ -221,19 +224,8 @@ function dataURItoBlob(dataURI) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-function addIndividualImgToCart(){
+function addIndividualImgToCart() {
   //Possibly add checks to see if they want to add the same image twice
-
 
   // saveImageBtn();
   var CurrentUser = firebase.auth().currentUser;
@@ -245,16 +237,28 @@ function addIndividualImgToCart(){
     product.editedImageUrl = url;
     product.subtotal = product.price * product.quantity;
 
-    var temp = JSON.parse(localStorage.getItem('storedCart'))
+    var isAlreadyAdded = false;
+    var temp = JSON.parse(localStorage.getItem('storedCart'));
+
     if (temp) {
 
-      cart.push(product);
       for (var i = 0; i < temp.length; i++) {
-        cart.push(temp[i]);
+        if (temp[i].editedStateName == product.editedStateName) {
+          alert("Please only add one image per state to your Cart.");
+          isAlreadyAdded = true;
+        }
       }
 
-      localStorage.setItem('storedCart', JSON.stringify(cart));
-      cart.length = 0;
+      if (isAlreadyAdded == false) {
+        cart.push(product);
+        for (var i = 0; i < temp.length; i++) {
+          cart.push(temp[i]);
+        }
+
+        localStorage.setItem('storedCart', JSON.stringify(cart));
+        cart.length = 0;
+      }
+
     } else {
       cart.push(product);
       localStorage.setItem('storedCart', JSON.stringify(cart));
@@ -276,73 +280,104 @@ function addIndividualImgToCart(){
 }
 
 
-function populateCartDropdown(){
-
-  var storedCartDisplay = JSON.parse(localStorage.getItem('storedCart'));
-
-  document.getElementsByClassName("shopping-cart")[0].removeChild(document.getElementById("shopping-cart-items"));
-
-  cartItems = document.createElement('Ul');
-  cartItems.setAttribute("class", "shopping-cart-items");
-  cartItems.setAttribute("id", "shopping-cart-items");
-  document.getElementsByClassName("shopping-cart")[0].appendChild(cartItems);
-
-  for (var i = 0; i < storedCartDisplay.length; i++) {
-
-    newLineItem = document.createElement('li');
-    newLineItem.setAttribute("class", "clearfix " + i);
-    document.getElementsByClassName("shopping-cart-items")[0].appendChild(newLineItem);
-
-    newImage = document.createElement("img");
-    newImage.setAttribute("src", storedCartDisplay[i].editedImageUrl);
-    newImage.setAttribute("height", 100);
-    newImage.setAttribute("width", 100);
-    document.getElementsByClassName("clearfix " + i)[0].appendChild(newImage);
-
-    newSpan_name = document.createElement("span");
-    newSpan_name.setAttribute("class", 'item-name');
-    newSpan_name.innerHTML = "State: " + storedCartDisplay[i].editedStateName;
-    document.getElementsByClassName("clearfix " + i)[0].appendChild(newSpan_name);
-
-    newSpan_price = document.createElement("span");
-    newSpan_price.setAttribute('class', 'item-price');
-    newSpan_price.innerHTML = "Price: " + storedCartDisplay[i].price;
-    document.getElementsByClassName("clearfix " + i)[0].appendChild(newSpan_price);
-
-    removeItemLink = document.createElement("a");
-    removeItemLink.setAttribute("id", storedCartDisplay[i].editedStateName );
-    removeItemLink.innerHTML = "Remove Item";
-    removeItemLink.setAttribute("href", "#");
-    // removeItemLink.setAttribute("onclick", "removeItemFromCart(" + "'" + storedCartDisplay[i].editedStateName + "'" + ")" );
-    removeItemLink.setAttribute("onclick", "removeItemFromCart(" + "'" + i + "'" + ")" );
-    document.getElementsByClassName("clearfix " + i)[0].appendChild(removeItemLink);
-
-  }
-
-}
-
-//NEED TO CHANGE THIS FROM NAME TO ARRAY INDEX NUMBER
-function removeItemFromCart(indexNum){
-
-  console.log(indexNum);
-
-  var temp = JSON.parse(localStorage.getItem('storedCart'))
-  // if (temp) {
-  //
-  //   for (var i = 0; i < temp.length; i++) {
-  //     if(temp[i].editedStateName == itemName){
-          // temp.splice(temp[i], 1);
-  //     }
-  //
-  //   }
-    // localStorage.setItem('storedCart', JSON.stringify(temp));
-    // populateCartDropdown();
-  // }
 
 
-  temp.splice(temp[indexNum], 1);
-    localStorage.setItem('storedCart', JSON.stringify(temp));
-    populateCartDropdown();
 
 
-}
+// var img = new Image()
+// var $canvas = $("<canvas>"),
+//   canvasWhiteSpace = $canvas[0],
+//   context;
+//
+// // define here an image from your domain
+// img.href = 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)';
+//
+//
+// function removeBlanks(imgWidth, imgHeight) {
+//   var imageData = context.getImageData(0, 0, imgWidth, imgHeight),
+//     data = imageData.data,
+//     getRBG = function(x, y) {
+//       var offset = imgWidth * y + x;
+//       return {
+//         red: data[offset * 4],
+//         green: data[offset * 4 + 1],
+//         blue: data[offset * 4 + 2],
+//         opacity: data[offset * 4 + 3]
+//       };
+//     },
+//     isWhite = function(rgb) {
+//       // many images contain noise, as the white is not a pure #fff white
+//       return rgb.red > 200 && rgb.green > 200 && rgb.blue > 200;
+//     },
+//     scanY = function(fromTop) {
+//       var offset = fromTop ? 1 : -1;
+//
+//       // loop through each row
+//       for (var y = fromTop ? 0 : imgHeight - 1; fromTop ? (y < imgHeight) : (y > -1); y += offset) {
+//
+//         // loop through each column
+//         for (var x = 0; x < imgWidth; x++) {
+//           var rgb = getRBG(x, y);
+//           if (!isWhite(rgb)) {
+//             return y;
+//           }
+//         }
+//       }
+//       return null; // all image is white
+//     },
+//     scanX = function(fromLeft) {
+//       var offset = fromLeft ? 1 : -1;
+//
+//       // loop through each column
+//       for (var x = fromLeft ? 0 : imgWidth - 1; fromLeft ? (x < imgWidth) : (x > -1); x += offset) {
+//
+//         // loop through each row
+//         for (var y = 0; y < imgHeight; y++) {
+//           var rgb = getRBG(x, y);
+//           if (!isWhite(rgb)) {
+//             return x;
+//           }
+//         }
+//       }
+//       return null; // all image is white
+//     };
+//
+//   var cropTop = scanY(true),
+//     cropBottom = scanY(false),
+//     cropLeft = scanX(true),
+//     cropRight = scanX(false),
+//     cropWidth = cropRight - cropLeft,
+//     cropHeight = cropBottom - cropTop;
+//
+//   var $croppedCanvas = $("<canvas>").attr({
+//     width: cropWidth,
+//     height: cropHeight
+//   });
+//
+//   // finally crop the guy
+//   $croppedCanvas[0].getContext("2d").drawImage(canvas,
+//     cropLeft, cropTop, cropWidth, cropHeight,
+//     0, 0, cropWidth, cropHeight);
+//
+//   $("body").
+//   append("<p>same image with white spaces cropped:</p>").
+//   append($croppedCanvas);
+//   console.log(cropTop, cropBottom, cropLeft, cropRight);
+// };
+//
+// img.crossOrigin = "anonymous";
+// img.onload = function() {
+//   $canvas.attr({
+//     width: this.width,
+//     height: this.height
+//   });
+//   context = canvasWhiteSpace.getContext("2d");
+//   if (context) {
+//     context.drawImage(this, 0, 0);
+//     $("body").append("<p>original image:</p>").append($canvas);
+//
+//     removeBlanks(this.width, this.height);
+//   } else {
+//     alert('Get a real browser!');
+//   }
+// };

@@ -18,36 +18,38 @@
 <body>
 
   <header>
-    <span class="menu-trigger animated fadeInDown">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-    </span>
 
-    <!-- if the user has javascript disabled they can still use the menu -->
-    <noscript>
-          <div class="no-js-menu">
-            <ul>
-              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-              <li id="LogInLink" class="hide"><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li>
-              <li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
-              <!-- <li><i class="fa fa-beer"></i><a href="about.html">About</a></li> -->
-              <li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
-            </ul>
-          </div>
-        </noscript>
-    <!-- end no script -->
-
-    <div id="menu-target">
+    <div id="mySidenav" class="sidenav">
       <ul>
-        <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-        <li id="LogInLink" class="hide"><i class="fa fa-users"></i><a id="modalButton" href="#" onclick="logginModal()">Log In</a></li>
-        <li id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
-        <!-- <li><i class="fa fa-beer"></i><a href="about.html">About</a></li> -->
-        <li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <li class="sidenav_li"><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+        <li class="sidenav_li"><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
+        <li class="sidenav_li hide" id="LogInLink" ><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li>
+        <li class="sidenav_li" id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
+        <li class="sidenav_li"><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
       </ul>
-      <hr>
+      <hr style="width:40%">
     </div>
+
+    <div class="cartContainer">
+      <div class="shopping-cart" style="display:none;">
+        <div class="shopping-cart-header" style="background-color:lightgray;">
+          <div class="shopping-cart-total">
+            <span><strong>Subtotal: $</strong></span>
+            <span id="totalDollars" class="main-color-text"></span>
+          </div>
+        </div>
+
+        <ul id="shopping-cart-items" class="shopping-cart-items">
+        </ul>
+
+        <a href="/checkout.html" class="button">Checkout</a>
+      </div>
+      <!--end shopping-cart -->
+    </div>
+    <!--end container -->
+
+
   </header>
 
   <div id="loginModal" class="logginModalClass">
@@ -82,7 +84,23 @@
 		</div>
 	</div>
 
-<div class="container">
+  <div class="title">
+		<span id="menu_trigger" class="menu_trigger" onclick="openNav()">
+			<span class="menu_trigger_bar"></span>
+		<span class="menu_trigger_bar"></span>
+		<span class="menu_trigger_bar"></span>
+		</span>
+
+		<img src="/img/ota_plane_right.png" alt="">
+		<!-- <img src="/img/ota_final.png" alt=""> -->
+		<p>Office To
+			<h2>Adventure</h2></p>
+
+		<a id="userDisplay" href="profile.html" class="loggedInUser"></a><span style="color:black; right:125px" class="loggedInUser"> | </span>
+		<a href="#" id="cart" class="cartIcon"><i class="fa fa-shopping-cart fa-2x"></i> Cart <span class="badge" id="badge"></span></a>
+	</div>
+
+<div class="checkoutContainer">
   <h3>Almost Done! Complete the form below to order your map.</h3>
 <div class="row">
 <!-- You can make it whatever width you want. I'm making it full width
@@ -151,9 +169,6 @@ on <= small devices and 4/12 page width on >= medium devices -->
 <!-- CREDIT CARD FORM ENDS HERE -->
 
 
-</div>
-
-
 
 </div>
 </div>
@@ -164,7 +179,6 @@ on <= small devices and 4/12 page width on >= medium devices -->
 <script>
   window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
 </script>
-<script src="js/vendor/jquery.jpanelmenu.min.js"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/vendor/fastclick.min.js"></script>
 <script src="js/main.js"></script>
@@ -172,5 +186,11 @@ on <= small devices and 4/12 page width on >= medium devices -->
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script src="js/usa_map.js"></script>
 <script src="js/user_loggin.js"></script>
+<script src="js/common.js"></script>
+
+<script type="text/javascript">
+	document.onload(populateCartDropdown());
+
+</script>
 
 </body>

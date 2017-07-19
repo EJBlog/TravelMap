@@ -465,6 +465,9 @@
 
 	<script type="text/javascript">
 
+
+
+
 		var ak = document.getElementById("AK");
 		var akg = document.getElementById("AKg");
 		var clip = document.getElementById("AK_clip");
@@ -476,22 +479,28 @@
 		var path = ak.getBBox();
 		var pathWidth = path.width, pathHeight = path.height, pathX = path.x, pathY = path.y;
 
+
+
 		akg.style.stroke = "red";
 		// clip.style.fill = 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)'
 		var g = akg.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'g'))
 		// var newclipPath = g.appendChild(document.createElementNS('clipPath'))
 		var img = g.appendChild(document.createElementNS('http://www.w3.org/2000/svg','image'))
+			img.setAttribute('id', 'alaskaImg');
+
 		img.setAttribute('href', "https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa")
 		img.setAttribute('height', pathHeight);
 		img.setAttribute('width', pathWidth);
 		img.setAttribute('x', pathX);
 		img.setAttribute('y', pathY);
 
+
 		// img.setAttribute('height', '309.3');
 		// img.setAttribute('width', '255.4');
 		// img.setAttribute('x', '-20');
 		// img.setAttribute('y', '370');
 		g.setAttribute('clipPath', 'url(#AK_clip)')
+
 
 
 
@@ -514,6 +523,30 @@
 		// var r = clippath.appendChild(document.createElementNS(_svgNS, 'rect'));
 		// r.setAttribute('width', '200');
 		// r.setAttribute('height', '100');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
