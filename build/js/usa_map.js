@@ -768,3 +768,118 @@ mapImg.onclick = function() {
   };
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var img = new Image()
+var $canvas = $("<canvas>"),
+  canvasWhiteSpace = $canvas[0]
+var context = $canvas.getContext('2d');
+
+// define here an image from your domain
+// img.href = 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)';
+img.href = document.getElementById('alaskaImg').href;
+
+function removeBlanks(imgWidth, imgHeight) {
+  var imageData = context.getImageData(0, 0, imgWidth, imgHeight),
+    data = imageData.data,
+    getRBG = function(x, y) {
+      var offset = imgWidth * y + x;
+      return {
+        red: data[offset * 4],
+        green: data[offset * 4 + 1],
+        blue: data[offset * 4 + 2],
+        opacity: data[offset * 4 + 3]
+      };
+    },
+    isWhite = function(rgb) {
+      // many images contain noise, as the white is not a pure #fff white
+      return rgb.red > 200 && rgb.green > 200 && rgb.blue > 200;
+    },
+    scanY = function(fromTop) {
+      var offset = fromTop ? 1 : -1;
+
+      // loop through each row
+      for (var y = fromTop ? 0 : imgHeight - 1; fromTop ? (y < imgHeight) : (y > -1); y += offset) {
+
+        // loop through each column
+        for (var x = 0; x < imgWidth; x++) {
+          var rgb = getRBG(x, y);
+          if (!isWhite(rgb)) {
+            return y;
+          }
+        }
+      }
+      return null; // all image is white
+    },
+    scanX = function(fromLeft) {
+      var offset = fromLeft ? 1 : -1;
+
+      // loop through each column
+      for (var x = fromLeft ? 0 : imgWidth - 1; fromLeft ? (x < imgWidth) : (x > -1); x += offset) {
+
+        // loop through each row
+        for (var y = 0; y < imgHeight; y++) {
+          var rgb = getRBG(x, y);
+          if (!isWhite(rgb)) {
+            return x;
+          }
+        }
+      }
+      return null; // all image is white
+    };
+
+  var cropTop = scanY(true),
+    cropBottom = scanY(false),
+    cropLeft = scanX(true),
+    cropRight = scanX(false),
+    cropWidth = cropRight - cropLeft,
+    cropHeight = cropBottom - cropTop;
+
+  var $croppedCanvas = $("<canvas>").attr({
+    width: cropWidth,
+    height: cropHeight
+  });
+
+  // finally crop the guy
+  $croppedCanvas[0].getContext("2d").drawImage(canvas,
+    cropLeft, cropTop, cropWidth, cropHeight,
+    0, 0, cropWidth, cropHeight);
+
+  $("body").
+  append("<p>same image with white spaces cropped:</p>").
+  append($croppedCanvas);
+  console.log(cropTop, cropBottom, cropLeft, cropRight);
+};
+
+img.crossOrigin = "anonymous";
+img.onload = function() {
+  $canvas.attr({
+    width: this.width,
+    height: this.height
+  });
+  context = canvasWhiteSpace.getContext("2d");
+  if (context) {
+    context.drawImage(this, 0, 0);
+    $("body").append("<p>original image:</p>").append($canvas);
+
+    removeBlanks(this.width, this.height);
+  } else {
+    alert('Get a real browser!');
+  }
+};
