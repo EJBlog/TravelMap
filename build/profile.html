@@ -42,7 +42,7 @@
 			<div class="shopping-cart-header" style="background-color:lightgray;">
 				<div class="shopping-cart-total">
 					<span><strong>Subtotal: $</strong></span>
-					<span id="totalDollars" class="main-color-text"></span>
+					<span id="subtotalDollars" class="main-color-text"></span>
 				</div>
 			</div>
 
@@ -103,6 +103,9 @@
 		<div class="logginModal-footer">
 			<input type="button" onclick="updateUserInfo()" id="updateUserInfo" value="Submit">
 		</div>
+		<div id="verifyEmailModalContent" class="logginModal-footer hide">
+			<p style="padding-left:50px; color:red;">A verification email has been sent to <strong> <span id="userEmail"></span> </strong>. Please verify your email before creating your Travel Map.</p>
+		</div>
 	</div>
 
 
@@ -116,13 +119,24 @@
 		<script src="js/common.js"></script>
 
 	<script type="text/javascript">
-		document.onload(populateCartDropdown());
+		// window.onload(setTimeout(displayUserInfo(), 2000));
+		// document.onload(populateCartDropdown());
+
+		window.onload = function(){
+			displayUserInfo();
+			populateCartDropdown();
+		};
 
 		function editUserInfo() {
 			document.getElementById("updateUserProfile").classList.remove("hide");
+			displayUserInfo();
 		};
 
-		window.onload = setTimeout(displayUserInfo, 2000);
+
+
+		// window.onload = setTimeout(displayUserInfo(), 2000);
+
+
 	</script>
 </body>
 

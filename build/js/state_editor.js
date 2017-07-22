@@ -109,10 +109,14 @@ function preview() {
     var watermark = new fabric.Image(ota_logo);
     watermark.set({
       opacity: .7,
-      top: 130,
-      left: 180,
-      height: 250,
-      width: 250
+      // top: 130,
+      // left: 180,
+      // height: 250,
+      // width: 250
+      height: canvas.height,
+      width:canvas.width,
+      x:0,
+      y:0
     });
     canvas.add(watermark);
     window.open(canvas.toDataURL({

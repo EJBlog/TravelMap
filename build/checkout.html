@@ -1,14 +1,14 @@
 <head>
   <meta charset="utf-8">
-	<meta https-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Checkout</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width">
+  <meta https-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Checkout</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/map.css">
 
   <script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
   <script type="text/javascript" src="js/checkout.js"></script>
@@ -24,7 +24,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <li class="sidenav_li"><i class="fa fa-home"></i><a href="index.html">Home</a></li>
         <li class="sidenav_li"><i class="fa fa-globe"></i><a href="map.html">Map</a></li>
-        <li class="sidenav_li hide" id="LogInLink" ><i class="fa fa-users"></i><a  href="#" onclick="logginModal()">Log In</a></li>
+        <li class="sidenav_li hide" id="LogInLink"><i class="fa fa-users"></i><a href="#" onclick="logginModal()">Log In</a></li>
         <li class="sidenav_li" id="logOutLink"><i class="fa fa-users"></i><a href="map.html" onclick="signOutUser()">Log Out</a></li>
         <li class="sidenav_li"><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
       </ul>
@@ -53,144 +53,178 @@
   </header>
 
   <div id="loginModal" class="logginModalClass">
-		<div class="logginModal-content">
+    <div class="logginModal-content">
 
-			<div class="logginModal-header">
-				<span class="close">&times;</span>
-			</div>
-			<div id="signInModalContent" class="logginModal-body hide">
-				<p style="padding-top:85px; padding-left:50px;">You Have Logged In successfully!</p>
-			</div>
-			<div id="modalBody" class="logginModal-body">
-				<h2>Log In</h2>
-				<form>
-					<input type="text" placeholder="Email" id="email" name="email">
-					<input type="password" placeholder="Password" id="password" name="password">
-				</form>
-				<input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
-				<p id="errorMsg" class="errorMsg"></p>
-				<!-- <a id="changePasswordLink" class="hide" href="/changepassword.html">Change Your Password</a> -->
-				<a id="changePasswordLink" href="/changepassword.html">Forgot Password?</a>
-			</div>
-			<div id="modalFooter" class="logginModal-footer">
-				<p style="margin-bottom:10px">First Time? Create an account.</p>
-				<input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
-			</div>
+      <div class="logginModal-header">
+        <span class="close">&times;</span>
+      </div>
+      <div id="signInModalContent" class="logginModal-body hide">
+        <p style="padding-top:85px; padding-left:50px;">You Have Logged In successfully!</p>
+      </div>
+      <div id="modalBody" class="logginModal-body">
+        <h2>Log In</h2>
+        <form>
+          <input type="text" placeholder="Email" id="email" name="email">
+          <input type="password" placeholder="Password" id="password" name="password">
+        </form>
+        <input type="button" onclick="signInUser()" id="signIn" name="signIn" value="Log in">
+        <p id="errorMsg" class="errorMsg"></p>
+        <!-- <a id="changePasswordLink" class="hide" href="/changepassword.html">Change Your Password</a> -->
+        <a id="changePasswordLink" href="/changepassword.html">Forgot Password?</a>
+      </div>
+      <div id="modalFooter" class="logginModal-footer">
+        <p style="margin-bottom:10px">First Time? Create an account.</p>
+        <input type="button" onclick="createUser()" id="newUser" name="newUser" value="Create a new account">
+      </div>
 
-			<div id="verifyEmailModalContent" class="logginModal-footer hide">
-				<p style="padding-left:50px; color:red;">A verification email has been sent to <strong> <span id="userEmail"</span> </strong>. Please verify your email before creating your Travel Map.</p>
-			</div>
+      <div id="verifyEmailModalContent" class="logginModal-footer hide">
+        <p style="padding-left:50px; color:red;">A verification email has been sent to <strong> <span id="userEmail"</span> </strong>. Please verify your email before creating your Travel Map.</p>
+      </div>
 
-		</div>
-	</div>
+    </div>
+  </div>
 
   <div class="title">
-		<span id="menu_trigger" class="menu_trigger" onclick="openNav()">
+    <span id="menu_trigger" class="menu_trigger" onclick="openNav()">
 			<span class="menu_trigger_bar"></span>
-		<span class="menu_trigger_bar"></span>
-		<span class="menu_trigger_bar"></span>
-		</span>
+    <span class="menu_trigger_bar"></span>
+    <span class="menu_trigger_bar"></span>
+    </span>
 
-		<img src="/img/ota_plane_right.png" alt="">
-		<!-- <img src="/img/ota_final.png" alt=""> -->
-		<p>Office To
-			<h2>Adventure</h2></p>
+    <img src="/img/ota_plane_right.png" alt="">
+    <!-- <img src="/img/ota_final.png" alt=""> -->
+    <p>Office To
+      <h2>Adventure</h2></p>
 
-		<a id="userDisplay" href="profile.html" class="loggedInUser"></a><span style="color:black; right:125px" class="loggedInUser"> | </span>
-		<a href="#" id="cart" class="cartIcon"><i class="fa fa-shopping-cart fa-2x"></i> Cart <span class="badge" id="badge"></span></a>
-	</div>
+    <a id="userDisplay" href="profile.html" class="loggedInUser"></a><span style="color:black; right:125px" class="loggedInUser"> | </span>
+    <a href="#" id="cart" class="cartIcon"><i class="fa fa-shopping-cart fa-2x"></i> Cart <span class="badge" id="badge"></span></a>
+  </div>
 
-<div class="checkoutContainer">
-  <h3>Almost Done! Complete the form below to order your map.</h3>
-<div class="row">
-<!-- You can make it whatever width you want. I'm making it full width
+  <div class="checkoutContainer" >
+    <h3>Almost Done! Complete the form below to order your map.</h3>
+    <div class="row">
+      <!-- You can make it whatever width you want. I'm making it full width
 on <= small devices and 4/12 page width on >= medium devices -->
-<div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-4" style="width:600px;">
 
+        <!-- CREDIT CARD FORM STARTS HERE -->
+        <div class="panel panel-default credit-card-box">
+          <div class="panel-heading display-table" style="display:block;">
+            <div class="row display-tr">
+              <h3 class="panel-title display-td">Payment Details</h3>
+              <div class="display-td">
+                <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <form role="form" id="payment-form">
+              <div class="row">
+                <div class="col-xs-12">
 
-<!-- CREDIT CARD FORM STARTS HERE -->
-<div class="panel panel-default credit-card-box">
-<div class="panel-heading display-table" >
-<div class="row display-tr" >
-<h3 class="panel-title display-td">Payment Details</h3>
-<div class="display-td" >
-<img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
-</div>
-</div>
-</div>
-<div class="panel-body">
-<form role="form" id="payment-form">
-<div class="row">
-<div class="col-xs-12">
-<div class="form-group">
-<label for="cardNumber">CARD NUMBER</label>
-<div class="input-group">
-<input type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number" required autofocus/>
-<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-</div>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-xs-7 col-md-7">
-<div class="form-group">
-<label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
-<input type="tel" class="form-control" name="cardExpiry" placeholder="MM / YY" autocomplete="cc-exp" required/>
-</div>
-</div>
-<div class="col-xs-5 col-md-5 pull-right">
-<div class="form-group">
-<label for="cardCVC">CV CODE</label>
-<input type="tel" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required/>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-xs-12">
-<div class="form-group">
-<label for="couponCode">COUPON CODE</label>
-<input type="text" class="form-control" name="couponCode" />
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-xs-12">
-<button class="btn btn-success btn-lg btn-block" type="submit">Order Map</button>
-</div>
-</div>
-<div class="row" style="display:none;">
-<div class="col-xs-12">
-<p class="payment-errors"></p>
-</div>
-</div>
-</form>
-</div>
-</div>
-<!-- CREDIT CARD FORM ENDS HERE -->
+                  <div class="checkoutDollars">
+                    <span class="subtotalDollars"><strong>Subtotal: $</strong></span>
+                    <span id="subtotalDollars" class="subtotalDollars"></span><br>
+                    <span class="taxAmt"><strong>Tax: $</strong></span>
+                    <span id="taxAmt" class="taxAmt"></span><br>
+                    <span class="totalAmt"><strong>Total: $</strong></span>
+                    <span id="totalAmt" class="totalAmt"></span>
+                  </div>
 
+                  <div class="form-group">
+                    <label for="cardNumber">CARD NUMBER</label>
+                    <div class="input-group">
+                      <input type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number" required autofocus/>
+                      <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-7 col-md-7">
+                  <div class="form-group">
+                    <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                    <input type="tel" class="form-control" name="cardExpiry" placeholder="MM / YY" autocomplete="cc-exp" required/>
+                  </div>
+                </div>
+                <div class="col-xs-5 col-md-5 pull-right">
+                  <div class="form-group">
+                    <label for="cardCVC">CV CODE</label>
+                    <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required/>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="couponCode">COUPON CODE</label>
+                    <input type="text" class="form-control" name="couponCode" />
+                  </div>
+                </div>
+              </div> -->
+              <div class="row">
+                <div class="col-xs-12">
+                  <button class="btn btn-success btn-lg btn-block" type="submit">Order Map</button>
+                </div>
+              </div>
+              <div class="row" style="display:none;">
+                <div class="col-xs-12">
+                  <p class="payment-errors"></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- CREDIT CARD FORM ENDS HERE -->
 
+      </div>
+    </div>
+  </div>
 
-</div>
-</div>
+  <!-- <div class="checkoutCart">
 
-	<!-- If you're using Stripe for payments -->
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+      <div class="checkout-cart-header">
+        <div class="checkout-cart-total">
+          <span><strong>Subtotal: $</strong></span>
+          <span id="subtotalDollars" class="main-color-text"></span>
+          <span><strong>Tax: $</strong></span>
+          <span id="taxAmt" class="main-color-text"></span>
+          <span><strong>Total: $</strong></span>
+          <span id="totalDollars" class="main-color-text"></span>
+        </div>
 
-<script>
-  window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
-</script>
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/vendor/fastclick.min.js"></script>
-<script src="js/main.js"></script>
-<script src="js/raphael.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-<script src="js/usa_map.js"></script>
-<script src="js/user_loggin.js"></script>
-<script src="js/common.js"></script>
+        <input type="button" name="Calculate" value="submit" onclick="calculateTotal()">
+      </div>
 
-<script type="text/javascript">
-	document.onload(populateCartDropdown());
+      <ul id="checkout-cart-items" class="checkout-cart-items">
+      </ul>
 
-</script>
+  </div> -->
+
+    <!-- If you're using Stripe for payments -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+    <script>
+      window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/fastclick.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/raphael.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    <script src="js/usa_map.js"></script>
+    <script src="js/user_loggin.js"></script>
+    <script src="js/common.js"></script>
+
+    <script type="text/javascript">
+
+    window.onload = function(){
+      populateCartDropdown()
+       calculateTotal()
+}
+      // document.onload(populateCartDropdown());
+      // document.onload(calculateTotal());
+    </script>
+
 
 </body>

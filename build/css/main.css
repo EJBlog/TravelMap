@@ -596,7 +596,8 @@ nav {
 
 /* CSS for Credit Card Payment form */
 .checkoutContainer {
-  padding-top: 75px;
+  padding-top: 155px;
+  padding-left: 30%;
 }
 .credit-card-box .panel-title {
     display: inline;
@@ -637,4 +638,48 @@ nav {
 /* Just looks nicer */
 .credit-card-box .panel-heading img {
     min-width: 180px;
+}
+
+
+
+
+
+
+
+.checkoutCart{
+  border-style: solid;
+  border-color: black;
+  width:250px;
+  right:5%;
+  position: absolute;
+  top: 300px;
+
+}
+
+.checkout-cart-header{
+
+}
+
+.checkout-cart-total{
+
+}
+
+.checkout-cart-items{
+
+}
+
+.checkoutDollars{
+  padding-bottom: 25px;
+}
+
+.subtotalDollars{
+  font-size: 15px;
+}
+
+.taxAmt{
+  font-size: 15px;
+}
+
+.totalAmt{
+  font-size: 25px;
 }

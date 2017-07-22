@@ -148,7 +148,7 @@
 <div id="map-container" class="map-container">
 	<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 	<?xml-stylesheet href="css/svgstyle.css" type="text/css"?>
-	<svg id="usa_map" xmlns="http://www.w3.org/2000/svg" width="959" height="593">
+	<svg id="usa_map" xmlns="http://www.w3.org/2000/svg" width="959" height="593" xmlns:xlink="http://www.w3.org/1999/xlink">
 
 	  <!-- <g id="outlines"> -->
 
@@ -479,20 +479,36 @@
 		var path = ak.getBBox();
 		var pathWidth = path.width, pathHeight = path.height, pathX = path.x, pathY = path.y;
 
+		// gTag = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+		// gTag.setAttribute('id', 'gTag');
+  	// document.getElementById("AKg")[0].appendChild(gTag);
+		//
+		// imgTag = document.createElementNS('http://www.w3.org/2000/svg','image');
+		// imgTag.setAttribute('id', 'imgTag' );
+		// document.getElementById("gTag")[0].appendChild(imgTag);
+		// var img = document.getElementById("imgTag");
+
 
 
 		akg.style.stroke = "red";
 		// clip.style.fill = 'url(https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa)'
-		var g = akg.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'g'))
+		// var g = akg.appendChild(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
+		var g = akg.insertBefore(document.createElementNS('http://www.w3.org/2000/svg', 'g'), akg.childNodes[5]);
+		// document.getElementById("AKg")
 		// var newclipPath = g.appendChild(document.createElementNS('clipPath'))
-		var img = g.appendChild(document.createElementNS('http://www.w3.org/2000/svg','image'))
-			img.setAttribute('id', 'alaskaImg');
+		var img = g.appendChild(document.createElementNS('http://www.w3.org/2000/svg','image'));
+
+		// img.setAttribute('id', 'alaskaImg');
 
 		img.setAttribute('href', "https://firebasestorage.googleapis.com/v0/b/travel-map-dev.appspot.com/o/aFCFWLccMqVdwYHnp0NqoF2ZU4x2%2FAK%2Fcropped_state_image.png?alt=media&token=8459f348-3624-4507-99c3-ee8db0dc90fa")
+		// img.setAttribute('xlink:href', 'img/ak_test_download_img.png')
 		img.setAttribute('height', pathHeight);
 		img.setAttribute('width', pathWidth);
+		// img.setAttribute('style', 'height:'+ pathHeight + 'px'+'; width:' + pathWidth + 'px' + '; x:' + pathX + '; y:' + pathY + ';');
 		img.setAttribute('x', pathX);
 		img.setAttribute('y', pathY);
+		g.setAttribute('clipPath', 'url(#AK_clip)');
+			// g.setAttribute('clip-path', 'url(#AK_clip)')
 
 
 		//removeBlanks(img.width, img.height);
@@ -502,7 +518,7 @@
 		// img.setAttribute('width', '255.4');
 		// img.setAttribute('x', '-20');
 		// img.setAttribute('y', '370');
-		g.setAttribute('clipPath', 'url(#AK_clip)')
+		// g.setAttribute('clipPath', 'url(#AK_clip)')
 
 
 
@@ -713,16 +729,6 @@
 								// 'height':'1500',
 								// 'width':'1500'
 							});
-
-							var pat = document.getElementById("raphael-pattern");
-							var pat0 = document.getElementById("raphael-pattern-0");
-							var pat1 = document.getElementById("raphael-pattern-1");
-							var pat2 = document.getElementById("raphael-pattern-2");
-							var pat3 = document.getElementById("raphael-pattern-3");
-							var pat4 = document.getElementById("raphael-pattern-4");
-							var pat5 = document.getElementById("raphael-pattern-5");
-							pat.setAttribute("height", pat.getAttribute("height") * 0.5);
-							pat.setAttribute("width", pat.getAttribute("width") * 0.5);
 
 
 							// console.log(states[i].data('id') + " and " + statesEdited[b]);

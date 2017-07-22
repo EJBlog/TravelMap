@@ -24,15 +24,6 @@
 }
 
 
-path:hover {
-  fill: none;
-  stroke: black;
-}
-
-path:hover #KY {
-  fill: green;
-}
-
 
 .hover-state{
 font-size: 20px;
@@ -44,7 +35,7 @@ z-index: 1
 	top: 45px;
 	position: absolute;
 	color: black;
-	right: 130px;
+	right: 140px;
 	font-size: 20px;
 	border-bottom: none;
 }
