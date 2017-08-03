@@ -123,8 +123,7 @@
 		// document.onload(populateCartDropdown());
 
 		window.onload = function(){
-			displayUserInfo();
-			populateCartDropdown();
+			onloadStuff();
 		};
 
 		function editUserInfo() {
@@ -135,6 +134,11 @@
 
 
 		// window.onload = setTimeout(displayUserInfo(), 2000);
+
+		function onloadStuff(){
+			setTimeout(displayUserInfo, 2000);
+			populateCartDropdown();
+		};
 
 
 	</script>
