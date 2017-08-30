@@ -2,15 +2,12 @@
 .map-container{
   position: absolute;
   top: 85px;
-  left:100px;
+  left:257px;
+  border:solid;
+  background-color:slategray;
+  padding-left: 20px;
+  width:959px;
 }
-
-
-
-
-
-
-
 
 @media (max-width: 779px) and (min-width: 500px ) {
   .title {
@@ -22,8 +19,6 @@
     position: absolute;
   }
 }
-
-
 
 .hover-state{
 font-size: 20px;
