@@ -1,0 +1,29 @@
+{
+  "name": "travelmap",
+  "version": "1.0.0",
+  "description": "This is an application which helps users create their own map of images to show events they have experienced in each individual state.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-util": "latest",
+    "gulp-sass": "latest",
+    "gulp-concat": "latest",
+    "gulp-connect": "latest"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EJBlog/TravelMap.git"
+  },
+  "author": "Jake Ellis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EJBlog/TravelMap/issues"
+  },
+  "homepage": "https://github.com/EJBlog/TravelMap#readme"
+}

@@ -9,55 +9,111 @@
 	<meta name="viewport" content="width=device-width">
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/carousel.css">
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/bootstrap-override.css">
 
 	<script src="js/vendor/modernizr.custom.32229-2.8-respondjs-1-4-2.js"></script>
 
 </head>
 
-<body class="body" style="overflow-x:auto">
+<body>
 
 	<!-- <img class="main-ota-logo" id="ota" src="/img/ota_final.png" alt=""> -->
-
-	<div class="title">
-		<!-- <p id="ota" style="text-decoration: none;"> <span style="color:white">Office</span> To <span style="color:#A30000">Adventure</span></p> -->
-		<img src="/img/ota_plane_right.png" alt="">
-		<p>Office To <h2>Adventure</h2></p>
-		<div class="home-menu-links">
-			<a id="contactUs" href="contact.html" style="text-decoration: none;">Contact Us</a>
-			<!-- <a  onclick=""style="text-decoration: none;">Blog</a> -->
-			<a id="travelMap" href="map.html" style="text-decoration: none;">Travel Map Creator</a>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				 aria-controls="navbar">
+			  <span class="sr-only">Toggle navigation</span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			</button>
+				<a class="navbar-brand" href="#">
+					<h1>Office to <span class="h1-accent">Adventure</span></h1>
+				</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="map.html">Travel Map Creator</a></li>
+					<li><a href="contact.html">Contact Us</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
 		</div>
+	</nav>
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<img class="first-slide" src="img/rach_travel_map.jpg" alt="First slide">
+				<div class="container">
+					<div class="carousel-caption">
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img class="second-slide" src="img/louisville_downtown_sunset.jpg" alt="Second slide">
+				<div class="container">
+					<div class="carousel-caption">
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<img class="third-slide" src="img/smith_rock.jpg" alt="Third slide">
+				<div class="container">
+					<div class="carousel-caption">
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		  <span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		  <span class="sr-only">Next</span>
+		</a>
 	</div>
 
-	<div class="main-home-image" role="banner">
-		<img class="mySlides" src="img/rach_travel_map.jpg">
-		<img class="mySlides" src="img/louisville_downtown_sunset.jpg">
-		<img class="mySlides" src="img/smith_rock.jpg">
-
-		<button class="gallery-button gallery-button-display-left" onclick="plusDivs(-1)">&#10094;</button>
-		<button class="gallery-button gallery-button-display-right" onclick="plusDivs(1)">&#10095;</button>
-	</div>
-
-	<div class="home-footer">
-		<p class="home-footer-desc">Are you a weekend warrior like us? Turn those old pictures from your weekend adventures and family vacations into a piece of art.
-			<a href="/map.html" style="color:royalblue; text-decoration: none;">Create your own Travel Map today!</a></p>
-		<h2 style="text-align:center;">About Us</h2>
-
-		<div class="about_jake">
-			<img src="img/about_jake.jpg" height="250px" width="250px">
-			<h3>Jake Ellis</h3>
-			<p>University Of Louisville graduating class of 2013. Currently traveling the United States with my girlfriend and dog to find the best food, views, and climb as many classic routes as possible</p>
+	<div class="home-footer container">
+		<div class="row">
+			<p class="site-description col-sm-12">Are you a weekend warrior like us? Turn those old pictures from your weekend adventures and family vacations into a piece
+				of art.
+				<a href="/map.html" style="color:royalblue; text-decoration: none;">Create your own Travel Map today!</a></p>
 		</div>
 
-		<div class="about_evan">
-			<img src="img/about_evan.png" height="250px" width="250px">
-			<h3>Evan Neises</h3>
-			<p>University of Louisville graduating class of 2015. Currently not traveling the United States, just living happily in Louisville, KY. Eating better food and drinking better beer than Jake.</p>
+		<div class="row">
+			<h2 class="col-sm-12">About Us</h2>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<img src="img/about_jake.jpg" height="250px" width="250px">
+				<h3>Jake Ellis</h3>
+				<p>University Of Louisville graduating class of 2013. Currently traveling the United States with my girlfriend and dog to
+					find the best food, views, and climb as many classic routes as possible</p>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<img src="img/about_evan.png" height="250px" width="250px">
+				<h3>Evan Neises</h3>
+				<p>University of Louisville graduating class of 2015. Currently not traveling the United States, just living happily in
+					Louisville, KY. Eating better food and drinking better beer than Jake.</p>
+			</div>
 		</div>
 
 	</div>
 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		// image slide show
 		var slideIndex = 1;
