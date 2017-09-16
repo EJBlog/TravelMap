@@ -1,0 +1,46 @@
+body {
+  background-color: #fff; }
+
+.map-control-panel {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+  .map-control-panel .center {
+    margin: 0px auto;
+    width: 80%; }
+  .map-control-panel a {
+    font-family: sans-serif;
+    font-size: 17px; }
+  .map-control-panel h3 {
+    margin: 0px; }
+
+#map-container {
+  border: solid;
+  border-color: black;
+  background-color: slategray;
+  width: 959px;
+  padding-left: 20px; }
+
+.navbar {
+  z-index: 0;
+  position: relative;
+  font-size: 16px;
+  margin-bottom: 0px;
+  background-color: whitesmoke; }
+  .navbar .navbar-brand {
+    padding: 5px 15px; }
+  .navbar h1 {
+    margin: 0px;
+    color: black; }
+    .navbar h1 .h1-accent {
+      color: red; }
+  .navbar .navbar-nav {
+    float: right; }
+    .navbar .navbar-nav li a {
+      padding: 0px; }
+    .navbar .navbar-nav i {
+      line-height: 1.3; }
+
+.navbar-inverse .navbar-toggle {
+  border-color: black; }
+  .navbar-inverse .navbar-toggle .icon-bar {
+    background-color: black; }

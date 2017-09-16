@@ -1,14 +1,3 @@
-
-.map-container{
-  position: absolute;
-  top: 85px;
-  left:257px;
-  border:solid;
-  background-color:slategray;
-  padding-left: 20px;
-  width:959px;
-}
-
 @media (max-width: 779px) and (min-width: 500px ) {
   .title {
     background-color: whitesmoke;
@@ -35,15 +24,6 @@ z-index: 1
 	border-bottom: none;
 }
 
-.map_container{
-	position: absolute;
-	margin-left: 250px;
-	background-color: slategray;
-	width:959px;
-	padding-left: 0px;
-	top:77px;
-	/*padding-top:100px;*/
-}
 .map_container h4{
 	margin-left: 300px;
 	position: absolute;
@@ -84,13 +64,6 @@ z-index: 1
 	font-size: 20px;
 	/*float:right;*/
 }
-.hover-display h3 {
-	position: absolute;
-	top: 24px;
-	right: 400px;
-	width: 220px;
-}
-/*maybe change the name*/
 
 @media (max-width: 1457px) {
   .hover-display{
