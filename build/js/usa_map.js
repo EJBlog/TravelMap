@@ -25,9 +25,18 @@ function clickState(stateClicked) {
 
   var stateElement = document.getElementById(stateClicked.id);
   ClickedIdName = stateElement.id;
-  clickedStateName  = stateElement.attributes.value.nodeValue;
+
+  if (stateElement.attributes.value != undefined) {
+      clickedStateName = stateElement.attributes.value.nodeValue;
+      localStorage.setItem('storedStateName', clickedStateName);
+  }
+  // else {
+  //   clickedStateName = stateElement.value;
+  //   localStorage.setItem('storedStateName', clickedStateName);
+  // }
+
   localStorage.setItem('storedIdName', ClickedIdName);
-  localStorage.setItem('storedStateName', clickedStateName);
+
 
   if (isSignedIn == true) {
 
@@ -89,6 +98,11 @@ function showEditedStates() {
       storedImg.setAttribute('y', pathY);
 
       storedImg.setAttribute('href', url)
+      storedImg.setAttribute('class', 'hovering')
+      storedImg.setAttribute('onclick', 'clickState(this)')
+      // storedImg.setAttribute('onmouseover', 'mouseOverState(this)') //Not working because we arent putting the state name with the new image
+      storedImg.setAttribute('id',statesEdited[b])
+      // storedImg.setAttribute('value','')
 
       newG.setAttribute('clipPath', 'url(#' + stateCodes[i] + '_clip)');
 
