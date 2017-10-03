@@ -173,3 +173,49 @@ function calculateTotal(){
   document.getElementById("totalAmt").innerHTML = total;
 
 }
+
+
+
+
+
+
+
+function populateCheckoutLinks(){
+
+  var storedCartDisplay = JSON.parse(localStorage.getItem('storedCart'));
+
+  // document.getElementsByClassName("cart-checkout-links")[0].removeChild(document.getElementById("cart-checkout-items"));
+
+  // cartItems = document.createElement('Ul');
+  // cartItems.setAttribute("class", "cart-checkout-items");
+  // cartItems.setAttribute("id", "cart-checkout-items");
+  // document.getElementsByClassName("shopping-cart")[0].insertBefore(cartItems, checkoutBtn[0]);
+
+  for (var i = 0; i < storedCartDisplay.length; i++) {
+
+    newLineItem = document.createElement('li');
+    newLineItem.setAttribute("class", "checkoutItem " + i);
+    newLineItem.setAttribute("style", "font-size:14px;");
+    document.getElementsByClassName("cart-checkout-items")[0].appendChild(newLineItem);
+
+    newImage = document.createElement("img");
+    newImage.setAttribute("src", storedCartDisplay[i].editedImageUrl);
+    newImage.setAttribute("height", 100);
+    newImage.setAttribute("width", 100);
+    document.getElementsByClassName("checkoutItem " + i)[0].appendChild(newImage);
+
+    newSpan_name = document.createElement("span");
+    newSpan_name.setAttribute("class", 'item-name');
+    newSpan_name.innerHTML = "State: " + storedCartDisplay[i].editedStateName;
+    document.getElementsByClassName("checkoutItem " + i)[0].appendChild(newSpan_name);
+
+    newSpan_url = document.createElement("a");
+    newSpan_url.setAttribute("class", 'item-url');
+    newSpan_url.innerHTML = "URL: " + "Click here to save and print image";
+    newSpan_url.setAttribute("href", storedCartDisplay[i].editedImageUrl);
+    newSpan_url.setAttribute("target", "_blank");
+    document.getElementsByClassName("checkoutItem " + i)[0].appendChild(newSpan_url);
+
+  }
+
+}
