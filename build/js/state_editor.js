@@ -162,6 +162,7 @@ function saveImageBtn() {
 
   var ref = firebase.storage().ref(CurrentUser.uid + "/" + idNameStored + "/" + croppedImage.name);
   var task = ref.put(croppedImage);
+  // addIndividualImgToCart();
 
   task.on('state_changed',
 
@@ -176,11 +177,15 @@ function saveImageBtn() {
     },
 
     function complete() {
-      window.location.replace("map.html");
+
+        addIndividualImgToCart();
+      setTimeout(function(){ window.location.replace("map.html"); }, 1500);
+      // window.location.replace("map.html");
 
     }
 
   );
+
 }
 
 

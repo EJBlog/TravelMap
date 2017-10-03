@@ -1,6 +1,11 @@
-var stateCodes = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
-  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN",
-  "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+var stateCodes = [
+  ["AL","Alabama"], ["AK","Alaska"], ["AZ","Arizona"], ["AR","Arkansas"], ["CA","California"], ["CO","Colorado"], ["CT","Connecticut"],
+["DE","Delaware"], ["FL","Florida"], ["GA","Georgia"], ["HI","Hawaii"], ["ID","Idaho"], ["IL","Illinois"], ["IN","Indiana"], ["IA","Iowa"], ["KS","Kansas"],
+["KY","Kentucky"], ["LA","Louisiana"], ["ME","Maine"], ["MD","Maryland"], ["MA","Massachusetts"], ["MI","Michigan"], ["MN","Minnesota"], ["MS","Mississippi"],
+["MO","Missouri"], ["MT","Montana"], ["NE","Nebraska"], ["NV","Nevada"], ["NH","New Hampshire"], ["NJ","New Jersey"], ["NM","New Mexico"], ["NY","New York"],
+["NC","North Carolina"], ["ND","North Dakota"],["OH","Ohio"], ["OK","Oklahoma"], ["OR","Oregon"], ["PA","Pennsylvania"], ["RI","Rhode Island"],
+["SC","South Carolina"], ["SD","South Dakota"], ["TN","Tennessee"], ["TX","Texas"], ["UT","Utah"], ["VT","Vermont"], ["VA","Virginia"],
+["WA","Washington"], ["WV","West Virginia"], ["WI","Wisconsin"], ["WY","Wyoming"]
 ];
 
 var states = [];
@@ -16,7 +21,7 @@ var b;
 var recalled = false;
 
 for (var i = 0; i < stateCodes.length; i++) {
-  states.push(document.getElementById(stateCodes[i]));
+  states.push(document.getElementById(stateCodes[i][0]));
   states[i].style.cursor = 'pointer';
 }
 
@@ -30,13 +35,16 @@ function clickState(stateClicked) {
       clickedStateName = stateElement.attributes.value.nodeValue;
       localStorage.setItem('storedStateName', clickedStateName);
   }
-  // else {
-  //   clickedStateName = stateElement.value;
-  //   localStorage.setItem('storedStateName', clickedStateName);
-  // }
+  else {
+    for (var i = 0; i < stateCodes.length; i++) {
+      if (stateCodes[i][0] == ClickedIdName) {
+        clickedStateName = stateCodes[i][1];
+        localStorage.setItem('storedStateName', clickedStateName);
+      }
+    }
+  }
 
   localStorage.setItem('storedIdName', ClickedIdName);
-
 
   if (isSignedIn == true) {
 
@@ -57,29 +65,20 @@ function mouseOverState(hoverState) {
   document.getElementById('state-name').innerHTML = hoverState.attributes.value.nodeValue;
 }
 
+function mouseOverStateId(hoverState) {
+  // document.getElementById('state-name').innerHTML = hoverState.id;
+
+    for (var i = 0; i < stateCodes.length; i++) {
+      if (stateCodes[i][0] == hoverState.id) {
+        document.getElementById('state-name').innerHTML = stateCodes[i][1];
+      }
+    }
+  }
+
 function showEditedStates() {
 
   var CurrentUser = firebase.auth().currentUser;
 
-  // for (var i = 0, b = 0; i < stateCodes.length; i++) {
-  //
-  // 	// if (stateID) {
-  // 	// 	break;
-  // 	// 	i--;
-  // 	// }
-  //
-  // 	if (stateCodes[i] == statesEdited[b]) {
-  // 		console.log(stateCodes[i] + " and " + statesEdited[b] + " matched");
-  //
-  // 		var stateID = document.getElementById(stateCodes[i]);
-  // 		var stateG = document.getElementById(stateCodes[i] + "g");
-  // 		var stateClip = document.getElementById(stateCodes[i] + "_clip");
-  //
-  // 		var path = stateID.getBBox();
-  // 		var pathWidth = path.width;
-  // 		var pathHeight = path.height;
-  // 		var pathX = path.x;
-  // 		var pathY = path.y;
   if (recalled == false) {
     b = 0;
   }
@@ -98,11 +97,13 @@ function showEditedStates() {
       storedImg.setAttribute('y', pathY);
 
       storedImg.setAttribute('href', url)
+
+      newG.setAttribute('clipPath', 'url(#' + stateCodes[i] + '_clip)');
       storedImg.setAttribute('class', 'hovering')
       storedImg.setAttribute('onclick', 'clickState(this)')
       // storedImg.setAttribute('onmouseover', 'mouseOverState(this)') //Not working because we arent putting the state name with the new image
+      storedImg.setAttribute('onmouseover', 'mouseOverStateId(this)')
       storedImg.setAttribute('id',statesEdited[b])
-      // storedImg.setAttribute('value','')
 
       newG.setAttribute('clipPath', 'url(#' + stateCodes[i] + '_clip)');
 
@@ -140,11 +141,11 @@ function matchEditedState() {
     // 	i--;
     // }
 
-    if (stateCodes[i] == statesEdited[b]) {
+    if (stateCodes[i][0] == statesEdited[b]) {
 
-      stateID = document.getElementById(stateCodes[i]);
-      stateG = document.getElementById(stateCodes[i] + "g");
-      stateClip = document.getElementById(stateCodes[i] + "_clip");
+      stateID = document.getElementById(stateCodes[i][0]);
+      stateG = document.getElementById(stateCodes[i][0] + "g");
+      stateClip = document.getElementById(stateCodes[i][0] + "_clip");
 
       path = stateID.getBBox();
       pathWidth = path.width;
